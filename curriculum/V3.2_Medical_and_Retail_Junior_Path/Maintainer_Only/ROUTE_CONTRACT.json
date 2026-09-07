@@ -1,0 +1,113 @@
+{
+  "initial_path": [
+    "J0",
+    "J1",
+    "J2",
+    "J3",
+    "J4",
+    "J5"
+  ],
+  "resume": "Q0 / 0.3",
+  "products": [
+    "Medical Document Review Assistant",
+    "Retail Support and Order Assistant"
+  ],
+  "stages": [
+    {
+      "id": "J0",
+      "depends_on": [],
+      "required_for_initial_checkpoint": true
+    },
+    {
+      "id": "J1",
+      "depends_on": [
+        "J0"
+      ],
+      "required_for_initial_checkpoint": true
+    },
+    {
+      "id": "J2",
+      "depends_on": [
+        "J1"
+      ],
+      "required_for_initial_checkpoint": true
+    },
+    {
+      "id": "J3",
+      "depends_on": [
+        "J2"
+      ],
+      "required_for_initial_checkpoint": true
+    },
+    {
+      "id": "J4",
+      "depends_on": [
+        "J3"
+      ],
+      "required_for_initial_checkpoint": true
+    },
+    {
+      "id": "J5",
+      "depends_on": [
+        "J4"
+      ],
+      "required_for_initial_checkpoint": true
+    },
+    {
+      "id": "Q5",
+      "depends_on": [
+        "J3"
+      ],
+      "required_for_initial_checkpoint": false
+    },
+    {
+      "id": "Q6",
+      "depends_on": [
+        "J4"
+      ],
+      "required_for_initial_checkpoint": false
+    },
+    {
+      "id": "Q7",
+      "depends_on": [
+        "J4"
+      ],
+      "required_for_initial_checkpoint": false
+    },
+    {
+      "id": "Q8",
+      "depends_on": [
+        "J4"
+      ],
+      "required_for_initial_checkpoint": false
+    },
+    {
+      "id": "Q9",
+      "depends_on": [
+        "J3"
+      ],
+      "required_for_initial_checkpoint": false
+    },
+    {
+      "id": "Q10",
+      "depends_on": [
+        "J1"
+      ],
+      "required_for_initial_checkpoint": false
+    },
+    {
+      "id": "Q11",
+      "depends_on": [
+        "J5"
+      ],
+      "required_for_initial_checkpoint": false
+    },
+    {
+      "id": "Q12",
+      "depends_on": [
+        "J5"
+      ],
+      "required_for_initial_checkpoint": false
+    }
+  ]
+}

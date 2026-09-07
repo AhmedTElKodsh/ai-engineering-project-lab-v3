@@ -1,0 +1,18 @@
+{
+  "source_directory": "C:\\Users\\Asd\\Downloads\\V3.1.4.3_NotebookLM_Host_Safe_Code_and_Continuity",
+  "sha256": {
+    "Maintainer_Only/NOTEBOOKLM_PILOT_PROTOCOL.md": "d7b90fae205a01f10059e650b25082d3433e9676cfaa78bab5991aabec4afb21",
+    "Maintainer_Only/V3.1.4.3_GUIDE_SET_MANIFEST.md": "0c3a775921a3275b28264b1018eb8742ab4e081151e97ecf85aa7da651d7425d",
+    "Maintainer_Only/V3.1.4.3_REVIEW_AND_REVISION_NOTES.md": "090adb59513f51064b0631e9bc66a6b2c74d803ad6be514282d3598ee57fc769",
+    "Maintainer_Only/V3.1.4.3_STATIC_VALIDATION_REPORT.txt": "766abb8f96b6a4795b9982c328dc2aed1e798b74e4203797c799a49c6470a65a",
+    "Maintainer_Only/validate_v3_1_4_3.py": "f26084df36f23c151bc9d39719256a1c6b746418f36d9ce62eaf396cc8f70548",
+    "NotebookLM_Live_Source_Pack/00_Onboarding_and_Diagnostic.md": "758f36858af8c6965465d7c6db0cb77a295861074d523b98fb9ce13a321b422b",
+    "NotebookLM_Live_Source_Pack/01_AI_Engineer_Project_Quest_Map.md": "ed4798d753a6ea4b6f77eb71a4208aeaafc2319ea945ca4e42a7938231b0ad20",
+    "NotebookLM_Live_Source_Pack/02_AI_Engineering_Skill_Map.md": "51237dee9cbe8fe2f630a1c36fd9db3ea04d6776f96f22df4f6b49f6d381d38f",
+    "NotebookLM_Live_Source_Pack/03_Current_Quest_Status.md": "26085f8c8d6c22203cc5fd8e3417a2fefbbea9b00b80995cfadd6225fa4114ae",
+    "NotebookLM_Live_Source_Pack/04_Engineering_Playbook.md": "4a786a674b5dd1576d841a69fcefa7db8282052db58b89fbe13a77c9b36c0a2b",
+    "NotebookLM_Live_Source_Pack/05_Portfolio_Index.md": "7fee97ddfc74c4c1f9f51a55342ebf706790b3f8c473026811b8e2e39dd91f40",
+    "NotebookLM_Live_Source_Pack/06_Lesson_Generation_and_Learning_Cadence.md": "c8c9ccab31ca0e4f85da806b5cbc79234f956f8ed946aaad651cddeba55f155a",
+    "README_FIRST.md": "68fc378772c6e943e99ec06db69b8643019699acbc9279c76b9f5f451e4f7f88"
+  }
+}

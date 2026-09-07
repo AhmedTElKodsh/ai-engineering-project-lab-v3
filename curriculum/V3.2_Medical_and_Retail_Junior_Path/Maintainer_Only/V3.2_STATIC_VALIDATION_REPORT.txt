@@ -1,0 +1,25 @@
+V3.2 STATIC VALIDATION REPORT
+Scope: local document structure and selected consistency invariants only.
+
+PASS: exactly seven expected live files and no extra live artifacts
+PASS: consistent V3.2 version and revision date
+PASS: balanced plain and blockquoted Markdown code fences
+PASS: local Markdown links resolve
+PASS: live source filename references resolve
+PASS: route dependencies resolve, are acyclic, and exclude later modules from initial gates
+PASS: two products appear in route, portfolio and continuity
+PASS: pending first-call state and both completion evidence types retained
+PASS: no awarded initial skill status in curriculum migration
+PASS: host-safe response extraction spelling retained
+PASS: preserved complete first-call Python block parses and includes zero-index access
+PASS: all original baseline files unchanged by SHA-256
+PASS: first-call executable block identical to supplied baseline
+PASS: initial vs later stack and bridge sequencing updated
+PASS: medical, action, evaluation and vacancy boundaries explicit
+
+STATIC RESULT: PASS (15 checks passed; 0 failed)
+NotebookLM V3.2 host pilot: NOT RUN
+Learner execution/understanding/retention pilot: NOT RUN
+Provider API/model availability and runtime: NOT RUN
+Clinical validation and hiring outcome validation: NOT RUN
+Static checks cannot establish teaching effectiveness or job readiness.

@@ -1,0 +1,12 @@
+{
+  "version": "V3.2",
+  "sha256": {
+    "00_Onboarding_and_Diagnostic.md": "12ce809761762d0756fdfe325eaa5647beafcf30717935ba25ebe997e6c47ccd",
+    "01_AI_Engineer_Project_Quest_Map.md": "60d99ed4e306ad497d1d732548e7aa323669da3d10434ef486aed9b10d8dd20c",
+    "02_AI_Engineering_Skill_Map.md": "d121032ff0b95444a7b2814269b11e2884bd7b36f22615be97fa1d4439d0b78f",
+    "03_Current_Quest_Status.md": "5b333b08115664f809ded2e44ac8dfcd454dc7599f464c8a2c1e6484104990e4",
+    "04_Engineering_Playbook.md": "7e26a906e7ab09548d3c4b3bc11fbec5caca0e0029a8e52829a5b502549aa0ac",
+    "05_Portfolio_Index.md": "1a3b9e8367a3b210ff349aa8db9843591912b6ed496dc2becbbcac4f427d8fb1",
+    "06_Lesson_Generation_and_Learning_Cadence.md": "dc4836e555071924c358b7bbeb40d22a412e59d3b7d738f9cb25378a5a20059b"
+  }
+}
