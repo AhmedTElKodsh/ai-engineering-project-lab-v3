@@ -30,7 +30,7 @@ Keep captures honest as they are made: label synthetic data, simulated actions, 
 Applications are not gated on route completion, and waiting for the whole route is a common, costly mistake.
 
 - **After J1:** the CV, profile and repository carry one honest measured bullet. This is enough to start conversations and to find out what local and eligible-remote listings actually ask for.
-- **From J3 onward:** apply to roles whose must-have list is already covered by demonstrated work. Retrieval, structured output and evaluation literacy cover a large share of junior applied-LLM postings.
+- **From J3 onward:** apply to roles whose must-have list is already covered by demonstrated work. Which requirements those are is an open question this curriculum does not answer — collect the must-have lists from actual eligible listings and compare them against the route yourself. Do not take a coverage claim from any secondary source, including this document.
 - **Throughout:** record uncovered requirements as `role_gaps` entries and convert repeated ones into short targeted branches. A requirement appearing in one listing is noise; the same requirement in five is a branch worth taking.
 
 None of this changes eligibility. Degree, experience minimums, language requirements, location and work authorization are separate constraints that portfolio evidence does not remove, and "remote" alone does not mean applicants in Egypt are eligible. Verify before applying, and do not describe planned work as completed.

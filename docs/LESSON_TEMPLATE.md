@@ -14,10 +14,25 @@ A shape is a floor and a checklist, never a script to read aloud. Section names 
 | Asked to be tested, or reached a gate needing evidence | **D — assess** | Leak the answer, or hint in the same message as the question |
 | Asked for explicitly scoped implementation help | **E — build together** | Let supplied code drift into an ownership claim |
 | Came back after a pause | **F — resume** | Re-onboard, or repeat a prerequisite already demonstrated |
+| Has no project, or none that can be located | **0 — cold start** | Teach a mechanism they cannot run |
 | Asked a direct question | Answer it. Directly, sufficiently, then return | Wrap a two-line answer in template scaffolding |
 | Finished a stage | **Stage-end capture** | Defer portfolio work to J5 |
 
 When two apply, the learner's most recent event wins. An error mid-first-exposure becomes shape C, then returns to A.
+
+---
+
+## Shape 0 — cold start
+
+No runnable project, or a saved location that cannot be verified. Nothing else works until this does: a mechanism taught to someone who cannot execute it produces neither evidence nor momentum.
+
+1. **State what was actually inspected** and its bounds — which paths, what was found. A bounded search is not proof of absence; say so rather than concluding.
+2. **Ask once for the location.** Do not create the project on their behalf, and do not assume this curriculum repository is it.
+3. **If there is genuinely no project:** the shortest honest path to a first run. Declared dependencies, one secret in a local file, one ignore rule, and a verification that the ignore actually matches before any commit. Nothing else — no linters, no layout conventions, no containers.
+4. **Keep it collapsed and out of the teaching path.** Setup is a prerequisite, not the lesson, and must never be the first thing the learner reads.
+5. **Separate a setup blocker from a concept blocker** and ask which it is. They need different help, and a learner often will not volunteer the difference.
+
+Record a verified location as `location` evidence with an exact `observed_path` per [progress protocol](PROGRESS_PROTOCOL.md). Setup produces no competence evidence of any kind.
 
 ---
 
@@ -31,15 +46,15 @@ Where the learner is, the objective, the evidence this session should produce, a
 
 ### 2. The napkin sketch — before any code
 
-At most seven boxes, arrows for data movement, a marked line wherever trust, determinism or ownership changes. Invite the learner to draw it first. If a sketch already exists, redraw it with the new box and say what changed. The sketch precedes the explanation; it is not an illustration of it.
+Conventions are below. Invite the learner to draw it first. It precedes the explanation; it is not an illustration of one.
 
 ### 3. The café explanation — the substance
 
-As a colleague would explain over coffee. Second person, short sentences, contractions. It must contain the mechanism stated plainly; **the objection the learner is about to raise, voiced in their words and answered**; one analogy followed immediately by where it breaks; and the aside that matters — what bites people, what is commonly skipped. Casual register, exact content: every name, index, key, argument and ordering stays precise.
+[Teaching](TEACHING_GUIDE.md) owns why this register. What must be present: the mechanism stated plainly; **the objection the learner is about to raise, voiced in their words and answered**; one analogy with its breaking point named; the aside that matters — what bites people here, what is commonly skipped. Casual register, exact content.
 
 ### 4. One or two detail dives
 
-Pick what would otherwise become recurring confusion. Name the specific thing, state the misconception it corrects, say what would be observably different if it worked the other way. Two is the ceiling. Do not narrate obvious syntax or dive on something untouched.
+Two is the ceiling. Each names the specific thing, the misconception it corrects, and what would be observably different otherwise. Do not dive on something the learner did not touch.
 
 ### 5. Ladder position — a small table
 
@@ -135,7 +150,9 @@ The artifact each stage must produce, per [the route](CURRICULUM.md); [portfolio
 3. **The numbers, with denominators.** What was measured, on how many cases, what failed and in which category, and what was never checked. Unknown latency or cost is unknown, never zero.
 4. **One CV bullet, bracket-free.** Only observed facts. If a number is not measured yet, the bullet is not written yet.
 
-A capture takes well under an hour at the boundary and considerably longer when reconstructed from memory later, which is the actual reason for the rule.
+Capture at the boundary because the inputs are still available: the failing case, the counts, the config, the reason a choice was made. Reconstructing those later means rerunning work or guessing, and guessing is how dishonest portfolio numbers get written.
+
+A capture is a portfolio artifact, never competence evidence. A recording proves something ran; it does not establish explanation, modification, debugging or transfer. [Progress protocol](PROGRESS_PROTOCOL.md) owns what counts.
 
 ---
 
@@ -156,14 +173,12 @@ Plain ASCII, Mermaid, or indented text all work. Crude is correct — it is draw
 
 ## Rules that override every shape
 
-- **One mechanism per lesson.** Two new ideas means the lesson is too big; split it.
-- **One action at the end.** One action does not mean one line of instruction — explain thoroughly, then ask for one thing.
-- **Never open with setup.** If installation is unavoidable, put it after the learner sees why, and collapse it out of the main path.
+Session shape, stopping points and the stall modes belong to [teaching](TEACHING_GUIDE.md) and are not repeated here. These four are the ones a shape can quietly violate:
+
+- **One mechanism, one action.** Two new ideas means the lesson is too big; split it. One action does not mean one line of instruction.
 - **A direct question ends the shape.** Answer directly and sufficiently, then return.
-- **Verify before showing exact syntax.** Provider, SDK, model and API details are checked against current primary documentation, or labelled unverified with the durable mechanism taught anyway. See [provider reference](PROVIDER_REFERENCE.md) and [engineering guide](ENGINEERING_GUIDE.md).
-- **No files created on the learner's behalf** during ordinary tutoring unless requested, and no provider calls made for them.
-- **Stop somewhere resumable** — a passing case, a written-down failure, a committed change. Never mid-refactor.
-- **Never award progress the evidence does not support.** Generated code, generated tests and tutor simulations are not learner competence.
+- **Verify before showing exact syntax,** or label it unverified and teach the durable mechanism anyway. See [provider reference](PROVIDER_REFERENCE.md) and [engineering guide](ENGINEERING_GUIDE.md).
+- **Never award progress the evidence does not support.** No files created or provider calls made on the learner's behalf during ordinary tutoring; generated code, generated tests and tutor simulations are not competence.
 
 ## Self-check before sending
 

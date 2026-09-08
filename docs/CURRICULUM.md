@@ -27,7 +27,7 @@ Retail is the companion domain because the same skills transfer to customer oper
 
 **Every stage ends with something you could show another person.** Not finished — recordable. A short screen capture, a README paragraph and the exact command that reproduces it. Portfolio evidence accumulates from J1 onward; [portfolio](PORTFOLIO.md) is a running file, not a final phase. A stage that produced no showable artifact is a stage that has to be reconstructed from memory later, which is the slowest possible route to an application.
 
-**Boundary checks are the product; test engineering is deferred.** Span verification, schema invariants, query scope and approval transitions arrive with the mechanism they guard, because an extractor without a span check is not an untested extractor — it is a text generator with a confident tone. Being able to say *how you knew the output was wrong* is the most interview-relevant thing this route teaches. What is deferred is test *engineering*: framework architecture, coverage targets, fixture libraries and CI. See [the engineering guide](ENGINEERING_GUIDE.md).
+**Boundary checks are the product; test engineering is deferred.** Span verification, schema invariants, query scope and approval transitions arrive with the mechanism they guard, because an extractor without a span check is not an untested extractor — it is a text generator with a confident tone. Being able to say *how you knew the output was wrong* is also the part of this work that is easiest to show another person, because it produces artifacts: cases, counts and a named failure. What is deferred is test *engineering*: framework architecture, coverage targets, fixture libraries and CI. See [the engineering guide](ENGINEERING_GUIDE.md).
 
 **Deferred, and the observation that brings it back:**
 
@@ -66,7 +66,7 @@ Use only the active increment's [assessment card](ASSESSMENT_CARDS.md) for J1–
 
 **Prerequisite:** current status reconciliation, not new onboarding. Existing Q0 milestone 0.3 remains pending in [current state](../progress/current.json) with Groq selected. Preserve the existing working example and run command. Do not create files on the learner's behalf during tutoring unless requested.
 
-J0 is three working blocks, not nine separate assignments. The identifiers are retained for continuity with earlier records; each block is roughly one sitting, and none of them should be presented to the learner as a numbered gate to clear.
+J0 is three working blocks, not nine separate assignments. The identifiers are retained for continuity with earlier records, and none of them should be presented to the learner as a numbered gate to clear. Block size is a grouping decision, not a duration estimate: no session length is claimed here, and actual pace is measured from observed sessions like every other estimate in this route.
 
 **Block A — the call and its controls (0.3–0.5).** 0.3 provider-native call: actual terminal evidence AND explanation of local deterministic logic vs probabilistic generation. 0.4 inspect messages, input and response object. 0.5 change one prompt or input, predict the effect before running, then compare. Milestones 0.1 practical diagnostic and 0.2 project setup are inherited; revisit only a prerequisite that current evidence shows failing.
 
