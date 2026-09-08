@@ -2,9 +2,9 @@
 title: 'Codex learner-owned curriculum workspace'
 type: 'feature'
 created: '2026-09-08'
-status: 'ready-for-publication'
+status: 'done'
 route: 'dispatch'
-review_loop_iteration: 0
+review_loop_iteration: 1
 baseline_commit: 'UNBORN'
 review_base_commit: 'd58c4f5bf615b7d60e2c9f90412dc063777c22fc'
 context: []
@@ -74,3 +74,4 @@ context: []
 - Independent bounded tutor simulations — evaluate responses to resume, success-only, assessment and maintainer prompts without provider calls or student state writes.
 - Root publication verification — private visibility, local/remote commit and clean worktree.
 - Local result: native validation passed 45 fixtures; Skill Creator validation, Python compilation, diff hygiene, known-secret pattern scan, and four bounded tutor simulations passed. The real learner/provider boundary remains untested.
+- Publication result: the authenticated personal account owns a private `ai-engineering-project-lab-v3` repository; `main` was pushed and final local/remote equality was checked after this completion record was committed.

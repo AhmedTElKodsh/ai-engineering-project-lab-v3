@@ -31,3 +31,7 @@ Date: 2026-09-08. Scope: Codex learner workspace configuration and its authored 
 ## Evidence boundary
 
 Static checks establish repository consistency and the intended teaching gates. They do not establish an actual Groq call, installed provider versions, learner understanding, teaching effectiveness, clinical validity, production readiness, or job readiness. The saved learner state therefore remains at J0 / Q0 / 0.3 with execution and explanation pending.
+
+## Publication
+
+The workspace was published to the authenticated user's `ai-engineering-project-lab-v3` repository with private visibility. The final `main` reference was compared with the clean local checkout after this report and completion status were committed.
