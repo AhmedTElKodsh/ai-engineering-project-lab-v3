@@ -1,0 +1,19 @@
+# V3.2 to native Codex migration
+
+The seven files under [NotebookLM_Live_Source_Pack](../curriculum/V3.2_Medical_and_Retail_Junior_Path/NotebookLM_Live_Source_Pack/00_Onboarding_and_Diagnostic.md) are frozen provenance. Their bytes, archives, build/package scripts and Maintainer_Only reports are preserved. They are not a second active rule set. Native authority is selected by [AGENTS.md](../AGENTS.md); latest user direction and newest actual learner evidence retain priority.
+
+| Frozen live source | Native authority | Preserved/adapted content |
+|---|---|---|
+| 00_Onboarding_and_Diagnostic.md | [Teaching](TEACHING_GUIDE.md), [AGENTS](../AGENTS.md) | Learner ownership, direct questions, event-first instruction, evidence, depth, continuity and safety |
+| 01_AI_Engineer_Project_Quest_Map.md | [Curriculum](CURRICULUM.md) | J0–J5 products/dependencies and Q5–Q12 optional catalog; exact Q0 0.3 resume continuity |
+| 02_AI_Engineering_Skill_Map.md | [Skills](../progress/skills.json), [protocol](PROGRESS_PROTOCOL.md) | E01–E22 targets, later modules, separate competence evidence and review queues; no new achievements |
+| 03_Current_Quest_Status.md | [Current state](../progress/current.json), [evidence](../progress/evidence.jsonl), [provider reference](PROVIDER_REFERENCE.md), [protocol](PROGRESS_PROTOCOL.md) | Saved resume action, inherited onboarding, dated provider baseline and pending run/understanding; code location explicitly null/unverified |
+| 04_Engineering_Playbook.md | [Engineering](ENGINEERING_GUIDE.md), [teaching](TEACHING_GUIDE.md) | Mechanism-first standards, exact syntax/source fidelity, boundary security, evaluation and conditional later depth |
+| 05_Portfolio_Index.md | [Portfolio](PORTFOLIO.md) | Distinct project evidence, maturity, honest metrics, contribution and Egypt/eligible-remote vacancy matching |
+| 06_Lesson_Generation_and_Learning_Cadence.md | [Teaching](TEACHING_GUIDE.md), [tutor skill](../.agents/skills/ai-engineering-tutor/SKILL.md) | Rich first exposure, annotated code, decomposition, traces, faded help, direct answers, retrieval, delayed transfer and checkpoints |
+
+NotebookLM conversational settings, seven-live-source restrictions, required signposts and numeric-index whitespace workarounds are host packaging and no longer active Codex requirements. Their underlying technical and pedagogical purpose survives: exact index semantics, grounded sources, trace/code agreement, manageable context, visible mechanisms and learner evidence. Native Learn/Assess/Build together routing makes assistance explicit; maintainer work proceeds normally.
+
+The archive's initial `Not started` text is historical. Native progress may advance on legitimate new learner evidence under the protocol; do not run the frozen V3.2 validator as a native state validator or copy its initial-state assertions into active progress. An archive QA PASS proves only what that old check measured, not native tutor behavior or learner outcomes.
+
+This repository is curriculum/configuration/planning, not either learner product. The inherited expected `app/main.py` layout and Downloads provenance are not executable assumptions in a new clone. No original Downloads content is edited or required by native validation. No provider run, observed understanding, clinical validity, job eligibility, or timeline is created by migration. Publication remains a separate private-repository verification by the root maintainer.

@@ -1,0 +1,36 @@
+# Local secrets and machine-specific settings
+.env
+.env.*
+!.env.example
+!.env.sample
+*.pem
+*.key
+*.pfx
+*.p12
+*.user.toml
+.codex/config.toml
+.local/
+
+# Python environments and caches
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Regenerable BMAD snapshots; preserve installed project skills and runtime
+_bmad/render/
+.bmad-help-setup*.toml
+
+# Existing Windows junctions to .agents skills are local host conveniences
+.claude/skills/
+
+# Learner data and transient output must be deliberately selected for publication
+data/private/
+data/raw/
+*.log
+node_modules/
+dist/
+Thumbs.db
+.DS_Store

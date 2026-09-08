@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "skills": [
+    {
+      "id": "E01",
+      "stage": "J0",
+      "capability": "Python/project execution",
+      "status": "not_started",
+      "evidence_ids": [],
+      "evidence_target": "Launch, modify and interpret a traceback in the actual project"
+    },
+    {
+      "id": "E02",
+      "stage": "J0",
+      "capability": "Configuration, secrets and Git",
+      "status": "not_started",
+      "evidence_ids": [],
+      "evidence_target": "Keep a key local, explain environment loading, inspect a meaningful diff"
+    },
+    {
+      "id": "E03",
+      "stage": "J0",
+      "capability": "Provider request/response boundary",
+      "status": "not_started",
+      "evidence_ids": [],
+      "evidence_target": "Run a native call and explain messages, response structure and local/model behavior"
+    },
+    {
+      "id": "E04",
+      "stage": "J0",
+      "capability": "JSON and typed validation",
+      "status": "not_started",
+      "evidence_ids": [],
+      "evidence_target": "Distinguish valid JSON, valid schema and correct content"
+    },
+    {
+      "id": "E05",
+      "stage": "J1",
+      "capability": "Grounded extraction",
+      "status": "not_started",
+      "evidence_ids": [],
+      "evidence_target": "Return stated facts with valid spans; flag missing/negated/uncertain content"
+    },
+    {
+      "id": "E06",
+      "stage": "J1",
+      "capability": "AI behavior evaluation",
+      "status": "not_started",
+      "evidence_ids": [],
+      "evidence_target": "Define expected outcomes, count failures and compare one change"
+    },
+    {
+      "id": "E07",
+      "stage": "J1",
+      "capability": "Human review interface",
+      "status": "not_started",
+      "evidence_ids": [],
+      "evidence_target": "Show source and editable extracted values with a correction record"
+    },
+    {
+      "id": "E08",
+      "stage": "J2",
+      "capability": "Independent domain transfer",
+      "status": "not_started",
+      "evidence_ids": [],
+      "evidence_target": "Build a new retail schema with reduced support"
+    },
+    {
+      "id": "E09",
+      "stage": "J2-J3",
+      "capability": "Arabic/English behavior",
+      "status": "not_started",
+      "evidence_ids": [],
+      "evidence_target": "Report separate language results; document untested code-switch/cross-language cases"
+    },
+    {
+      "id": "E10",
+      "stage": "J3",
+      "capability": "Embeddings and similarity",
+      "status": "not_started",
+      "evidence_ids": [],
+      "evidence_target": "Inspect vectors, rank passages and explain similarity limitations"
+    },
+    {
+      "id": "E11",
+      "stage": "J3",
+      "capability": "Ingestion/chunking/provenance",
+      "status": "not_started",
+      "evidence_ids": [],
+      "evidence_target": "Trace an answer source to a versioned document section"
+    },
+    {
+      "id": "E12",
+      "stage": "J3",
+      "capability": "Grounded RAG",
+      "status": "not_started",
+      "evidence_ids": [],
+      "evidence_target": "Separate retrieval/answer errors, verify citations and abstain on missing evidence"
+    },
+    {
+      "id": "E13",
+      "stage": "J3",
+      "capability": "Framework responsibility",
+      "status": "not_started",
+      "evidence_ids": [],
+      "evidence_target": "Compare a visible RAG slice and LangChain implementation"
+    },
+    {
+      "id": "E14",
+      "stage": "J4",
+      "capability": "SQL fundamentals",
+      "status": "not_started",
+      "evidence_ids": [],
+      "evidence_target": "Write parameterized filters, joins and aggregation; validate expected rows"
+    },
+    {
+      "id": "E15",
+      "stage": "J4",
+      "capability": "Native tool calling",
+      "status": "not_started",
+      "evidence_ids": [],
+      "evidence_target": "Validate arguments, execute a bounded tool and return linked tool results"
+    },
+    {
+      "id": "E16",
+      "stage": "J4",
+      "capability": "Authorization and action scope",
+      "status": "not_started",
+      "evidence_ids": [],
+      "evidence_target": "Block cross-customer access and unapproved simulated actions in code"
+    },
+    {
+      "id": "E17",
+      "stage": "J4",
+      "capability": "State and bounded workflows",
+      "status": "not_started",
+      "evidence_ids": [],
+      "evidence_target": "Explain transitions, stop conditions, failures and a small LangGraph comparison"
+    },
+    {
+      "id": "E18",
+      "stage": "J5",
+      "capability": "HTTP/API and interface",
+      "status": "not_started",
+      "evidence_ids": [],
+      "evidence_target": "Run a small usable app with validated boundaries and clear errors"
+    },
+    {
+      "id": "E19",
+      "stage": "J5",
+      "capability": "Basic failure handling",
+      "status": "not_started",
+      "evidence_ids": [],
+      "evidence_target": "Handle timeout/transient failure without unbounded or unsafe retries"
+    },
+    {
+      "id": "E20",
+      "stage": "J5",
+      "capability": "Focused deterministic checks",
+      "status": "not_started",
+      "evidence_ids": [],
+      "evidence_target": "Verify schema/span, data scope and approval transitions separately from model quality"
+    },
+    {
+      "id": "E21",
+      "stage": "J5",
+      "capability": "Held-out evaluation and tradeoffs",
+      "status": "not_started",
+      "evidence_ids": [],
+      "evidence_target": "Report counts, denominators, limits, latency/cost and repeat variability"
+    },
+    {
+      "id": "E22",
+      "stage": "J5",
+      "capability": "Independent delivery and explanation",
+      "status": "not_started",
+      "evidence_ids": [],
+      "evidence_target": "Make an unfamiliar change, debug a new failure and explain architecture"
+    }
+  ],
+  "later_modules": [
+    {
+      "id": "Q5",
+      "status": "not_started",
+      "evidence_ids": []
+    },
+    {
+      "id": "Q6",
+      "status": "not_started",
+      "evidence_ids": []
+    },
+    {
+      "id": "Q7",
+      "status": "not_started",
+      "evidence_ids": []
+    },
+    {
+      "id": "Q8",
+      "status": "not_started",
+      "evidence_ids": []
+    },
+    {
+      "id": "Q9",
+      "status": "not_started",
+      "evidence_ids": []
+    },
+    {
+      "id": "Q10",
+      "status": "not_started",
+      "evidence_ids": []
+    },
+    {
+      "id": "Q11",
+      "status": "not_started",
+      "evidence_ids": []
+    },
+    {
+      "id": "Q12",
+      "status": "not_started",
+      "evidence_ids": []
+    }
+  ],
+  "review_queues": {
+    "blockers": [],
+    "delayed_practice": [],
+    "role_gaps": []
+  },
+  "last_event_id": "init-20260908",
+  "updated_at": "2026-09-08"
+}

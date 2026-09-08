@@ -1,0 +1,6 @@
+interface:
+  display_name: "AI Engineering Tutor"
+  short_description: "Resume lessons with learner-owned evidence"
+  default_prompt: "Use $ai-engineering-tutor to resume my current lesson from saved state and my latest evidence."
+policy:
+  allow_implicit_invocation: true
