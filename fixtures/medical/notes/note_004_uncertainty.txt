@@ -1,0 +1,10 @@
+SYNTHETIC CLINICAL NOTE — NOT A REAL PATIENT
+Document ID: MED-004
+Date of visit: 2026-03-17
+
+Patient is a 67-year-old man with shortness of breath on exertion. Findings are
+suggestive of possible pneumonia, though a cardiac cause cannot be ruled out at this
+stage. He reports taking "something for blood pressure" but cannot recall the name or
+dose; the pharmacy has been asked to confirm.
+
+Smoking history unclear from the record. Plan: chest imaging, confirm medication list.

@@ -49,3 +49,45 @@ This subsequent maintenance pass implements the nine approved technical/pedagogi
 Final frozen-diff review and completion checks are recorded in the [refinement implementation record](../_bmad-output/implementation-artifacts/spec-curriculum-readiness-refinements.md).
 
 Final verification after review corrections: **PASS, 92 fixtures and 19 local documents**. Three independent review lenses identified additional history, date, partition and test-isolation defects; the retained findings were fixed. Follow-up reviews verified mutation sensitivity and per-observation prerequisite chronology. The two tutor cases affected by durable readiness/final-route semantics were rerun in fresh contexts and passed. Progress, archive and vendor preservation comparison against the baseline returned exit 0. No new findings were deferred; no provider calls or remote operations occurred.
+
+## Teaching-material pass — 2026-09-09
+
+A multi-perspective review of the curriculum, AI-guiding files and skills found that prior
+review cycles had been engineering lenses only. Twelve triaged findings above all concern
+ledger integrity; none tested whether the material teaches. Two defects followed from that.
+
+**Acceptance clause not met.** [acceptance.md](../_bmad-output/specs/spec-codex-learning-workspace/acceptance.md)
+requires that *"rich first-exposure instruction/inline explanation survives removal of
+NotebookLM host formatting."* It did not. The five Golden Exemplars in frozen source 06 —
+roughly 3,700 words of worked teaching responses — were dropped as host packaging, leaving
+[TEACHING_GUIDE.md](TEACHING_GUIDE.md) with no worked example and no code fence. Restored,
+adapted, as per-situation references under the tutor skill; host formatting stays dropped.
+
+**Required fixtures did not exist.** [CURRICULUM.md](CURRICULUM.md) J1 and
+[ENGINEERING_GUIDE.md](ENGINEERING_GUIDE.md) both mandate synthetic cases for absent facts,
+negation, uncertainty, chronology, malformed output and instruction-like text. None existed
+as files, so each session regenerated them, which made J5's "freeze expected outcomes before
+running" structurally unsatisfiable. Seven notes and eight hand-written payloads are now
+frozen in [fixtures](../fixtures/README.md). Expected values are deliberately absent: they
+are learner work.
+
+**J3 embedding route had no owner.** The curriculum said "use one embedding route" and never
+named it while E09 requires separate Arabic reporting. Recorded as [DR-001](DECISIONS.md)
+with its Arabic consequence stated in advance, so a poor Arabic result is attributable to
+the model rather than to the learner.
+
+Changes are additive; no governing rule was rewritten and no progress file was touched.
+Four pointer edits wire the new material into `CURRICULUM.md`, `ENGINEERING_GUIDE.md` and
+the tutor skill. `python tools/validate_workspace.py` and `--self-test` PASS, 20 owned
+documents and 92 fixtures.
+
+Not established by this pass: that the restored exemplars improve tutoring, that the
+fixtures cover the failure modes a real learner hits, that DR-001's default is the right
+one, or any learner progress whatsoever. Static structure only.
+
+**Known gap, not fixed here.** CAP-5 requires the project skill to be discoverable. In a
+fresh clone it is not: `.claude/skills/` is gitignored as non-portable host junctions, so
+`ai-engineering-tutor` is absent from the skill picker and `allow_implicit_invocation: true`
+has no effect. [AGENTS.md](../AGENTS.md) works around it by naming the skill path directly.
+Resolving it means changing what is tracked and published, which is a maintainer decision
+outside this pass.

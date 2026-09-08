@@ -1,0 +1,11 @@
+{
+  "document_id": "MED-001",
+  "age": 54,
+  "chief_complaint": "productive cough and low-grade fever",
+  "medications": [],
+  "smoking_status": "current",
+  "review_flags": [],
+  "confidence_score": 0.97,
+  "model_notes": "high confidence extraction",
+  "verified": true
+}

@@ -1,0 +1,10 @@
+SYNTHETIC CLINICAL NOTE — NOT A REAL PATIENT
+Document ID: MED-001
+Date of visit: 2026-03-14
+
+Patient is a 54-year-old man presenting with a three-day history of productive cough
+and low-grade fever. He reports taking metformin 500 mg twice daily for type 2
+diabetes. He smokes approximately half a pack of cigarettes per day and has done so
+for roughly twenty years. No known drug allergies.
+
+Chest examination unremarkable. Plan: sputum culture, review in one week.

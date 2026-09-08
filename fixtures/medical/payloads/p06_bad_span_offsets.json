@@ -1,0 +1,10 @@
+{
+  "document_id": "MED-001",
+  "age": 54,
+  "chief_complaint": "productive cough and low-grade fever",
+  "medications": [
+    {"name": "metformin", "evidence": {"text": "metformin 500 mg twice daily", "start": 0, "end": 28}}
+  ],
+  "smoking_status": "current",
+  "review_flags": []
+}
