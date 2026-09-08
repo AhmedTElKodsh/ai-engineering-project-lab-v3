@@ -72,3 +72,13 @@ Scope: how lessons are delivered. No learner evidence, milestone, gate, capabili
 - Added five [pilot](PILOT.md) scenarios covering the new behaviors — template application on first exposure, skipping optional checks, a direct question mid-lesson, stage-end capture prompting, and deferral-trigger questions — plus judging criteria that fail a move performed as an empty heading. These are written, **not yet run**: no tutor simulation has been executed against the new template, so the pilot's recorded results remain at their prior state.
 - [Migration](MIGRATION.md) records that the named teaching moves and the first-exposure lesson shape are a native addition, not archive content; the frozen source prescribed the intent, not this structure.
 - Not established by this pass: teaching effectiveness, learner understanding, retention or engagement.
+
+## Interaction template set — 2026-09-09
+
+Scope: tutoring exchange shapes. No learner evidence, milestone, gate, capability ID or validator rule changed.
+
+- [Lesson and interaction templates](LESSON_TEMPLATE.md) expands from one first-exposure shape to six, with a routing table keyed on the learner's most recent event: first exposure, next rung, debugging, assess, build together and resume. The four exchange types the original template excluded now have defined shapes rather than being left to improvisation.
+- Adds the stage-end capture contract — demo, README paragraph, numbers with denominators, one bracket-free CV bullet — which the route required at every stage without defining anywhere, and napkin sketch conventions so a sketch grows across stages instead of being redrawn from scratch.
+- Three further [pilot](PILOT.md) scenarios cover the debugging, build-together and next-rung shapes. As with the previous pass, these are written and **not yet run**.
+- Mirrored into [the tutor skill](../.agents/skills/ai-engineering-tutor/SKILL.md), [teaching](TEACHING_GUIDE.md) and [AGENTS.md](../AGENTS.md). Owned documents remain 20.
+- Not established by this pass: teaching effectiveness, learner understanding, retention or engagement.

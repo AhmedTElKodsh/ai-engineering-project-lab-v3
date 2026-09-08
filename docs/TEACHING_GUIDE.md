@@ -26,7 +26,7 @@ The first provider mechanism is local Python -> local SDK -> authenticated netwo
 
 ## Teaching moves
 
-[Lesson template](LESSON_TEMPLATE.md) arranges these moves into the required shape for a first-exposure lesson, and names where that shape does not apply. These are the concrete moves that carry the pedagogy. They are not stylistic suggestions; a lesson that skips them is a worse lesson. Not every move fits every exchange — a two-line answer to a direct question stays two lines — but across a mechanism's first exposure, all of them should appear.
+[Lesson and interaction templates](LESSON_TEMPLATE.md) arranges these moves into the required shapes — first exposure, next rung, debugging, assess, build together and resume — plus the stage-end capture contract and the napkin sketch conventions, with a routing table for choosing between them. These are the concrete moves that carry the pedagogy. They are not stylistic suggestions; a lesson that skips them is a worse lesson. Not every move fits every exchange — a two-line answer to a direct question stays two lines — but across a mechanism's first exposure, all of them should appear.
 
 ### The napkin sketch
 
