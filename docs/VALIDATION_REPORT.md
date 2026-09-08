@@ -35,3 +35,17 @@ Static checks establish repository consistency and the intended teaching gates. 
 ## Publication
 
 The workspace was published to the authenticated user's `ai-engineering-project-lab-v3` repository with private visibility. The final `main` reference was compared with the clean local checkout after this report and completion status were committed.
+
+## Curriculum readiness refinements — 2026-09-08
+
+This subsequent maintenance pass implements the nine approved technical/pedagogical review refinements. It is local work; the earlier publication statement above does not mean these changes were uploaded.
+
+- Native validator and self-test: PASS, 19 local documents and 66 in-memory fixtures at the implementation checkpoint. The local count includes an existing ignored spec memlog; it is not a portable inventory guarantee.
+- New fixtures cover readiness queues, midnight versus elapsed delay, invalidated prerequisite history, cross-stage reassessment/reconciliation, independent J5 ownership, capability coverage and supported execution.
+- [Nine isolated tutor scenarios](../_bmad-output/verification/2026-09-08-curriculum-refinements/README.md) exercised original routing cases plus retention-readiness and unsupported final completion. All user-facing behaviors passed. One metadata-inventory failure was retained, the capture rule corrected, and a fresh maintenance retest passed.
+- JSON mode and immutable approval binding are now explicit teaching/acceptance contracts. No learner implementation or provider behavior was exercised to validate these future contracts.
+- Learner progress remains actual-evidence-only. No actual learner pilot, provider execution, clinical validity, production readiness or job eligibility is established by these refinements.
+
+Final frozen-diff review and completion checks are recorded in the [refinement implementation record](../_bmad-output/implementation-artifacts/spec-curriculum-readiness-refinements.md).
+
+Final verification after review corrections: **PASS, 92 fixtures and 19 local documents**. Three independent review lenses identified additional history, date, partition and test-isolation defects; the retained findings were fixed. Follow-up reviews verified mutation sensitivity and per-observation prerequisite chronology. The two tutor cases affected by durable readiness/final-route semantics were rerun in fresh contexts and passed. Progress, archive and vendor preservation comparison against the baseline returned exit 0. No new findings were deferred; no provider calls or remote operations occurred.

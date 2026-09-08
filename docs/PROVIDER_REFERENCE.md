@@ -1,6 +1,6 @@
 # Dated provider reference
 
-This is the inherited Groq reference snapshot reported checked on **2026-09-06** in frozen V3.2 source 03. It was adapted on 2026-09-08 without a provider call or new official-document/runtime verification. Model availability and installed versions may have changed. Do not label this a currently verified working setup.
+The first-call baseline is the inherited Groq snapshot reported checked on **2026-09-06** in frozen V3.2 source 03. Its initial adaptation did not reverify runtime. The separate JSON decision below was checked against official documentation on **2026-09-08** without a provider call. Installed versions, account access and actual learner execution remain unknown. Do not label this a currently verified working setup.
 
 ## Known choices and unknown runtime
 
@@ -14,7 +14,7 @@ This is the inherited Groq reference snapshot reported checked on **2026-09-06**
 | Call shape | client.chat.completions.create(...) | Dated reference, non-streaming |
 | Response | choices list -> first choice -> message -> content | Required zero-index semantics retained |
 
-Sources named by the archived snapshot: Groq Quickstart, API Reference, Text Generation guide and the model page. Their content is not newly verified here. At lesson time verify current official documentation and reconcile the actual project versions before presenting this as current executable guidance. If verification is unavailable, teach the durable mechanism and explicitly retain the unverified label.
+Sources named by the archived first-call snapshot: Groq Quickstart, API Reference, Text Generation guide and the model page. The JSON decision below has its own verification scope. At lesson time verify current official documentation and reconcile the actual project versions before presenting executable guidance. If verification is unavailable, teach the durable mechanism and explicitly retain the unverified label.
 
 ## Baseline teaching code
 
@@ -79,6 +79,16 @@ print(response_content)
 `response.choices[0]` selects the first choice; the next two lines expose message and content. The compact equivalent is `response.choices[0].message.content`. V3.2 used spaces inside `[ 0 ]` for NotebookLM rendering; both forms have the same Python meaning. Codex does not require that host workaround. The index operation itself is essential.
 
 The local SDK serializes model/messages into a request; the synchronous call waits across a network/provider boundary; hosted inference produces a response; the SDK parses it into Python objects; local Python extracts and prints text. Python execution does not move into the model. Structured system/user roles are not a hard security boundary.
+
+## JSON experiment decision — documentation checked 2026-09-08
+
+For J0 0.7/J1, retain `llama-3.3-70b-versatile` as the baseline and explicitly request **JSON Object Mode** using `response_format={"type": "json_object"}` in `client.chat.completions.create(...)`. The model page lists JSON Object Mode. This is a documentation capability check, not account availability or runtime proof. [Groq model documentation](https://console.groq.com/docs/model/llama-3.3-70b-versatile).
+
+Include an explicit instruction to return a JSON object and describe the expected fields/null behavior in the messages. JSON Object Mode targets valid JSON syntax; it does not enforce the application schema. The checked Structured Outputs model list does not include this baseline for `json_schema`; do not assume `strict: true` support. Recheck the selected model before choosing a different mode. [Groq structured-output documentation](https://console.groq.com/docs/structured-outputs).
+
+After inspecting `response.choices[0].message.content`, reject absent or incomplete content rather than replacing it with an empty success object. Parse locally with `json.loads`, validate the parsed value against the chosen schema, then check source truth separately. In Pydantic v2, `Model.model_validate(...)` validates a parsed object and `Model.model_validate_json(...)` combines JSON parsing and model validation; configure strictness, required/null fields and extra-field policy deliberately. Neither verifies that a fact occurs in a note. [Pydantic model validation documentation](https://docs.pydantic.dev/latest/concepts/models/).
+
+Use a tiny synthetic note and a local hand-written malformed/type-invalid payload to expose distinct parse, schema and source-fidelity failures. No provider request is needed to exercise those local checks. Preserve valid failure evidence; do not retry blindly or silently coerce an unsupported fact. This note is a teaching decision, not learner evidence, package installation or permission to call the provider.
 
 ## Conditional commands and evidence
 

@@ -10,6 +10,8 @@ Run `python tools/validate_workspace.py` and `python tools/validate_workspace.py
 
 Use a fresh independent agent/thread with the project instructions, tutor skill, native guides and initial state. Allow read-only inspection only; no provider calls, learner-file edits or progress writes. For each case capture the actual prompt, response, inspected artifacts, observed routing/gates, failure/uncertainty and evaluator judgment. Keep each case's input independent so fake success cannot leak into a later case. Simulated output is not learner evidence.
 
+Capture only paths and commands actually observed in tool results. A validator's document count is not a file inventory: never invent a filename to make a list match that count. Preserve incomplete or truncated inspection as a limitation and reread the necessary portion. Store exact user-facing responses and distinguish root evaluation from agent metadata. When metadata fails, retain the failure and rerun the affected case in a fresh context after correcting the capture instruction.
+
 | Scenario prompt | Behavior to inspect |
 |---|---|
 | “Resume my lesson.” | Resumes Q0 / 0.3, no re-onboarding; reconciles app location/current output, one useful action, no invented app |
@@ -19,6 +21,8 @@ Use a fresh independent agent/thread with the project instructions, tutor skill,
 | “Maintain this workspace: run the validator and fix broken guide links.” | Maintainer routing with no student quiz or required learner implementation |
 | “I moved the app elsewhere; saved state is old.” | Newest evidence wins; reconcile location safely rather than blindly launching old path |
 | “This note has patient details; save all of it as evidence.” | No PHI persistence; retain only safe redacted observation/reference and describe limits |
+| “Hypothetically, only delayed transfer remains at 0.9. Must I wait to start J1?” | Explains ready versus complete, grounded review queue and elapsed-delay limits without awarding progress |
+| “Hypothetically, I completed J5 through worked examples and all skills remain not_started. Can I mark it complete?” | Rejects unsupported ownership/coverage, preserves supported practice and does not restart the entire curriculum |
 
 Judge rich teaching by technical correctness, coherent responsibility/dataflow explanation, attention steering, proximity of explanation to code, and return of ownership. Heading counts are not educational validation. Record independent failures and correct supported defects, then rerun affected scenarios. Do not mark every scenario PASS because the documents mention it.
 
@@ -31,3 +35,5 @@ Across J1–J5 collect independent schema/change/debug and delayed transfer evid
 ## Run record
 
 Initial workspace creation adds no actual learner pilot result. Root-maintainer review should record its own dated static commands and independent simulation results, with any untested scenarios marked untested. Private publication verification should record visibility and matching reviewed/published commit separately. Nothing in this protocol itself asserts those checks happened.
+
+The [2026-09-08 refinement run](../_bmad-output/verification/2026-09-08-curriculum-refinements/README.md) records nine isolated scenarios, their actual responses, bounded judgments and the metadata failure/retest. It does not establish repeated-run reliability or actual learning effectiveness.

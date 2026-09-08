@@ -1,6 +1,6 @@
 """Read-only native document/evidence validation. No learner apps or network calls."""
 from pathlib import Path
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 import argparse
 import ast
 import copy
@@ -34,9 +34,17 @@ def require(condition, message):
 
 
 def timestamp(value):
-    require(isinstance(value, str), 'date/timestamp must be text')
+    require(isinstance(value, str) and re.fullmatch(r'\d{4}-\d{2}-\d{2}(?:T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})?)?', value), 'date/timestamp must be canonical date or full ISO timestamp')
     result = datetime.fromisoformat(value.replace('Z', '+00:00'))
     return result.replace(tzinfo=timezone.utc) if result.tzinfo is None else result.astimezone(timezone.utc)
+
+
+def delayed_after(transfer, practice):
+    """Date-only evidence has unknown time: demand a full intervening day."""
+    later, earlier = timestamp(transfer), timestamp(practice)
+    if len(transfer) == 10 or len(practice) == 10:
+        return (later.date() - earlier.date()).days >= 2
+    return later - earlier >= timedelta(days=1)
 
 
 def nonempty(value):
@@ -79,11 +87,15 @@ def validate_state(current, skills, events, root=None):
     require(type(skills.get('schema_version')) is int and skills['schema_version'] == 1, 'skills schema version')
     require(current.get('mode') in {'learn', 'assess', 'build_together'}, 'unknown teaching mode')
     require(current.get('route') == 'J0-J5', 'unknown initial route')
+    require(all(isinstance(skills.get(k), list) and all(isinstance(r, dict) for r in skills[k]) for k in ('skills', 'later_modules')), 'skill rows must be objects')
+    initial_ids = {f'E{i:02}' for i in range(1, 23)}
+    require({r.get('id') for r in skills['skills']} == initial_ids and {r.get('id') for r in skills['later_modules']} == set(LATER), 'skill partition mismatch')
     rows = skills['skills'] + skills['later_modules']
     ids = [row['id'] for row in rows]
     require(len(ids) == len(set(ids)), 'duplicate skill ID')
     require(set(ids) == {f'E{i:02}' for i in range(1, 23)} | set(LATER), 'missing/unknown skill IDs')
     require(isinstance(events, list) and events, 'empty evidence log')
+    require(all(isinstance(e, dict) for e in events), 'evidence events must be objects')
     require(events[0].get('kind') == 'initialization' and events[0].get('actor') == 'maintainer', 'first event must initialize')
     records, invalid = {}, set()
     previous = datetime.min.replace(tzinfo=timezone.utc)
@@ -96,6 +108,18 @@ def validate_state(current, skills, events, root=None):
         kind = event.get('kind')
         if kind == 'initialization':
             require(not records and event.get('actor') == 'maintainer' and nonempty(event.get('summary')), 'invalid initialization')
+        elif kind == 'readiness':
+            mid = event.get('milestone')
+            require(event.get('actor') == 'maintainer' and mid in STEPS and 'transfer' in STEPS[mid], 'invalid readiness decision')
+            require(all(nonempty(event.get(k)) for k in ('source', 'eligible_after', 'next_task', 'trigger')), 'readiness decision lacks review contract')
+            refs = event.get('evidence_ids')
+            require(isinstance(refs, list) and all(isinstance(e, str) for e in refs) and len(refs) == len(set(refs)), 'invalid readiness references')
+            then_latest = {e['kind']: e for e in records.values() if e.get('actor') == 'learner' and e['milestone'] == mid and e['id'] not in invalid}
+            needed = set(STEPS[mid]) - {'transfer'}
+            require(set(refs) == {then_latest[k]['id'] for k in needed if k in then_latest} and needed <= set(then_latest), 'readiness needs then-current non-transfer evidence')
+            require(all(then_latest[k]['outcome'] == 'pass' and (k == 'execution' or then_latest[k]['assistance'] != 'ai_implemented')
+                        and (mid != 'J5' or k == 'execution' or then_latest[k]['assistance'] in {'none', 'docs'}) for k in needed), 'readiness requires passing ownership evidence')
+            require(delayed_after(event['eligible_after'], then_latest['modification']['at']), 'readiness review is premature')
         elif kind == 'correction':
             old = event.get('supersedes')
             require(event.get('actor') == 'maintainer' and nonempty(event.get('reason')), 'invalid correction')
@@ -143,6 +167,10 @@ def validate_state(current, skills, events, root=None):
             found.append(event)
         return found
 
+    queues = skills['review_queues']
+    require(isinstance(queues, dict) and set(queues) == {'blockers', 'delayed_practice', 'role_gaps'}, 'review queue keys')
+    require(all(isinstance(entries, list) and all(isinstance(q, dict) for q in entries) for entries in queues.values()), 'review entries must be objects')
+    decisions = [e for e in events if e.get('kind') == 'readiness']
     milestones = current['milestones']
     mids = [m['id'] for m in milestones]
     require(len(mids) == len(set(mids)) and set(STEPS) <= set(mids), 'missing/duplicate milestones')
@@ -154,7 +182,7 @@ def validate_state(current, skills, events, root=None):
         require(m.get('stage') == stage, 'milestone stage mismatch')
         required = set(STEPS.get(mid, ('execution', 'explanation', 'debug')))
         require(set(m['gates']) == required, 'missing/unknown required gates')
-        require(m.get('status') in {'pending', 'in_progress', 'complete'}, 'invalid milestone status')
+        require(m.get('status') in {'pending', 'in_progress', 'ready', 'complete'}, 'invalid milestone status')
         for kind, gate in m['gates'].items():
             require(gate.get('status') in {'pending', 'satisfied'}, 'invalid gate status')
             evidence = references(gate['evidence_ids'])
@@ -163,10 +191,22 @@ def validate_state(current, skills, events, root=None):
                 require(evidence and all(e['outcome'] == 'pass' for e in evidence), 'satisfied gate needs current passing evidence')
                 if kind in {'explanation', 'modification', 'debug', 'transfer'}:
                     require(all(e['assistance'] != 'ai_implemented' for e in evidence), 'ownership gate requires learner work')
+                if mid == 'J5' and kind != 'execution':
+                    require(all(e['assistance'] in {'none', 'docs'} for e in evidence), f'J5 independent ownership gate unsupported: {kind}')
                 if kind == 'transfer':
                     practice = references(m['gates']['modification']['evidence_ids'])
-                    require(any(p['outcome'] == 'pass' and timestamp(t['at']).date() > timestamp(p['at']).date()
-                                for t in evidence for p in practice), 'milestone transfer must follow modification on a later date')
+                    require(any(p['outcome'] == 'pass' and delayed_after(t['at'], p['at'])
+                                for t in evidence for p in practice), 'milestone transfer requires at least 24 hours after modification (date-only: two days)')
+        if m['status'] == 'ready':
+            require('transfer' in m['gates'] and m['gates']['transfer']['status'] == 'pending', 'ready requires pending retention transfer')
+            require(all(g['status'] == 'satisfied' for k, g in m['gates'].items() if k != 'transfer'), 'ready milestone lacks current readiness gates')
+            practice = references(m['gates']['modification']['evidence_ids'])
+            current_proof = {eid for k, g in m['gates'].items() if k != 'transfer' for eid in g['evidence_ids']}
+            require(any(d['milestone'] == mid and set(d['evidence_ids']) == current_proof and not invalid.intersection(d['evidence_ids']) for d in decisions), 'ready requires current durable readiness decision')
+            queue = skills['review_queues']['delayed_practice']
+            require(any(q.get('milestone') == mid and nonempty(q.get('eligible_after'))
+                        and any(p['id'] in q.get('evidence_ids', []) and delayed_after(q['eligible_after'], p['at']) for p in practice)
+                        for q in queue), f'{mid} readiness requires grounded delayed review with eligible_after')
         if m['status'] == 'complete':
             require(all(g['status'] == 'satisfied' for g in m['gates'].values()), 'complete milestone has unsatisfied gates')
     active = current.get('milestone')
@@ -177,21 +217,44 @@ def validate_state(current, skills, events, root=None):
     for mid, m in by_id.items():
         predecessors = order[:order.index(mid)] if mid in order else order
         if mid == active:
-            require(all(by_id[p]['status'] == 'complete' for p in predecessors), 'incomplete milestone prerequisite')
-        elif m['status'] != 'pending':
+            require(all(by_id[p]['status'] in {'ready', 'complete'} for p in predecessors), 'incomplete milestone prerequisite')
+        if m['status'] != 'pending':
             # Reopened prerequisites do not erase work demonstrated after an earlier pass.
-            own = [e for e in learner if e['milestone'] == mid]
-            started = min((timestamp(e['at']) for e in own), default=previous)
-            for p in predecessors:
-                if by_id[p]['status'] == 'complete':
-                    continue
-                history = [e for e in learner if e['milestone'] == p and e['outcome'] == 'pass'
-                           and timestamp(e['at']) <= started and e['assistance'] != 'ai_implemented']
-                require(set(STEPS[p]) <= {e['kind'] for e in history}, 'downstream history lacks earlier prerequisite evidence')
+            own_ids = {eid for gate in m['gates'].values() for eid in gate['evidence_ids']}
+            own = [e for e in learner if e['id'] in own_ids]
+            for observation in own:
+                started_index = events.index(observation)
+                for p in predecessors:
+                    historical_latest = {e['kind']: e for e in learner if e['milestone'] == p
+                                         and e['id'] not in invalid and events.index(e) < started_index}
+                    needed = set(STEPS[p])
+                    practice = historical_latest.get('modification')
+                    if 'transfer' in needed and any(d['milestone'] == p and events.index(d) < started_index
+                            and not invalid.intersection(d['evidence_ids'])
+                            and set(d['evidence_ids']) == {historical_latest[k]['id'] for k in needed - {'transfer'} if k in historical_latest}
+                            for d in decisions):
+                        needed.remove('transfer')
+                    require(needed <= {k for k, e in historical_latest.items() if e['outcome'] == 'pass'
+                            and (k == 'execution' or e['assistance'] != 'ai_implemented')
+                            and (p != 'J5' or k == 'execution' or e['assistance'] in {'none', 'docs'})},
+                            'downstream history lacks earlier prerequisite evidence')
+                    if 'transfer' in needed:
+                        require(delayed_after(historical_latest['transfer']['at'], historical_latest['modification']['at']),
+                                'downstream history lacks delayed prerequisite transfer')
     for row in rows:
         status = row['status']
         require(status in STATUSES, 'unknown skill status')
         evidence = references(row['evidence_ids'], row['id'])
+        reconciliations = row.get('reconciliations', [])
+        require(isinstance(reconciliations, list) and all(isinstance(r, dict) for r in reconciliations), 'skill reconciliations must be objects')
+        for reconciliation in reconciliations:
+            failure = records.get(reconciliation.get('failure_id'))
+            require(failure is not None and failure.get('actor') == 'learner' and failure.get('outcome') == 'fail'
+                    and row['id'] in failure['skill_ids'], 'reconciliation must name relevant failure')
+            require(reconciliation.get('decision') == 'retain' and all(nonempty(reconciliation.get(k)) for k in ('reason', 'scope', 'source', 'at')), 'invalid reconciliation decision')
+            require(timestamp(failure['at']) <= timestamp(reconciliation['at']) <= timestamp(skills['updated_at']), 'reconciliation time outside failure/snapshot interval')
+            if root:
+                local_ref(root, reconciliation['source'])
         if status == 'not_started':
             continue
         passing = [e for e in evidence if e['outcome'] == 'pass']
@@ -203,11 +266,23 @@ def validate_state(current, skills, events, root=None):
         else:
             independent = [e for e in passing if e['assistance'] in {'none', 'docs'}]
             require({'explanation', 'modification', 'debug', 'transfer'} <= {e['kind'] for e in independent}, 'independent skill lacks independent evidence')
-            require(any(timestamp(t['at']).date() > timestamp(p['at']).date()
+            require(any(delayed_after(t['at'], p['at'])
                         for t in independent if t['kind'] == 'transfer'
-                        for p in independent if p['kind'] == 'modification'), 'independent transfer must follow practice on a later date')
+                        for p in independent if p['kind'] == 'modification'), 'independent transfer requires at least 24 hours after practice (date-only: two days)')
+            failures = [e for e in learner if e['id'] not in invalid and row['id'] in e['skill_ids']
+                        and e['outcome'] == 'fail' and events.index(e) > min(events.index(p) for p in independent)
+                        and not any(p['kind'] == e['kind'] and events.index(p) > events.index(e) for p in independent)]
+            for failure in failures:
+                require(any(r['failure_id'] == failure['id'] for r in reconciliations),
+                        f'{row["id"]} independent claim needs failure reconciliation: {failure["id"]}')
             if status == 'production_understanding':
                 require('operational' in {e['kind'] for e in independent}, 'production status lacks operational evidence')
+    if by_id['J5']['status'] in {'ready', 'complete'}:
+        missing = [r['id'] for r in rows if r['id'] in initial_ids if r['status'] not in {'practiced', 'applied_independently', 'production_understanding'}]
+        require(not missing, 'final capability coverage missing: ' + ', '.join(missing))
+        if by_id['J5']['status'] == 'complete':
+            require(all(by_id[mid]['status'] == 'complete' for mid in STEPS), 'final completion requires all initial-route retention complete')
+            require(next(r for r in rows if r['id'] == 'E22')['status'] in {'applied_independently', 'production_understanding'}, 'final E22 delivery requires independent evidence')
     queues = skills['review_queues']
     require(set(queues) == {'blockers', 'delayed_practice', 'role_gaps'}, 'review queue keys')
     for entries in queues.values():
@@ -269,7 +344,7 @@ def check_link(path, link):
 def validate_documents(root):
     required = ['AGENTS.md', 'AGENT.md', 'README.md', '.agents/skills/ai-engineering-tutor/SKILL.md',
                 'docs/CURRICULUM.md', 'docs/TEACHING_GUIDE.md', 'docs/ENGINEERING_GUIDE.md',
-                'docs/PROGRESS_PROTOCOL.md', 'docs/PORTFOLIO.md', 'docs/PROVIDER_REFERENCE.md',
+                'docs/PROGRESS_PROTOCOL.md', 'docs/ASSESSMENT_CARDS.md', 'docs/PORTFOLIO.md', 'docs/PROVIDER_REFERENCE.md',
                 'docs/PILOT.md', 'docs/MIGRATION.md', '_bmad-output/specs/spec-codex-learning-workspace/SPEC.md']
     for name in required:
         require((root/name).is_file(), f'missing owned file: {name}')
@@ -334,7 +409,7 @@ def self_test(root):
     practiced=copy.deepcopy(execution); practiced[1]['skills'][2].update(status='practiced',evidence_ids=['run']); test('legitimate skill progress',practiced,True)
     bad=copy.deepcopy(practiced); bad[1]['skills'][2]['status']='applied_independently'; test('execution is not independence',bad,False)
     independent=copy.deepcopy(complete)
-    for kind,day in [('modification','2026-09-08'),('debug','2026-09-08'),('transfer','2026-09-09')]: append(independent,event(kind,kind,day=day))
+    for kind,day in [('modification','2026-09-08'),('debug','2026-09-08'),('transfer','2026-09-10')]: append(independent,event(kind,kind,day=day))
     independent[1]['skills'][2].update(status='applied_independently',evidence_ids=['explain','modification','debug','transfer'])
     test('independent delayed evidence',independent,True)
     bad=copy.deepcopy(independent); bad[2][-1]['assistance']='ai_implemented'; test('AI-written transfer not independent',bad,False)
@@ -352,7 +427,10 @@ def self_test(root):
     located=copy.deepcopy((c,s,events)); item=event('location','loc'); item['observed_path']='C:/example/app'; append(located,item)
     located[0]['code_location'].update(path='c:\\example\\app',status='verified',evidence_id='loc'); test('exact normalized location',located,True)
     bad=copy.deepcopy(located); bad[2][-1]['observed_path']='C:/example/app-backup'; test('substring location rejected',bad,False)
-    regression=copy.deepcopy(advance); append(regression,event('execution','regression','fail'))
+    regression=copy.deepcopy(advance)
+    downstream = event('execution', 'downstream'); downstream['milestone'] = '0.4'; append(regression, downstream)
+    regression[0]['milestones'][1]['gates']['execution'] = {'status':'satisfied', 'evidence_ids':['downstream']}
+    append(regression,event('execution','regression','fail'))
     regression[0]['milestone']='0.3'; regression[0]['milestones'][0]['status']='in_progress'
     regression[0]['milestones'][0]['gates']['execution']={'status':'pending','evidence_ids':['regression']}
     test('reassessment preserves downstream history',regression,True)
@@ -361,7 +439,173 @@ def self_test(root):
         item=event(kind,'delay-'+kind); item['milestone']='0.9'; append(delayed,item)
         target['gates'][kind]={'status':'satisfied','evidence_ids':[item['id']]}
     test('same day milestone transfer',delayed,False)
-    delayed[2][-1]['at']='2026-09-09'; delayed[0]['updated_at']=delayed[1]['updated_at']='2026-09-09'; test('later milestone transfer',delayed,True)
+    delayed[2][-1]['at']='2026-09-10'; delayed[0]['updated_at']=delayed[1]['updated_at']='2026-09-10'; test('later milestone transfer',delayed,True)
+    # Readiness and ownership regressions use only synthetic in-memory observations.
+    ready = copy.deepcopy(delayed)
+    ready[2].pop()
+    ready[0]['last_event_id'] = ready[1]['last_event_id'] = ready[0]['last_learner_event'] = ready[2][-1]['id']
+    ready[0]['milestones'][6]['gates']['transfer'] = {'status': 'pending', 'evidence_ids': []}
+    ready[0]['milestones'][6]['status'] = 'ready'
+    review = {'milestone': '0.9', 'evidence_ids': ['delay-modification'], 'eligible_after': '2026-09-10',
+              'observation': 'Synthetic readiness practice', 'next_task': 'Unfamiliar variation', 'trigger': 'Later study session'}
+    ready[1]['review_queues']['delayed_practice'] = [review]
+    prior_events = []
+    for milestone in ready[0]['milestones'][:6]:
+        milestone['status'] = 'complete'
+        for kind in STEPS[milestone['id']]:
+            item = event(kind, 'prior-' + milestone['id'] + '-' + kind)
+            item['milestone'] = milestone['id']; prior_events.append(item)
+            milestone['gates'][kind] = {'status':'satisfied', 'evidence_ids':[item['id']]}
+    ready[2][1:1] = prior_events
+    decision = dict(review, id='ready-decision', at=ready[2][-1]['at'], kind='readiness', actor='maintainer', source='conversation:fixture', evidence_ids=['delay-modification', 'delay-explanation'])
+    append(ready, decision)
+    test('ready with grounded retention queue', ready, True)
+    bad = copy.deepcopy(ready); bad[1]['review_queues']['delayed_practice'] = []
+    test('ready without retention queue', bad, False)
+    bad = copy.deepcopy(ready); bad[1]['review_queues']['delayed_practice'][0]['evidence_ids'] = ['delay-explanation']
+    test('ready queue not grounded in practice', bad, False)
+    bad = copy.deepcopy(delayed); bad[2][-3]['at'] = '2026-09-08T23:59:00Z'; bad[2][-2]['at'] = '2026-09-08T23:59:30Z'; bad[2][-1]['at'] = '2026-09-09T00:01:00Z'
+    test('midnight is not delayed retention', bad, False)
+    bad[2][-1]['at'] = '2026-09-09T23:59:00Z'
+    test('full 24 hours is delayed retention', bad, True)
+    bad = copy.deepcopy(regression)
+    append(bad, {'id':'invalid-history', 'at':'2026-09-08', 'kind':'correction', 'actor':'maintainer', 'supersedes':'run', 'reason':'Synthetic false earlier output'})
+    test('corrected prerequisite cannot support downstream history', bad, False)
+    bad[0]['milestones'][1]['status'] = 'pending'
+    test('correction preserves artifacts with reopened claims', bad, True)
+    earlier_failure = copy.deepcopy(independent)
+    item = event('debug', 'earlier-attempt', outcome='fail')
+    earlier_failure[2].insert(1, item)
+    test('same-date earlier failure resolved by later independent work', earlier_failure, True)
+    failure = copy.deepcopy(independent)
+    item = event('debug', 'cross-stage-fail', outcome='fail', day='2026-09-11'); item['milestone'] = 'J1'; append(failure, item)
+    test('cross-stage failure cannot silently retain independence', failure, False)
+    downgrade = copy.deepcopy(failure); downgrade[1]['skills'][2]['status'] = 'practiced'
+    test('cross-stage failure with conservative downgrade', downgrade, True)
+    failure[1]['skills'][2]['reconciliations'] = [{'failure_id':'cross-stage-fail', 'decision':'retain', 'reason':'Failure concerns unpracticed extension', 'scope':'Earlier provider boundary only', 'source':'conversation:fixture', 'at':'2026-09-11'}]
+    test('cross-stage failure with scoped retain decision', failure, True)
+    for field, value in [('decision','ignore'), ('scope',''), ('at','2026-09-08'), ('source','missing-source.txt')]:
+        bad = copy.deepcopy(failure); bad[1]['skills'][2]['reconciliations'][0][field] = value
+        test('invalid reconciliation ' + field, bad, False)
+    reassessed = copy.deepcopy(failure); reassessed[1]['skills'][2].pop('reconciliations')
+    item = event('debug', 'later-independent-debug', day='2026-09-12'); item['milestone'] = 'J1'; append(reassessed, item)
+    reassessed[1]['skills'][2]['evidence_ids'].append(item['id'])
+    test('later independent same-kind reassessment resolves failure', reassessed, True)
+    route = copy.deepcopy((c,s,events))
+    day = datetime(2026, 9, 8, tzinfo=timezone.utc)
+    final_refs = []
+    for milestone in route[0]['milestones']:
+        for kind in STEPS[milestone['id']]:
+            day += timedelta(days=2)
+            item = event(kind, 'route-' + milestone['id'] + '-' + kind, day=day.isoformat())
+            item['milestone'] = milestone['id']
+            item['skill_ids'] = [f'E{i:02}' for i in range(1, 23)]
+            append(route, item)
+            milestone['gates'][kind] = {'status':'satisfied', 'evidence_ids':[item['id']]}
+            if milestone['id'] == 'J5': final_refs.append(item['id'])
+        milestone['status'] = 'complete'
+    route[0].update(stage='J5', quest='J5', milestone='J5')
+    for row in route[1]['skills']:
+        row.update(status='practiced', evidence_ids=[final_refs[0]])
+    route[1]['skills'][-1].update(status='applied_independently', evidence_ids=final_refs[1:])
+    test('final independent ownership and capability coverage', route, True)
+    bad = copy.deepcopy(route)
+    for row in bad[1]['skills']: row.update(status='not_started', evidence_ids=[])
+    test('route gates alone cannot establish capability coverage', bad, False)
+    bad = copy.deepcopy(route); bad[2][-1]['assistance'] = 'worked_example'
+    test('worked example cannot satisfy final ownership', bad, False)
+    bad = copy.deepcopy(route); bad[2][-5]['assistance'] = 'ai_implemented'
+    test('assisted execution with independent ownership remains valid', bad, True)
+    deferred = copy.deepcopy(route)
+    j2 = next(m for m in deferred[0]['milestones'] if m['id'] == 'J2')
+    j2['status'] = 'ready'; j2['gates']['transfer'] = {'status':'pending', 'evidence_ids':[]}
+    practice_id = j2['gates']['modification']['evidence_ids'][0]
+    practice_at = next(e['at'] for e in deferred[2] if e['id'] == practice_id)
+    deferred[1]['review_queues']['delayed_practice'] = [dict(review, milestone='J2', evidence_ids=[practice_id], eligible_after=(timestamp(practice_at)+timedelta(days=2)).isoformat())]
+    for m in deferred[0]['milestones']:
+        if m['id'] in {'J4', 'J5'}: m['status'] = 'pending'
+    deferred[0].update(stage='J3', quest='J3', milestone='J3')
+    d = dict(deferred[1]['review_queues']['delayed_practice'][0], id='j2-ready', at=next(e['at'] for e in deferred[2] if e['id']=='route-J2-explanation'), kind='readiness', actor='maintainer', source='conversation:fixture', evidence_ids=['route-J2-modification','route-J2-explanation'])
+    deferred[2].insert(next(i for i,e in enumerate(deferred[2]) if e['id']=='route-J2-transfer'), d)
+    next(m for m in deferred[0]['milestones'] if m['id']=='J3')['status']='in_progress'
+    deferred[2][:] = [e for e in deferred[2] if e['id'] != 'route-J2-transfer']
+    test('pending retention permits next useful stage', deferred, True)
+    final_pending = copy.deepcopy(deferred)
+    for m in final_pending[0]['milestones']:
+        if m['id'] in {'J3','J4','J5'}: m['status']='complete'
+    final_pending[0].update(stage='J5',quest='J5',milestone='J5')
+    test('final completion rejects outstanding earlier retention', final_pending, False)
+    moved = copy.deepcopy(route); moved[1]['later_modules'].append(moved[1]['skills'].pop(0))
+    test('E row cannot move outside coverage partition', moved, False)
+    # Separate skill proof makes the gate assistance failures independent of E22 promotion.
+    ownership = copy.deepcopy(route)
+    skill_refs = []
+    for kind in ('explanation','modification','debug','transfer'):
+        day += timedelta(days=2)
+        item = event(kind, 'separate-E22-' + kind, day=day.isoformat()); item['skill_ids']=['E22']
+        append(ownership, item); skill_refs.append(item['id'])
+    ownership[1]['skills'][-1]['evidence_ids'] = skill_refs
+    # The added 0.3 explanation supersedes its gate, so keep it current.
+    ownership[0]['milestones'][0]['gates']['explanation']['evidence_ids'] = [skill_refs[0]]
+    test('separate independent final skill evidence', ownership, True)
+    for kind in ('explanation','modification','debug','transfer'):
+        bad = copy.deepcopy(ownership)
+        next(e for e in bad[2] if e['id']=='route-J5-'+kind)['assistance']='worked_example'
+        test('isolated J5 ownership '+kind, bad, False)
+    bad = copy.deepcopy(route); bad[1]['skills'][-1].update(status='practiced', evidence_ids=[final_refs[0]])
+    test('isolated final E22 independence', bad, False)
+    # Genuine reassessment retains a readiness decision even after its live queue is retired.
+    regressed = copy.deepcopy(deferred)
+    j2 = next(m for m in regressed[0]['milestones'] if m['id']=='J2')
+    item = event('modification','j2-regression','fail',day=regressed[2][-1]['at']); item['milestone']='J2'; item['skill_ids']=[]
+    append(regressed,item); j2['status']='in_progress'; j2['gates']['modification']={'status':'pending','evidence_ids':[item['id']]}
+    regressed[0].update(stage='J2',quest='J2',milestone='J2'); regressed[1]['review_queues']['delayed_practice']=[]
+    test('durable readiness preserves downstream after practice failure',regressed,True)
+    late_debug = copy.deepcopy(regressed)
+    item = event('debug', 'j3-after-prerequisite-failure', day=late_debug[2][-1]['at'])
+    item['milestone'] = 'J3'; item['skill_ids'] = []; append(late_debug, item)
+    next(m for m in late_debug[0]['milestones'] if m['id'] == 'J3')['gates']['debug'] = {'status':'satisfied', 'evidence_ids':[item['id']]}
+    test('old downstream gates cannot mask new work after prerequisite failure', late_debug, False)
+
+    retro = copy.deepcopy(regressed); d = next(e for e in retro[2] if e['kind']=='readiness'); retro[2].remove(d)
+    # Move decision after downstream began but before later regression, retaining valid then-current proof.
+    index = next(i for i,e in enumerate(retro[2]) if e['id']=='route-J3-debug')+1
+    d['at']=retro[2][index-1]['at']; retro[2].insert(index,d)
+    test('retroactive readiness cannot authorize earlier downstream proof',retro,False)
+    invalid_history = copy.deepcopy(regressed)
+    append(invalid_history,dict(id='correct-j2',at=invalid_history[2][-1]['at'],kind='correction',actor='maintainer',supersedes='route-J2-modification',reason='Wrong practice artifact'))
+    test('invalidated durable readiness proof cannot support downstream',invalid_history,False)
+    recovered = copy.deepcopy(invalid_history)
+    item=event('modification','replacement-j2',day=recovered[2][-1]['at']); item['milestone']='J2'; item['skill_ids']=[]; append(recovered,item)
+    j2=next(m for m in recovered[0]['milestones'] if m['id']=='J2'); j2['gates']['modification']={'status':'satisfied','evidence_ids':[item['id']]}; j2['status']='ready'
+    q=dict(review,milestone='J2',evidence_ids=[item['id']],eligible_after=(timestamp(item['at'])+timedelta(days=2)).isoformat())
+    recovered[1]['review_queues']['delayed_practice']=[q]
+    append(recovered,dict(q,id='replacement-ready',at=item['at'],kind='readiness',actor='maintainer',source='conversation:fixture',evidence_ids=[item['id'],'route-J2-explanation']))
+    test('recovered current prerequisite cannot backfill earlier downstream proof',recovered,False)
+    j3=next(m for m in recovered[0]['milestones'] if m['id']=='J3')
+    for kind in STEPS['J3']:
+        item=event(kind,'fresh-j3-'+kind,day=recovered[2][-1]['at']);item['milestone']='J3';item['skill_ids']=[];append(recovered,item)
+        j3['gates'][kind]={'status':'satisfied','evidence_ids':[item['id']]}
+    recovered[0].update(stage='J3',quest='J3',milestone='J3')
+    test('fresh downstream reassessment after valid prerequisite recovers',recovered,True)
+    resolved_history=copy.deepcopy(reassessed)
+    resolved_history[1]['skills'][2]['reconciliations']=copy.deepcopy(failure[1]['skills'][2]['reconciliations'])
+    test('resolved reconciliation remains auditable',resolved_history,True)
+    for value in (None, 'bad', 12, []):
+        bad=copy.deepcopy(failure);bad[1]['skills'][2]['reconciliations']=[value]
+        test('malformed reconciliation '+str(value),bad,False)
+    bad=copy.deepcopy(failure);bad[1]['skills'][2]['reconciliations'][0]['at']='2099-01-01'
+    test('future reconciliation rejected',bad,False)
+    for value in ('20260908', '2026-W37-2', '2026-09-08T23:00'):
+        bad=copy.deepcopy(complete);bad[2][-1]['at']=value
+        test('noncanonical evidence time '+value,bad,False)
+    for eligible, accepted in [('2026-09-09',False),('2026-09-10',True),('20260910',False)]:
+        bad=copy.deepcopy(ready);bad[1]['review_queues']['delayed_practice'][0]['eligible_after']=eligible
+        test('queue date boundary '+eligible,bad,accepted)
+    require(not delayed_after('2026-09-09','2026-09-08T23:59:00Z'), 'one-day mixed delay accepted')
+    require(delayed_after('2026-09-10','2026-09-08T23:59:00Z'), 'two-day mixed delay rejected')
+    require(delayed_after('2026-09-10T00:01:00Z','2026-09-08'), 'reverse mixed delay rejected')
+    require(not delayed_after('2026-09-10','2026-09-08T23:00:00-12:00'), 'offset mixed delay accepted')
     def document_test(label, operation, accepted):
         nonlocal count
         try:

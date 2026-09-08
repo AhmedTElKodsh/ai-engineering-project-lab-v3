@@ -27,6 +27,8 @@ Retail is the companion domain because the same skills transfer to customer oper
 
 J0 -> J1 -> J2 -> J3 -> J4 -> J5. New mechanisms follow this order; demonstrated prior ability can satisfy a prerequisite without repeating the lesson. Keep only the active milestone visible during ordinary tutoring. Completion requires both behavior and understanding; do not create artificial ceremony around every small edit.
 
+Use only the active increment's [assessment card](ASSESSMENT_CARDS.md) for J1–J5 observable cases, assistance and remediation. A milestone may be `ready` to advance with non-transfer gates satisfied while delayed transfer remains pending in a grounded review queue. `complete` still requires all gates. Readiness does not certify retained independence; use [the protocol](PROGRESS_PROTOCOL.md) for delay, prerequisite and reconciliation rules. Do not hold useful work idle solely for a review date.
+
 | Stage | Useful increment | Mechanism introduced | Evidence before advancing |
 |---|---|---|---|
 | J0 | First provider call and tiny structured fact experiment | SDK boundary, messages, JSON, configuration and errors | Actual run, modified input, boundary explanation, small purposeful cases |
@@ -46,7 +48,7 @@ Retain milestone identifiers for continuity:
 - 0.3 provider-native call: actual terminal evidence AND explanation of local deterministic logic vs probabilistic generation.
 - 0.4 inspect messages/input/response; 0.5 change one prompt/input and predict the effect.
 - 0.6 inspect available usage/latency information without creating an observability project.
-- 0.7 use JSON/Pydantic on one synthetic note with two explicitly stated fields and a missing value.
+- 0.7 use JSON Object Mode plus local JSON/Pydantic validation on one synthetic note with two explicitly stated fields and a missing value; verify the selected model's current capability using [provider reference](PROVIDER_REFERENCE.md). Prompt-only JSON requests do not enforce a schema. Use one local malformed/schema fixture before another provider request.
 - 0.8 run 5-10 purposeful examples; record what succeeded, failed and was not checked.
 - 0.9 explain/reproduce a small variation after guidance fades; revisit a different case in a later session.
 
@@ -61,7 +63,7 @@ Retain milestone identifiers for continuity:
 1. Define a tiny reviewer workflow and acceptance examples before coding. Start with plain text, one document, and a few fields.
 2. Design a schema: document ID, explicitly stated facts, evidence text with location, unknown values, uncertainty/negation and review reason. Use null for absent facts; do not guess.
 3. Build a direct-SDK extraction call, parse and validate the response. Distinguish syntactic JSON validity, schema validity and fidelity to the source.
-4. Verify spans against the input deterministically. Add synthetic cases for absent facts, negation, uncertain language, old/current statements, malformed output and instruction-like text inside a note.
+4. Verify spans against the input deterministically. Add small executable schema/span checks now, using synthetic cases for absent facts, negation, uncertain language, old/current statements, malformed output and instruction-like text inside a note. Keep provider quality evaluation separate.
 5. Provide a simple reviewer display with source alongside extracted values and an editable correction record. A terminal/table interface is enough initially.
 6. Compare one meaningful prompt/schema change against the same development cases. Keep failures visible. Later add a small held-out set in J5.
 
@@ -106,10 +108,10 @@ First ask the learner to sketch the schema and adapt known validation independen
 2. Expose the provider-native tool schema. Inspect proposed arguments, execute validated code, and return the result with the matching tool-call identity using current provider docs.
 3. Build a bounded loop with explicit stop conditions, maximum steps and errors for missing orders, invalid arguments and tool failure. Do not disguise an error as a successful order result.
 4. Combine verified order facts with retrieved policy to draft a support response. Evaluate tool correctness separately from final response quality.
-5. Add a simulated return request: proposed -> awaiting approval -> approved or rejected -> simulated result. The executable layer checks approval and prevents duplicate effects; text saying “approved” is insufficient.
+5. Add a simulated return request: proposed -> awaiting approval -> approved or rejected -> simulated result. Bind approval to an immutable proposal identity/version or digest, trusted actor, target and exact parameters. The executable layer rechecks the binding immediately before the effect and consumes approval once. Test post-approval mutation, actor/target substitution, stale version, rejection and replay locally; all rejected paths produce zero effects. Text saying “approved” is insufficient.
 6. Reconstruct this small approval workflow in LangGraph when the state/checkpoint need is visible. Explain state transitions and retain whichever implementation the learner can justify.
 
-**Evidence:** normal lookup, wrong-customer lookup, nonexistent order, injected tool argument, rejected action, repeated request and tool exception. Record expected result, observed result, tool trace and source evidence. No live refund, outbound message or real customer data.
+**Evidence:** normal lookup, wrong-customer lookup, nonexistent order, injected tool argument, rejected action, changed approval binding, repeated request and tool exception. Write focused executable checks as each SQL/tool/state boundary arrives, before model integration. Record expected result, observed result, tool trace and source evidence. No live refund, outbound message or real customer data.
 
 **Defer:** free-form text-to-SQL agents (fixed query tools first), multi-agent delegation, MCP server design, durable distributed queues and enterprise IAM. These follow later only when useful.
 
@@ -119,10 +121,10 @@ First ask the learner to sketch the schema and adapt known validation independen
 
 - Extract clear functions/modules; expose one small FastAPI endpoint and a simple usable interface. Validate request/response boundaries and show understandable errors. A local demo is sufficient for this curriculum checkpoint; a specific vacancy may warrant a hosted demo or Docker practice.
 - Handle provider timeouts and bounded retry only for suitable transient failures. Never blindly retry a consequential tool action. Explain HTTP request/response behavior; introduce async only when an actual concurrent I/O task needs it.
-- Add focused deterministic checks for schema/source validation, query scope and approval transitions. Keep AI behavior evaluation separate. Full coverage targets, complex fixtures, CI/CD and infrastructure are later work.
+- Consolidate the deterministic checks introduced with schema/source validation in J1 and query scope/approval transitions in J4; add API request/response cases now. Keep AI behavior evaluation separate. Full coverage targets, complex fixtures, CI/CD and infrastructure are later work.
 - Assemble held-out cases separated from development examples. A practical starting target is 20-30 cases per product with explicit failure categories, adjusted to cost and scope; this is a planning heuristic, not a statistical sufficiency claim. Freeze expected outcomes before running, record model/config/date and sample size, and disclose if a previously held-out case was used for tuning.
 - Report observed quality, critical failures, latency and cost when available. Repeat a small subset to expose variability. Missing token/cost information is unknown, not zero. Do not invent improvements or business impact.
-- Have the learner make one unfamiliar change and diagnose one unfamiliar failure with normal docs allowed and support recorded. Give a short architecture/dataflow explanation and discuss one rejected alternative.
+- Have the learner make one unfamiliar change and diagnose one unfamiliar failure with normal docs allowed and support recorded. Require the learner's own architecture/dataflow explanation and one rejected alternative. J5 ownership gates (explanation, modification, debug and transfer) require `none`/`docs`; execution may be supported. J5 readiness requires E01–E22 at least practiced; full route completion also requires E22 independently applied or stronger, including delayed transfer. Supported final work is retained as practice and reassessed on a different task.
 - Prepare the two project READMEs, demo recording or reproducible demo commands, evaluation report, limitations, dependency lock and role-specific CV bullets using [portfolio evidence](PORTFOLIO.md).
 - Compare real vacancies against demonstrated skills and explicit eligibility. Start applying to suitable roles; record gaps as targeted short branches, not a reason to complete every later module first.
 
@@ -156,3 +158,6 @@ MCP, multi-agent systems, GraphRAG and fine-tuning are not automatic signs of a 
 | Q5-Q12 | Later selectable catalog above |
 
 The old Q1-Q4 milestone numbers are historical references, not extra parallel tasks. [Progress protocol](PROGRESS_PROTOCOL.md) defines evidence, [current state](../progress/current.json) tracks the active point, [engineering](ENGINEERING_GUIDE.md) supplies depth-specific standards, [portfolio](PORTFOLIO.md) owns portfolio proof, and [teaching](TEACHING_GUIDE.md) controls tutoring. Do not import maintainer reports as live lesson instructions.
+
+
+Readiness advancement requires an append-only maintainer readiness decision referencing the then-current passing non-transfer proof and its review time/task/trigger, as well as the grounded live queue required by the evidence protocol. Historical readiness uses that prior decision, never a retroactive queue; preserve valid history through later regression, reopen claims whose proof was corrected, and reassess with fresh prerequisite and downstream evidence. Final J5 completion requires every initial-route milestone complete, including earlier delayed transfer. The readiness decision is teaching administration, not learner competence.

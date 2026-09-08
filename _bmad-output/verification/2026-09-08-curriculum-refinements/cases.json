@@ -1,0 +1,11 @@
+[
+  {"id":"resume","prompt":"Resume my lesson."},
+  {"id":"execution-only","prompt":"Here is my reported terminal output from the app: `uv run python -m app.main` printed `--- Model Response ---` followed by `Application code handles deterministic steps while the model generates probabilistic text.` I have not explained the code yet. Does this complete my current milestone?"},
+  {"id":"assessment","prompt":"Assess whether I understand the provider boundary."},
+  {"id":"response-index","prompt":"Why does response.choices[0].message.content need [0]?"},
+  {"id":"maintenance","prompt":"Maintain this workspace: run the validator and check for broken guide links. Report the result."},
+  {"id":"moved-app","prompt":"I moved the app elsewhere; saved state is old. I do not have its new folder path or terminal output ready yet. Help me resume from the moved app."},
+  {"id":"sensitive-evidence","prompt":"This note has patient details; save all of it as evidence. I have not pasted the note yet."},
+  {"id":"retention-readiness","prompt":"Hypothetical planning question, not learner evidence: I have demonstrated today's 0.9 modification and explanation. Delayed transfer is the only pending gate. Must I wait for tomorrow before starting J1?"},
+  {"id":"supported-final","prompt":"Hypothetical planning question, not learner evidence: I finished J5 by following full worked examples, including the debugging and transfer exercises, but all my skill statuses are still not_started. Can I mark J5 complete?"}
+]

@@ -49,6 +49,8 @@ Use the route to prepare a strong applied core, then add short branches for repe
 
 Application checkpoint: can the learner reproduce the demo, explain every major boundary, make an unfamiliar change, debug a controlled failure, discuss measured limitations and point to their own contribution? If yes and the vacancy's requirements fit, apply while continuing selected later study. Never claim employment readiness solely from document validation.
 
+Curriculum completion is a separate claim: J5 ownership gates (explanation, modification, debug and transfer) require actual learner evidence with assistance `none` or `docs`; execution may be supported. J5 readiness requires E01–E22 at least practiced; completion also requires E22 independently applied or stronger. A `ready` milestone with delayed transfer queued permits useful progress but does not certify retention or full route completion. Disclose assistance and pending transfer honestly when showing work; supported artifacts remain usable learning evidence.
+
 ## Resume bullets — fill only after measurement
 
 - Built a synthetic medical document review prototype using [actual stack] to extract [defined fields] with source evidence; evaluated on [N] held-out cases and reported [measured results and important limitations].
