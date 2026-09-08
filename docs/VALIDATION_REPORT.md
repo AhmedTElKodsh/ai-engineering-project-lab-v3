@@ -49,3 +49,14 @@ This subsequent maintenance pass implements the nine approved technical/pedagogi
 Final frozen-diff review and completion checks are recorded in the [refinement implementation record](../_bmad-output/implementation-artifacts/spec-curriculum-readiness-refinements.md).
 
 Final verification after review corrections: **PASS, 92 fixtures and 19 local documents**. Three independent review lenses identified additional history, date, partition and test-isolation defects; the retained findings were fixed. Follow-up reviews verified mutation sensitivity and per-observation prerequisite chronology. The two tutor cases affected by durable readiness/final-route semantics were rerun in fresh contexts and passed. Progress, archive and vendor preservation comparison against the baseline returned exit 0. No new findings were deferred; no provider calls or remote operations occurred.
+
+## Curriculum pacing and delivery pass — 2026-09-09
+
+Scope: teaching sequence, portfolio timing and deferral boundaries. No learner evidence, gate, milestone ID, capability ID or validator rule was changed; `progress/current.json` and `progress/evidence.jsonl` are untouched.
+
+- `python tools/validate_workspace.py` and `--self-test`: PASS, 19 owned documents and 92 in-memory fixtures, unchanged from the previous pass.
+- Route changes: J0's 0.3–0.9 identifiers are regrouped into three presented blocks; each stage now ends with a capture step; J5 is split into three passes; framework work in J3/J4 is a bounded comparison rather than a rebuild of working code.
+- A consolidated deferral table names each deferred area with the observation that reopens it, and the boundary-check versus test-engineering distinction is stated explicitly in the route and engineering guide.
+- Portfolio gains a per-stage capture table and explicit application timing; the readiness-machinery paragraph duplicated in the route map and assessment cards is replaced by a pointer to its single definition in the progress protocol.
+- `progress/skills.json` free-text `capability`, `stage` and `evidence_target` fields were revised for E13, E17 and E20. All IDs, statuses and evidence references are unchanged.
+- Not established by this pass: any learner execution, understanding, teaching effectiveness, pacing accuracy, portfolio quality or job readiness. No tutor simulation was rerun; the pilot scenarios in [pilot](PILOT.md) remain at their prior recorded state.

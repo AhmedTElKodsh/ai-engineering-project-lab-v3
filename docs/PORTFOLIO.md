@@ -11,6 +11,30 @@ Recommend two featured projects: the Medical Document Review Assistant and Retai
 | Medical Document Review Assistant | Planned; learner implementation not observed | Typed source-grounded extraction, missingness/negation, review workflow, measured field errors | Synthetic document-processing prototype; not clinically validated |
 | Retail Support and Order Assistant | Planned; learner implementation not observed | Cited policy RAG, scoped order lookup, bounded tool/state flow and simulated approval | Synthetic support workflow; actions simulated |
 
+## Capture as you go, not at the end
+
+The portfolio is a byproduct of the route, not its final phase. Each stage in [the route](CURRICULUM.md) ends with a capture step; this file is where those captures accumulate. Assembling a portfolio from memory after J5 is the slowest path to an application, and the numbers it needs are gone by then.
+
+| After | Capture, while it is fresh | Why this one is persuasive |
+|---|---|---|
+| J1 | Recording of a successful extraction, a correctly flagged missing fact and one honest failure; the field counts and denominator; the first measured CV bullet | Source-grounded extraction with visible provenance is a specific, uncommon thing to be able to show |
+| J2 | The retail schema beside the medical one, and a short note on what transferred and what the domain changed | Demonstrates generalization rather than one memorized pipeline |
+| J3 | A cited answer, an abstention on an unsupported question, and one retrieval miss traced to its layer | A system that refuses to answer reads as engineering judgment; one that always answers reads as a demo |
+| J4 | Normal lookup, blocked wrong-customer lookup, rejected approval producing zero effects | The refusals are the demo. Happy paths are assumed |
+| J5 | Reproducible run commands, README, evaluation report with limits, contribution disclosure | This is assembly if the earlier captures exist, authorship if they do not |
+
+Keep captures honest as they are made: label synthetic data, simulated actions, mocked outputs and prerecorded runs at capture time, not retroactively. A recording made during the stage is also the most reliable record of what the learner actually built themselves.
+
+## When to start applying
+
+Applications are not gated on route completion, and waiting for the whole route is a common, costly mistake.
+
+- **After J1:** the CV, profile and repository carry one honest measured bullet. This is enough to start conversations and to find out what local and eligible-remote listings actually ask for.
+- **From J3 onward:** apply to roles whose must-have list is already covered by demonstrated work. Retrieval, structured output and evaluation literacy cover a large share of junior applied-LLM postings.
+- **Throughout:** record uncovered requirements as `role_gaps` entries and convert repeated ones into short targeted branches. A requirement appearing in one listing is noise; the same requirement in five is a branch worth taking.
+
+None of this changes eligibility. Degree, experience minimums, language requirements, location and work authorization are separate constraints that portfolio evidence does not remove, and "remote" alone does not mean applicants in Egypt are eligible. Verify before applying, and do not describe planned work as completed.
+
 ## Artifact maturity is separate from visibility
 
 - **A — Learning build:** small runnable slice, a few expected-vs-observed cases, explanation and a known failure. It can already be shown as learning work.
@@ -43,7 +67,7 @@ Record the evaluation dataset size and ambiguity handling. Small synthetic evalu
 
 ## Vacancy matching for Egypt and remote roles
 
-Maintain a small list of current vacancies and revisit it as projects mature. Capture: employer/title/link/date, Egypt/on-site/hybrid/remote eligibility, experience/degree, English/Arabic requirements, must-have skills, preferred tools, evidence links and unresolved gaps. “Remote” alone does not mean applicants in Egypt are eligible. Listings may expire; verify before applying.
+This section owns how a vacancy is recorded and matched; the timing of a first application is above. Maintain a small list of current vacancies and revisit it as projects mature. Capture: employer/title/link/date, Egypt/on-site/hybrid/remote eligibility, experience/degree, English/Arabic requirements, must-have skills, preferred tools, evidence links and unresolved gaps. “Remote” alone does not mean applicants in Egypt are eligible. Listings may expire; verify before applying.
 
 Use the route to prepare a strong applied core, then add short branches for repeated requirements in eligible roles. If target roles consistently require Docker/Azure or deeper ML, schedule a focused extension with actual practice; do not pretend this initial route covers it. Some junior titles still demand prior experience or a degree, and a portfolio does not erase those constraints.
 

@@ -18,7 +18,7 @@ Learner questions are answered directly. Assessment answers are withheld until y
 
 J1–J5 use compact [assessment cards](docs/ASSESSMENT_CARDS.md), loaded only for the active increment. Advancement readiness can coexist with a grounded delayed-transfer review; retained independence and full completion require their own evidence. Final ownership is assessed with normal docs allowed, alongside coverage of all core capabilities.
 
-Start with [the route](docs/CURRICULUM.md), [teaching guide](docs/TEACHING_GUIDE.md), and [current state](progress/current.json). [Progress protocol](docs/PROGRESS_PROTOCOL.md) explains evidence and resumption. [Provider reference](docs/PROVIDER_REFERENCE.md) retains a dated baseline, not a current runtime claim. [Portfolio](docs/PORTFOLIO.md) distinguishes planned work from demonstrated results. [Migration](docs/MIGRATION.md) maps all seven frozen sources to native authorities.
+The route ships something showable at every stage rather than saving the portfolio for the end, and it defers test frameworks, deployment and LLMOps with an explicit trigger for reopening each. Start with [the route](docs/CURRICULUM.md), [teaching guide](docs/TEACHING_GUIDE.md), and [current state](progress/current.json). [Progress protocol](docs/PROGRESS_PROTOCOL.md) explains evidence and resumption. [Provider reference](docs/PROVIDER_REFERENCE.md) retains a dated baseline, not a current runtime claim. [Portfolio](docs/PORTFOLIO.md) distinguishes planned work from demonstrated results. [Migration](docs/MIGRATION.md) maps all seven frozen sources to native authorities.
 
 From this repository's root, with Python installed:
 

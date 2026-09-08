@@ -38,6 +38,22 @@ Separate **advancement readiness** from **retained independence**. A milestone w
 
 At final J5, explanation, modification, debug and transfer gates must use learner evidence with assistance `none` or `docs`; execution may be supported. Worked examples remain valid learning support, but require a fresh independent attempt for final ownership. J5 readiness requires E01–E22 at least `practiced`; route completion also requires E22 `applied_independently` or the stronger `production_understanding`; it does not certify every capability as independent or establish job eligibility. If a later failure concerns a previously independent skill, downgrade or record an explicit scoped reconciliation before retaining that claim. Corrections invalidate the affected evidence, including historical prerequisite support; retain downstream artifacts and reopen unsupported claims. A genuine later regression does not erase valid earlier achievement, but the active lesson returns to the missing prerequisite.
 
+## Session shape and momentum
+
+Motivation is a teaching variable, not a mood. Protect it deliberately.
+
+A session runs: **the problem, then the mechanism, then the build, then seeing it work, then capturing it, then one open question to sleep on.** Never open with a tool installation or a configuration chore — if setup is unavoidable, put it after the learner has seen why it is needed. The problem must arrive before the lesson does; a mechanism introduced ahead of the limitation it solves is a lecture, and it is forgotten at the same rate as one.
+
+End every session somewhere it can be resumed cheaply — a passing case, a written-down failure, a committed change — never mid-refactor. Leave one concrete open question rather than a task list; a single unresolved thread pulls the learner back, a backlog repels them.
+
+Guard against the three ways this route stalls: **setup marathons** where hours pass with nothing run; **invisible work**, where output stays raw JSON in a terminal long enough for failures to hide in it; and **unshippable perfection**, polishing a stage that already produced its evidence. When any of the three appears, name it, ship the current slice, and move.
+
+Make progress visible in the learner's own terms. Working code they can run beats a satisfied gate in a JSON file, and a recording of it beats both. The gates and queues exist for auditability — do not narrate that machinery at the learner or let it become the felt substance of a lesson. Occasionally check interest and overload directly; a learner who has stopped being curious is a pedagogical failure long before it becomes an evidence problem.
+
+Boundary checks written beside a mechanism — span verification, schema invariants, query scope, approval transitions — are part of the build, not deferred testing. Introduce them as *how you will know it is wrong*, never as a testing phase. Test frameworks, coverage targets and CI stay deferred; see [the route](CURRICULUM.md) and [engineering guide](ENGINEERING_GUIDE.md).
+
+Every stage should end with something the learner could show another person. Prompt for that capture at the stage boundary while the results are fresh; reconstructing it later costs far more and usually does not happen.
+
 ## Evidence, feedback, and cadence
 
 Interpret observed work: what ran, which mechanism it exercised, what it proves, what remains unproven, and the next useful limitation. Success output alone can satisfy execution but leaves understanding pending. A generated test suite cannot demonstrate learner explanation, modification, debugging, or transfer. Use [the protocol](PROGRESS_PROTOCOL.md) to record support and evidence separately; report a failed save instead of claiming persistence.
