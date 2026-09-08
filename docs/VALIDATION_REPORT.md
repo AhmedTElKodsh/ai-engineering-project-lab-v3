@@ -54,9 +54,19 @@ Final verification after review corrections: **PASS, 92 fixtures and 19 local do
 
 Scope: teaching sequence, portfolio timing and deferral boundaries. No learner evidence, gate, milestone ID, capability ID or validator rule was changed; `progress/current.json` and `progress/evidence.jsonl` are untouched.
 
-- `python tools/validate_workspace.py` and `--self-test`: PASS, 19 owned documents and 92 in-memory fixtures, unchanged from the previous pass.
+- `python tools/validate_workspace.py` and `--self-test`: PASS, 92 in-memory fixtures. The owned-document count moved from 19 to 20 when `docs/LESSON_TEMPLATE.md` was added in the pedagogy pass below; fixtures are unchanged.
 - Route changes: J0's 0.3–0.9 identifiers are regrouped into three presented blocks; each stage now ends with a capture step; J5 is split into three passes; framework work in J3/J4 is a bounded comparison rather than a rebuild of working code.
 - A consolidated deferral table names each deferred area with the observation that reopens it, and the boundary-check versus test-engineering distinction is stated explicitly in the route and engineering guide.
 - Portfolio gains a per-stage capture table and explicit application timing; the readiness-machinery paragraph duplicated in the route map and assessment cards is replaced by a pointer to its single definition in the progress protocol.
 - `progress/skills.json` free-text `capability`, `stage` and `evidence_target` fields were revised for E13, E17 and E20. All IDs, statuses and evidence references are unchanged.
 - Not established by this pass: any learner execution, understanding, teaching effectiveness, pacing accuracy, portfolio quality or job readiness. No tutor simulation was rerun; the pilot scenarios in [pilot](PILOT.md) remain at their prior recorded state.
+
+## Teaching pedagogy pass — 2026-09-09
+
+Scope: how lessons are delivered. No learner evidence, milestone, gate, capability ID or validator rule changed.
+
+- Added a **Teaching moves** section to [teaching](TEACHING_GUIDE.md) defining six binding moves: napkin sketch before code, cafe-register explanation with the learner's objection voiced and any analogy bounded, detail dives taken to the actual mechanism, a named complexity ladder with one new difficulty per rung, every explanation ending on the keyboard, and practice tasks.
+- Practice is split: predict-then-run belongs inside the action; break-it-on-purpose, explain-it-back and reconstruct-from-blank are **offered and freely skippable**, with an explicit instruction to continue without comment, penalty or re-offering. Optional self-checks are informal and never satisfy or block an evidence gate.
+- Added [lesson template](LESSON_TEMPLATE.md) as the required shape for first-exposure lessons, including the cases where it must not be applied. Owned documents: 20.
+- Mirrored the operative rules into [the tutor skill](../.agents/skills/ai-engineering-tutor/SKILL.md) and [AGENTS.md](../AGENTS.md).
+- Not established by this pass: teaching effectiveness, learner understanding, retention or engagement. No tutor simulation was rerun against the new template; the scenarios in [pilot](PILOT.md) remain at their prior recorded state.
