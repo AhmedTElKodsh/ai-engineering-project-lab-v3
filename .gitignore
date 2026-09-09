@@ -23,8 +23,11 @@ __pycache__/
 _bmad/render/
 .bmad-help-setup*.toml
 
-# Existing Windows junctions to .agents skills are local host conveniences
-.claude/skills/
+# Host skill directories. Vendored BMAD skills are local junctions to .agents and
+# stay untracked; the native tutor is tracked so a fresh clone can register it in
+# Claude Code as well as in the .agents convention.
+.claude/skills/*
+!.claude/skills/ai-engineering-tutor/
 
 # Learner data and transient output must be deliberately selected for publication
 data/private/

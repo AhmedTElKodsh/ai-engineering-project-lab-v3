@@ -10,13 +10,15 @@ Each assessment checks a conceptual anchor as well as output: what the mechanism
 
 ## J1 — Medical extraction
 
-**Prerequisite:** J0 JSON/boundary readiness; **stage gates:** execution, explanation, debug; **capabilities:** E05–E07, continued E04.
+**Prerequisite:** J0 JSON/boundary readiness; **stage gates:** execution, explanation, modification, debug; **capabilities:** E05–E07, continued E04.
 
 | Increment | Observable outcome and minimum acceptance cases | Unfamiliar ownership probe | Remediation |
 |---|---|---|---|
 | Schema and extraction | Required fields/types/nulls are explicit. Valid payload passes; malformed JSON and wrong type fail locally; absent fact remains null. Learner distinguishes syntax, schema and truth. | Add a field for an explicitly stated document fact and justify its absent-value rule. | Isolate parsing versus schema validation on a hand-written payload before another model request. |
 | Source checks | Exact spans resolve to the input; unsupported values are flagged. Cases include absent, negated, uncertain, old/current statements and instruction-like note text. A schema-valid unsupported claim fails source review. | Diagnose a new mismatched span or chronology case and explain which layer owns the correction. | Trace one field to source and fix its deterministic invariant, then try a different note. |
 | Review and comparison | Source and extracted values are visible together; a human correction retains original and corrected values/reason. Compare one change and a simple deterministic/non-AI baseline on fixed cases, reporting counts and denominator including omissions. | Explain a reserved unseen review flag and correct it without losing provenance. | Reduce to one source/value/correction path; restore the missing audit information and rerun it. |
+
+**Common wrong models at J1.** *"Valid JSON means the extraction is correct."* — separate the three questions out loud: it parsed, it matched the schema, and neither one looked at the note. *"The field is missing, so I'll leave it out."* — absent is a finding; null records it, omission hides it. *"The span resolved, so the fact is supported."* — a span proves the quote exists at that position, not that it supports the value; see the second case in [worked exemplars](EXEMPLARS.md).
 
 Worked examples and scaffolds are permitted in Learn. The stage debug gate must reflect the learner's actual diagnosis, not assistant-authored repair. Independently applied skill claims need separate explanation, modification, debug and delayed transfer; J1 execution alone cannot grant them. Revisit extraction transfer in J2.
 
@@ -29,11 +31,13 @@ Worked examples and scaffolds are permitted in Learn. The stage debug gate must 
 | New domain schema | Learner adapts known validation to category, stated order ID, missing information, draft and escalation reason. Test missing ID, ambiguous request, mixed intent and invented order status. No order system access is claimed. | Design a new bounded request category and explain which medical rules transfer and which change. | Return to one schema/value invariant; provide only the requested help, then use a fresh category. |
 | Language and delay | Record Arabic and English results separately against explicit expected labels; identify untested code-switch cases. A later unfamiliar request demonstrates transfer with a changed ambiguity, language or escalation rule, recorded assistance and elapsed delay. | Adapt validation to a new request whose missing-information or escalation contract differs materially; renaming fields does not qualify. | Keep supported modification as practice, record the later task in the readiness event and continue useful work if `ready`. |
 
+**Common wrong models at J2.** *"The model can look up the order."* — it cannot; nothing is connected yet, and a stated order ID is text the customer typed. *"Translating the labels makes it work in Arabic."* — interface language and model behaviour on Arabic input are unrelated; measure the second directly.
+
 Start with a learner sketch; hints are available after an attempt or direct request. Same-session transfer is useful practice but cannot certify delayed retention. Do not block J3 solely to wait for retention when the ready contract is met.
 
 ## J3 — Retrieval and grounded answers
 
-**Prerequisite:** J2 readiness and Python lists/functions plus a small vector explanation; **stage gates:** execution, explanation, debug; **capabilities:** E09–E13.
+**Prerequisite:** J2 readiness and Python lists/functions plus a small vector explanation; **stage gates:** execution, explanation, modification, debug; **capabilities:** E09–E13.
 
 | Increment | Observable outcome and minimum acceptance cases | Unfamiliar ownership probe | Remediation |
 |---|---|---|---|
@@ -41,11 +45,13 @@ Start with a learner sketch; hints are available after an attempt or direct requ
 | Answers and abstention | Every citation supports its attached claim; missing, conflicting, expired and instruction-like passages produce the defined handling. Fixture checks catch nonexistent citation IDs and wrong versions. | Diagnose whether a new wrong answer came from retrieval or generation. | Freeze retrieved context, then isolate the unsupported answer claim or missing retrieval. |
 | Abstraction decision | When a framework need is demonstrated, reproduce one slice in LangChain and name which ingestion/retrieval/prompt responsibilities moved. Otherwise, compare a changed native trace with the framework contract and justify no adoption, costs and a reconsideration trigger. | Predict and then trace the effect of one changed retrieval setting or boundary through the chosen path. | Trace one input through owned versus delegated responsibilities; do not add an abstraction to hide a failing step. |
 
+**Common wrong models at J3.** *"It retrieved something, so retrieval worked."* — retrieving the superseded version of a policy is a successful retrieval of the wrong document. *"A wrong answer means the prompt needs work."* — check what was retrieved first; changing the prompt to fix a retrieval failure hides it. *"Higher similarity means more correct."* — similarity cannot see a version number or an effective date.
+
 Allow documentation and supported learning. Do not call a framework-produced result independent understanding. Protected data is optional; if introduced, add deterministic access-scope checks before retrieving it.
 
 ## J4 — Scoped tools and approval
 
-**Entry prerequisite:** J2 readiness for hand-written parameterized SQL and the scoped read tool. **Completion prerequisite:** J3 retrieval readiness for the combined policy/order behavior. **Stage gates:** execution, explanation, debug; **capabilities:** E14–E17.
+**Entry prerequisite:** J2 readiness for hand-written parameterized SQL and the scoped read tool. **Completion prerequisite:** J3 retrieval readiness for the combined policy/order behavior. **Stage gates:** execution, explanation, modification, debug; **capabilities:** E14–E17.
 
 | Increment | Observable outcome and minimum acceptance cases | Unfamiliar ownership probe | Remediation |
 |---|---|---|---|
@@ -53,6 +59,8 @@ Allow documentation and supported learning. Do not call a framework-produced res
 | Native loop | Validate arguments, link tool result to its call identity, bound steps and expose tool exceptions. Test missing tool, invalid arguments and exhausted step budget without false success. | Trace and repair an unfamiliar tool-result or stopping failure. | Isolate one proposal/validated call/result cycle with a fake tool before model integration. |
 | Approval state | Before any simulated effect, bind approval to immutable proposal ID/version or digest, trusted actor, target and exact parameters. Test mutation after approval, changed actor, changed target, stale version, rejection, missing approval and replay; all rejected paths produce zero effects. Approved original executes once. | Diagnose a replay or changed-parameter proposal and justify the execution-time check. | Use a local transition fixture and effect counter; repair binding/consumption before another workflow run. |
 | State abstraction decision | Adopt LangGraph only when checkpoint, branch or recovery needs are demonstrated; otherwise justify no adoption by comparing ownership, complexity and a concrete trigger. The same rejection and once-only cases hold either way. | Change a transition and trace how the chosen design preserves the approval contract. | Trace application-owned state separately from any framework persistence. |
+
+**Common wrong models at J4.** *"The model said the customer ID, so I can query it."* — a model-supplied identifier is an argument, never authorization; scope comes from the trusted caller. *"The user replied 'approved', so it is approved."* — approval binds to a proposal identity, not to text; see the J4 exemplar. *"The tool returned an error, so I'll say the order was not found."* — a failure and an absence are different results and the learner must not collapse them.
 
 Assistance is recorded; deterministic acceptance cases begin when each boundary is introduced, before model integration. No live refunds or outbound messages. A local once-only demonstration does not prove distributed concurrency or production recovery.
 

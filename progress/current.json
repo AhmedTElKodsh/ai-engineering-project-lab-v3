@@ -160,6 +160,10 @@
           "status": "pending",
           "evidence_ids": []
         },
+        "modification": {
+          "status": "pending",
+          "evidence_ids": []
+        },
         "debug": {
           "status": "pending",
           "evidence_ids": []
@@ -198,6 +202,10 @@
           "status": "pending",
           "evidence_ids": []
         },
+        "modification": {
+          "status": "pending",
+          "evidence_ids": []
+        },
         "debug": {
           "status": "pending",
           "evidence_ids": []
@@ -214,6 +222,10 @@
           "evidence_ids": []
         },
         "explanation": {
+          "status": "pending",
+          "evidence_ids": []
+        },
+        "modification": {
           "status": "pending",
           "evidence_ids": []
         },

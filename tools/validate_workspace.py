@@ -16,13 +16,16 @@ STEPS = {
     '0.5': ('modification', 'explanation'), '0.6': ('execution', 'explanation'),
     '0.7': ('execution', 'explanation'), '0.8': ('execution', 'debug'),
     '0.9': ('modification', 'explanation', 'transfer'),
-    'J1': ('execution', 'explanation', 'debug'),
+    'J1': ('execution', 'explanation', 'modification', 'debug'),
     'J2': ('modification', 'explanation', 'transfer'),
-    'J3': ('execution', 'explanation', 'debug'),
-    'J4': ('execution', 'explanation', 'debug'),
+    'J3': ('execution', 'explanation', 'modification', 'debug'),
+    'J4': ('execution', 'explanation', 'modification', 'debug'),
     'J5': ('execution', 'explanation', 'modification', 'debug', 'transfer'),
 }
 LATER = [f'Q{i}' for i in range(5, 13)]
+# Inherited J0 setup milestones. Ungated by design, but a genuine prerequisite failure
+# must have a legal home rather than being relabeled under 0.3.
+PRE_STEPS = ('0.1', '0.2')
 KINDS = {'execution', 'explanation', 'modification', 'debug', 'transfer', 'engagement', 'operational', 'location'}
 ASSISTANCE = {'none', 'docs', 'hint', 'scaffold', 'worked_example', 'ai_implemented'}
 STATUSES = {'not_started', 'introduced', 'practiced', 'applied_independently', 'production_understanding'}
@@ -156,7 +159,7 @@ def validate_state(current, skills, events, root=None):
             invalid.add(old)
         else:
             require(kind in KINDS and event.get('actor') == 'learner', 'invalid learner kind/actor')
-            require(event.get('milestone') in set(STEPS) | set(LATER), 'unknown evidence milestone')
+            require(event.get('milestone') in set(STEPS) | set(LATER) | set(PRE_STEPS), 'unknown evidence milestone')
             require(event.get('outcome') in {'pass', 'fail', 'observed'}, 'invalid outcome')
             require(event.get('assistance') in ASSISTANCE, 'unknown assistance level')
             require(isinstance(event.get('skill_ids'), list) and set(event['skill_ids']) <= set(ids), 'unknown evidence skill')
@@ -182,7 +185,17 @@ def validate_state(current, skills, events, root=None):
             require(eid in records, f'missing evidence ID: {eid}')
             event = records[eid]
             require(eid not in invalid and event.get('actor') == 'learner', 'invalidated/non-learner evidence cannot support status')
-            require(is_fresh(event, events), 'stale evidence cannot support status')
+            # Their capability-scoped freshness decides staleness; the message names the
+            # repair, because a newer honest observation is the usual cause, not corruption.
+            newer = None if is_fresh(event, events) else next(
+                (o['id'] for o in events[events.index(event) + 1:]
+                 if o.get('actor') == 'learner' and o.get('id') not in invalid
+                 and o.get('milestone') == event['milestone'] and o.get('kind') == event['kind']
+                 and scopes_overlap(event, o)), 'a later observation')
+            where = f"skill {skill}" if skill else f"milestone {event['milestone']}"
+            require(newer is None, f"stale evidence cannot support status: {where} references "
+                                   f"{eid}, but {newer} is a later overlapping {event['kind']} for "
+                                   f"{event['milestone']} -- re-point this reference or reconcile it")
             if skill:
                 require(skill in event['skill_ids'], 'evidence does not support this skill')
             found.append(event)
@@ -378,6 +391,15 @@ def validate_documents(root):
         require(sum(line.strip().startswith('```') for line in body.splitlines()) % 2 == 0, f'unbalanced fence: {path.name}')
         for link in re.findall(r'(?<!!)\[[^\]\n]+\]\(([^)\n]+)\)', body):
             check_link(path, link)
+    mirror = root/'.claude/skills/ai-engineering-tutor'
+    if mirror.is_dir():
+        # The mirror is a convenience for a second host, never a second source.
+        source = root/'.agents/skills/ai-engineering-tutor'
+        for path in sorted(p for p in source.rglob('*') if p.is_file()):
+            twin = mirror/path.relative_to(source)
+            require(twin.is_file(), f'tutor skill mirror missing {path.name}: run tools/sync_tutor_skill.py')
+            require(twin.read_bytes() == path.read_bytes(),
+                    f'tutor skill mirror drifted at {path.name}: run tools/sync_tutor_skill.py')
     spec = root/'_bmad-output/specs/spec-codex-learning-workspace/SPEC.md'
     front = frontmatter(spec.read_text(encoding='utf-8'))
     for name in re.findall(r'^  - (.+)$', front, re.M):
@@ -418,6 +440,12 @@ def self_test(root):
     execution[0]['milestones'][0]['gates']['execution']={'status':'satisfied','evidence_ids':['run']}
     test('valid execution only, no forced advancement', execution, True)
     bad=copy.deepcopy(execution); bad[0]['milestones'][0]['status']='complete'; test('execution cannot complete',bad,False)
+    setup = copy.deepcopy((c,s,events))
+    setup_fail = event('execution','setup-fail',outcome='fail'); setup_fail['milestone']='0.1'
+    append(setup, setup_fail); test('failed setup prerequisite is recordable', setup, True)
+    misfiled = copy.deepcopy(setup)
+    misfiled[0]['milestones'][0]['gates']['execution']={'status':'satisfied','evidence_ids':['setup-fail']}
+    test('setup evidence cannot satisfy a 0.3 gate', misfiled, False)
     complete=copy.deepcopy(execution); append(complete,event('explanation','explain'))
     complete[0]['milestones'][0]['gates']['explanation']={'status':'satisfied','evidence_ids':['explain']}
     complete[0]['milestones'][0]['status']='complete'; test('valid completion',complete,True)

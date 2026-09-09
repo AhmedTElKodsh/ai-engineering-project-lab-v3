@@ -44,7 +44,7 @@ Use only the active increment's [assessment card](ASSESSMENT_CARDS.md) for J1–
 
 Retain milestone identifiers for continuity:
 
-- 0.1 practical diagnostic and 0.2 project setup: only revisit a failing prerequisite.
+- 0.1 practical diagnostic and 0.2 project setup: only revisit a failing prerequisite. These carry no gates, but a genuine failure is recorded as ordinary evidence against milestone `0.1` or `0.2`; never relabel it under `0.3`.
 - 0.3 provider-native call: actual terminal evidence AND explanation of local deterministic logic vs probabilistic generation.
 - 0.4 inspect messages/input/response; 0.5 change one prompt/input and predict the effect.
 - 0.6 inspect available usage/latency information and distinguish a request timeout from model or schema failure without creating an observability project.

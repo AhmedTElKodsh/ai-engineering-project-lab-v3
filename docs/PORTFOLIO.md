@@ -33,7 +33,7 @@ This route specializes in applied AI/LLM application engineering: provider bound
 8. Learner contribution and AI assistance disclosure, plus one independent change/debugging record. Preserve references to real commits/output where available.
 9. A small observed usability note when practical: one person other than the builder attempts a normal task from the README/interface; record the task, hesitation or failure, and one resulting correction or explicit deferral. Do not coach the participant to manufacture success or present this as a formal usability study.
 
-Useful demo: show one successful case, one missing/ambiguous case and one controlled failure with an honest explanation. A short recording or local reproduction is sufficient for this curriculum; a hosted app may be a useful vacancy-specific extension. Never require reviewers to supply patient/customer data or send their secrets to an unknown service.
+**A recorded demo is a required artifact, not an alternative to one.** Deployment is deferred to later work for good reasons, but the consequence has to be handled rather than inherited: a reviewer spending four minutes on a candidate does not clone a repository, install a package manager, supply their own provider key and run anything. Record two to three minutes showing one successful case, one missing or ambiguous case, and one controlled failure with an honest explanation. Label prerecorded or mocked output plainly. A hosted app remains an optional vacancy-specific extension; the recording is what actually gets watched. Never require reviewers to supply patient/customer data or send their secrets to an unknown service.
 
 ## Suggested measurements, never fabricated results
 
@@ -43,6 +43,17 @@ Useful demo: show one successful case, one missing/ambiguous case and one contro
 | Retail | Classification correctness; retrieval Recall@k; citation/answer support; abstention; tool/workflow success | Wrong-customer lookup, missing order, wrong policy version, rejected action, repeated request and tool error |
 
 Record the evaluation dataset size and ambiguity handling. Small synthetic evaluations show bounded engineering behavior, not clinical efficacy or proven commercial savings. If claiming a reduction in review time, measure it with an explicit baseline and comparable tasks; otherwise describe it as an intended benefit.
+
+## Publication: which repositories go public
+
+The curriculum workspace stays private. It holds learning state and evidence about a person, and nothing about it is portfolio material. The two product repositories have to be public, or the portfolio does not exist — a reviewer cannot evaluate what they cannot open.
+
+Before making a product repository public, in this order:
+
+1. Confirm no secret was ever committed, not merely that one is ignored now. `git check-ignore   .env` proves the current rule matches; it says nothing about history. Search the history   explicitly, and if a key was ever committed, rotate it — removing the file does not unpublish it.
+2. Confirm every document, note, policy and order in the repository is synthetic, and that the   README says so in its first paragraph.
+3. Keep the evaluation report in. Its limitations section is evidence of judgement, and removing   it to look stronger makes the portfolio weaker to exactly the readers worth impressing.
+4. Keep the assistance disclosure in. Supported work honestly labelled reads as professional;   discovering it was undisclosed does not.
 
 ## Vacancy matching for Egypt and remote roles
 
@@ -60,6 +71,12 @@ Curriculum completion is a separate claim: J5 ownership gates (explanation, modi
 - Developed a retail support assistant combining cited policy retrieval with scoped SQL order tools and human-approved simulated returns; demonstrated [actual workflow cases] and measured [actual quality/latency results].
 
 Replace brackets with observed facts before use. State prototype/synthetic scope when relevant. Do not claim clinical validation, live refunds, real revenue gains, production scale or business adoption without evidence.
+
+## What this package does not evidence
+
+This route is solo by construction. Two synthetic-data prototypes, one author, no review history, no issue thread, no collaboration artifact. "Can this person work with other people" is a real screen and nothing here answers it — which is worth stating plainly, in the same spirit as every other limit named in this document, rather than letting the package look complete along an axis it never measured.
+
+The cheapest honest evidence, if a target role weights it: one real issue thread, or one accepted contribution to something you did not write. Neither belongs on the critical path to a first application, and neither should delay one.
 
 ## Later portfolio expansion
 

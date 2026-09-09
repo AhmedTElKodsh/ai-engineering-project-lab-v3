@@ -2,6 +2,22 @@
 
 This document owns evidence/status rules adapted from V3.2 sources 02 and 03. [Current state](../progress/current.json) owns the active action; [skills](../progress/skills.json) owns competence; [evidence](../progress/evidence.jsonl) is append-only factual history. [Teaching](TEACHING_GUIDE.md) owns modes. Curriculum edits, generated code and static checks never create learner achievements.
 
+## Read only the part you need
+
+This document is a reference, not a briefing. An ordinary lesson needs none of it.
+
+| Doing this | Read |
+|---|---|
+| Resuming, reconciling saved state against newer evidence | *Resume and reconcile* |
+| Recording an observation | *Evidence record* |
+| Deciding whether a gate or skill status may change | *Gates and competence* |
+| Writing a checkpoint to disk | *Safe checkpoint writes* |
+| Advancing on readiness, or reopening a corrected claim | *Readiness, final ownership and reassessment*, then *Durable readiness and downstream history* |
+
+Nothing here is teaching policy; [the teaching guide](TEACHING_GUIDE.md) owns that. The
+prohibitions in this document exist to keep a record honest, not to shape a lesson: if a
+rule here appears to be telling you how to teach, you are reading the wrong document.
+
 ## Resume and reconcile
 
 Prefer newest actual learner evidence in the turn, then conversation, saved checkpoint, and saved state. Start with the latest event and unresolved action. Initial onboarding is inherited as complete and calibration sufficient; this is a continuity decision, not proof of installed packages or competence. The only initial evidence event is maintainer initialization. All E01–E22 skills and Q5–Q12 later modules start `not_started`; Q0 / 0.3 is `in_progress`, with both execution and explanation gates pending.
@@ -36,7 +52,7 @@ Corrections append `kind: correction`, `actor: maintainer`, `supersedes` naming 
 
 ## Gates and competence
 
-Milestone IDs 0.3–0.9 retain Q0 continuity within J0. J1–J5 have stage-level evidence gates; actual acceptance cases come from [curriculum](CURRICULUM.md). Every gate has `status` (`pending` or `satisfied`) and `evidence_ids`. A satisfied gate requires current active passing evidence of the matching kind and milestone under the overlap rule above. A pending gate can retain failed/observed evidence or await tutor review of a pass. Milestone `complete` requires all its gates satisfied.
+Milestone IDs 0.3–0.9 retain Q0 continuity within J0. J1, J3 and J4 each carry a `modification` gate, because each stage's route text asks the learner to change something they did not copy; that evidence belongs on the milestone, not only on a skill row. Inherited setup milestones `0.1` and `0.2` carry no gates and never appear in the milestone list, but they are valid evidence milestones: a genuine diagnostic or setup failure is recorded against them rather than relabeled under `0.3`. J1–J5 have stage-level evidence gates; actual acceptance cases come from [curriculum](CURRICULUM.md). Every gate has `status` (`pending` or `satisfied`) and `evidence_ids`. A satisfied gate requires current active passing evidence of the matching kind and milestone under the overlap rule above. A pending gate can retain failed/observed evidence or await tutor review of a pass. Milestone `complete` requires all its gates satisfied.
 
 Route entry and completion are separate dependency decisions. The recommended narrative is J0 -> J1 -> J2 -> J3 -> J4 -> J5, and the J0 increments through J3 retain their preceding readiness dependency. J4 may become active after J2 is `ready` or `complete`, allowing direct parameterized SQL and scoped read-tool work while J3 is incomplete. J4 cannot become `ready`/`complete` until J3 is also `ready` or `complete`, because the finished support workflow combines retrieved policy with order facts. J5 requires J4 completion, and therefore inherits both branches. If reassessment reopens an earlier prerequisite, return the active milestone to the affected prerequisite unless another dependency-safe branch remains useful; retain downstream work with its own valid evidence and evidence that its actual entry prerequisites previously passed before that work. Historical completion does not authorize a new dependent step past a reopened prerequisite. Passing evidence permits a reasoned update, never automatic advancement by execution alone. Completing 0.3 does not complete J0 or grant E03 independence.
 
@@ -50,9 +66,9 @@ Skill status meanings:
 - `applied_independently`: explanation, modification, debug and delayed transfer with assistance `none` or `docs`.
 - `production_understanding`: independent evidence plus actual scoped `operational` evidence; architecture intent alone is insufficient.
 
-For automated independence checks, transfer must occur at least 24 hours after supporting modification practice; if either observation has only a date, compare their UTC-normalized calendar dates and require a two-day difference, rather than 48 elapsed hours. Basic ISO dates and partial timestamps are rejected. Do not invent timestamps for historical evidence. A different date just minutes after practice does not establish delayed retention. Same-day practice can be recorded but does not yet satisfy that delayed-transfer check. Current native quest labels are `Q0` within J0 and otherwise the stage label (`J1`–`J5`). Selected later Q5–Q12 milestones can be added with execution, explanation and debug gates after the initial route is complete; deeper acceptance still comes from the selected module.
+The validator's elapsed-time check is a rejection floor, not the teaching interval: 24 hours is the point below which a delayed-transfer record is refused, while the interval to actually teach to remains 2-7 days. Do not schedule to the floor. For automated independence checks, transfer must occur at least 24 hours after supporting modification practice; if either observation has only a date, compare their UTC-normalized calendar dates and require a two-day difference, rather than 48 elapsed hours. Basic ISO dates and partial timestamps are rejected. Do not invent timestamps for historical evidence. A different date just minutes after practice does not establish delayed retention. Same-day practice can be recorded but does not yet satisfy that delayed-transfer check. Current native quest labels are `Q0` within J0 and otherwise the stage label (`J1`–`J5`). Selected later Q5–Q12 milestones can be added with execution, explanation and debug gates after the initial route is complete; deeper acceptance still comes from the selected module.
 
-Statuses can stay conservative while evidence accumulates. Required evidence references must be active, passing, tagged for that skill and latest for that skill/milestone/kind. Downgrade or return to pending when contrary current evidence invalidates a claim; retain the reason in a correction/checkpoint narrative. Explanation questions alone are not failures. These statuses express demonstrated scope, not universal mastery of a whole technology.
+Statuses can stay conservative while evidence accumulates. Required evidence references must be active, passing, tagged for that skill and latest for that skill/milestone/kind. Evidence supporting an `applied_independently` or `production_understanding` claim should carry a durable `source` -- a repository-relative artifact path rather than a conversation reference alone -- so the strongest claims remain checkable after the conversation is gone. Downgrade or return to pending when contrary current evidence invalidates a claim; retain the reason in a correction/checkpoint narrative. Explanation questions alone are not failures. These statuses express demonstrated scope, not universal mastery of a whole technology.
 
 The three review queues (`blockers`, `delayed_practice`, `role_gaps`) hold objects with `evidence_ids`, `observation`, `next_task`, and `trigger`. Add them only after a real observation. They can organize ordinary review work, but a `delayed_practice` queue entry is not a second readiness contract and cannot authorize advancement. Queue entries do not create calendar automations.
 
@@ -66,7 +82,7 @@ At a pause preserve milestone/mode, last learner event, conceptual thread, assis
 
 ## Validation boundary
 
-The read-only validator checks schema, paths, references, evidence kinds, current-event precedence, skill/gate prerequisites, ordering and owned document links. `--self-test` runs synthetic positive and negative fixtures only in memory. It cannot establish clinical validity, actual execution, a correct explanation, effective teaching, or job readiness. Tutor simulations belong in [pilot](PILOT.md), never in the learner log.
+The read-only validator is a consistency and discipline harness, not a fraud check. It verifies schema, paths, references, evidence kinds, current-event precedence, skill/gate prerequisites, ordering and owned document links -- the shape of the record. It cannot distinguish an invented observation from a true one; that judgement is the tutor's and the learner's alone, and no count of passing fixtures changes it. `--self-test` runs synthetic positive and negative fixtures only in memory. It cannot establish clinical validity, actual execution, a correct explanation, effective teaching, or job readiness. Tutor simulations belong in [pilot](PILOT.md), never in the learner log.
 
 
 ## Readiness, final ownership and reassessment

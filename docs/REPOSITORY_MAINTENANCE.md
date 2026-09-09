@@ -38,3 +38,18 @@ BMAD planning and implementation skills support maintainer work. Normal teaching
 ## Bundled BMAD limitations
 
 Independent review found two inherited vendor maintenance issues; vendor files are preserved. Replacing an existing runtime on Windows can fail with WinError 183 because `replace_dir` renames into an already-created backup directory. The materialized renderer test suite expects source-repository assets absent from `_bmad`, so it cannot collect here. Initial setup and skill rendering succeeded; runtime replacement and the vendor test suite are not certified. Use the native validator for this curriculum. Repairing vendor maintenance code is deferred to a separate scoped change.
+
+## Host skill mirror
+
+`.agents/skills/ai-engineering-tutor/` is the source of truth for the native tutor.
+`.claude/skills/ai-engineering-tutor/` mirrors it so Claude Code registers the skill as
+well as the Codex convention; both sit at the same relative depth, so document links
+resolve identically from either. After editing the skill, run:
+
+```powershell
+python tools/sync_tutor_skill.py
+```
+
+`python tools/validate_workspace.py` fails if the two copies drift, so the mirror is a
+checked invariant rather than a second file to remember. Vendored BMAD skills under
+`.claude/skills/` remain local host conveniences and stay untracked.
