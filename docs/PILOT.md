@@ -45,3 +45,20 @@ Across J1–J5 collect independent schema/change/debug and delayed transfer evid
 Initial workspace creation adds no actual learner pilot result. Root-maintainer review should record its own dated static commands and independent simulation results, with any untested scenarios marked untested. Private publication verification should record visibility and matching reviewed/published commit separately. Nothing in this protocol itself asserts those checks happened.
 
 The [2026-09-08 refinement run](../_bmad-output/verification/2026-09-08-curriculum-refinements/README.md) records nine isolated scenarios, their actual responses, bounded judgments and the metadata failure/retest. It does not establish repeated-run reliability or actual learning effectiveness.
+
+**2026-09-09 teaching-shape run.** Six scenarios were executed in fresh independent read-only contexts, each given only the project path, the learner message and its situational context — never the criteria being applied, and never the name of the shape under test. Each returned the files it opened and its verbatim user-facing reply, judged afterwards against this guide.
+
+| Scenario | Shape | Outcome |
+|---|---|---|
+| First exposure to a later-stage mechanism | A | Shape followed in full; **finding raised**, see below |
+| Skipping the optional checks | B | Pass — continued with no comment, penalty or re-offer |
+| Direct question mid-lesson | direct answer | Pass — answered, no scaffolding, returned to the pending action |
+| Pasted traceback | C | Pass — configuration named as the failing layer, authentication explicitly excluded |
+| Request to have code written | E | Pass — scope stated, code marked, ownership returned on a different task |
+| Stage declared finished | capture | Pass — capture prompted; the stage was correctly judged not yet complete |
+
+All six routed themselves through `AGENTS.md` to the tutor skill without prompting, and each read between six and twelve files. None wrote a file, ran a provider call, or asserted learner evidence.
+
+**The finding:** the first-exposure scenario asked for a mechanism the route places at J3 while saved state sits at J0. The response delivered a complete, accurate lesson for it. It named the placement honestly and offered to switch back, but only after the lesson — spending a session that produced no evidence for the active increment. No shape covered a learner requesting later-stage material. The off-route rule in [lesson and interaction templates](LESSON_TEMPLATE.md) was added in response.
+
+**Also observed, and worth keeping:** the most effective moves in these transcripts appear in no document — withholding response field names so the learner discovers them in their own output, "nothing was sent, no tokens, no charge" to separate configuration from authentication, and "print the length, never the value" for a secret. The shapes supplied order without displacing judgment. Six single runs establish neither repeated-run reliability nor any learning outcome.

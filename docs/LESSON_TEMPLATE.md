@@ -16,9 +16,12 @@ A shape is a floor and a checklist, never a script to read aloud. Section names 
 | Came back after a pause | **F — resume** | Re-onboard, or repeat a prerequisite already demonstrated |
 | Has no project, or none that can be located | **0 — cold start** | Teach a mechanism they cannot run |
 | Asked a direct question | Answer it. Directly, sufficiently, then return | Wrap a two-line answer in template scaffolding |
+| Asked for a mechanism from a later stage | **Off-route request** | Silently deliver a full later-stage lesson |
 | Finished a stage | **Stage-end capture** | Defer portfolio work to J5 |
 
 When two apply, the learner's most recent event wins. An error mid-first-exposure becomes shape C, then returns to A.
+
+**Off-route requests.** A learner may ask for a mechanism the route places later — embeddings at J0, agents at J1. Curiosity is not a problem to be managed, and refusing outright wastes it. Say where the mechanism sits and what it depends on, answer the conceptual question properly, and then put the choice to them explicitly: continue here, or detour. Do not deliver a full later-stage lesson without that choice having been made, because a detour taken by accident spends a session and produces no evidence for the active increment. If they choose the detour, say plainly that it advances no milestone, and return to the active increment afterwards.
 
 ---
 
@@ -155,6 +158,36 @@ Capture at the boundary because the inputs are still available: the failing case
 A capture is a portfolio artifact, never competence evidence. A recording proves something ran; it does not establish explanation, modification, debugging or transfer. [Progress protocol](PROGRESS_PROTOCOL.md) owns what counts.
 
 ---
+
+## A worked fragment
+
+Abstract shapes describe; an example shows. This is a condensed real Shape C opening, annotated with the move each part performs. Read it once rather than re-reading the shape lists.
+
+The learner pasted a traceback: `GroqError: The api_key client option must be set...` raised inside `Groq()`.
+
+> **Expected vs observed** — *(C2, stated as two lines, not a paragraph)*
+> Expected: `Groq()` finds your key in the environment and hands back a client.
+> Observed: it raised from inside its own constructor at line 12. Your program never reached the request.
+>
+> **What the traceback already proves** — *(C1, reading the evidence before any theory)*
+> Read it bottom-up. The deepest frame is inside the library — when a library raises in its own `__init__`, the fault is nearly always in what we handed it. And quietly: `from groq import Groq` worked, so the install, the interpreter and the dependency are all fine. You got further than you think.
+>
+> *(C3, the layer named — and the specific trap avoided)*
+> Nothing was sent to Groq. No request, no tokens, no charge — and your key has not been judged. This error says "there is no key here," not "your key is wrong." Those are different layers and people conflate them constantly. A bad key looks completely different: the client builds, the call goes out, and a 401 comes back from a much deeper frame. So the failing layer is **configuration**. Retrying will not help; there is nothing to retry.
+>
+> *(the detail dive — the misconception, and what would be observably different)*
+> The client reads the key once, at construction. So if `load_dotenv()` runs *after* `Groq()`, it loads your key correctly, no error — and the client has already given up. The variable is right there in the environment and the traceback still says it is missing.
+>
+> *(C4, one variable, predictions first)*
+> Before you run this, write down: will `load_dotenv()` return True? Will the key be present? If it is present, what does that tell you about line 12?
+>
+> *(secret hygiene, unprompted)*
+> Print the length, never the value. The error message offers you `Groq(api_key="...")` — don't; a key in source reaches your history and your screenshots.
+>
+> *(C6, the diagnosis handed back)*
+> Point at the exact line where behavior stops being deterministic, and tell me what makes it so. That is the one I will actually want.
+
+What to take from it: the shape supplies the order, and the substance is still yours to find. "Nothing was sent, no charge" and "length, never the value" appear in no template. Neither does the restraint of withholding field names so the learner discovers them in their own output. A shape that produced only what the shape listed would be a worse lesson than this one.
 
 ## Napkin sketch conventions
 
