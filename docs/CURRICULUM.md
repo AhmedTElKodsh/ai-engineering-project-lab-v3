@@ -23,11 +23,11 @@ Medical scope is document processing and human review. Do not offer diagnosis, t
 
 Retail is the companion domain because the same skills transfer to customer operations, commerce and enterprise support while yielding an accessible operational workflow. This is a portfolio design recommendation, not a quantified ranking of Egyptian vacancies. Arabic/English cases make regional relevance visible; measure each language separately.
 
-## Initial route and dependency chain
+## Initial route and dependency map
 
-J0 -> J1 -> J2 -> J3 -> J4 -> J5. New mechanisms follow this order; demonstrated prior ability can satisfy a prerequisite without repeating the lesson. Keep only the active milestone visible during ordinary tutoring. Completion requires both behavior and understanding; do not create artificial ceremony around every small edit.
+J0 -> J1 -> J2 -> J3 -> J4 -> J5 is the recommended narrative, not a universal prerequisite chain. Keep the route structured: offer only a dependency-safe next branch, not an unstructured menu. Demonstrated prior ability can satisfy a prerequisite without repeating the lesson. After J2, direct parameterized SQL and a scoped read tool may begin in J4 while J3 retrieval is incomplete. The combined policy-and-order workflow still requires both branches, so J4 cannot complete before J3 readiness; J5 follows completed J4. Keep only the active mechanism and any explicit open branch visible during ordinary tutoring. Completion requires both behavior and understanding; do not create artificial ceremony around every small edit.
 
-Use only the active increment's [assessment card](ASSESSMENT_CARDS.md) for J1–J5 observable cases, assistance and remediation. A milestone may be `ready` to advance with non-transfer gates satisfied while delayed transfer remains pending in a grounded review queue. `complete` still requires all gates. Readiness does not certify retained independence; use [the protocol](PROGRESS_PROTOCOL.md) for delay, prerequisite and reconciliation rules. Do not hold useful work idle solely for a review date.
+Use only the active increment's [assessment card](ASSESSMENT_CARDS.md) for J1–J5 observable cases, assistance and remediation. A milestone may be `ready` to advance with non-transfer gates satisfied while delayed transfer remains pending under the protocol's single readiness-event contract. `complete` still requires all gates. Readiness does not certify retained independence; use [the protocol](PROGRESS_PROTOCOL.md) for delay, prerequisite and reconciliation rules. Do not hold useful work idle solely for a review date.
 
 | Stage | Useful increment | Mechanism introduced | Evidence before advancing |
 |---|---|---|---|
@@ -35,7 +35,7 @@ Use only the active increment's [assessment card](ASSESSMENT_CARDS.md) for J1–
 | J1 | Medical facts with evidence and review flags | Structured extraction, Pydantic, missingness, negation and deterministic validation | Expected-vs-observed field checks, unsupported-fact detection, learner-owned fix |
 | J2 | Retail request classifier and response draft | Transfer of structured outputs to a different domain | New schema built with reduced help; ambiguous cases handled explicitly |
 | J3 | Retail policy answers with citations | Embeddings, similarity, chunks, retrieval, grounded generation and abstention | Retrieval and answer failures separated; visible baseline and a small framework comparison |
-| J4 | Order lookup and controlled support workflow | SQL, typed tools, tool-result messages, bounded loop, state and approval | Correct data scope; invalid tools/actions blocked; workflow tested on synthetic orders |
+| J4 | Order lookup and controlled support workflow | SQL, typed tools, tool-result messages, bounded loop, state and approval | Entry: J2 for SQL/scoped read tool; completion: J3 retrieval plus correct scope and synthetic workflow checks |
 | J5 | Two explainable portfolio releases and applications | Minimal API/interface, reproducibility, focused verification and evidence presentation | Independent change/debug, held-out results, runnable demos, truthful role-specific application |
 
 ### J0 — Resume Q0 and make the first boundary visible
@@ -47,7 +47,7 @@ Retain milestone identifiers for continuity:
 - 0.1 practical diagnostic and 0.2 project setup: only revisit a failing prerequisite.
 - 0.3 provider-native call: actual terminal evidence AND explanation of local deterministic logic vs probabilistic generation.
 - 0.4 inspect messages/input/response; 0.5 change one prompt/input and predict the effect.
-- 0.6 inspect available usage/latency information without creating an observability project.
+- 0.6 inspect available usage/latency information and distinguish a request timeout from model or schema failure without creating an observability project.
 - 0.7 use JSON Object Mode plus local JSON/Pydantic validation on one synthetic note with two explicitly stated fields and a missing value; verify the selected model's current capability using [provider reference](PROVIDER_REFERENCE.md). Prompt-only JSON requests do not enforce a schema. Use one local malformed/schema fixture before another provider request.
 - 0.8 run 5-10 purposeful examples; record what succeeded, failed and was not checked.
 - 0.9 explain/reproduce a small variation after guidance fades; revisit a different case in a later session.
@@ -65,7 +65,7 @@ Retain milestone identifiers for continuity:
 3. Build a direct-SDK extraction call, parse and validate the response. Distinguish syntactic JSON validity, schema validity and fidelity to the source.
 4. Verify spans against the input deterministically. Add small executable schema/span checks now, using synthetic cases for absent facts, negation, uncertain language, old/current statements, malformed output and instruction-like text inside a note. Keep provider quality evaluation separate.
 5. Provide a simple reviewer display with source alongside extracted values and an editable correction record. A terminal/table interface is enough initially.
-6. Compare one meaningful prompt/schema change against the same development cases. Keep failures visible. Later add a small held-out set in J5.
+6. Compare one meaningful prompt/schema change against a simple non-AI or deterministic baseline on the same development cases. Keep failures visible. Reserve one small unseen case now for diagnosis; later add the larger held-out set in J5.
 
 **Behavior evidence:** field precision/recall or an explicit exact-match rubric, unsupported-fact count, source-span validity and correct handling of missing/negated facts. Report counts and denominator; an empty prediction set cannot win by precision alone. Define which errors require review before measuring.
 
@@ -79,7 +79,7 @@ Retain milestone identifiers for continuity:
 
 The support worker receives refund, delivery and product questions. Build a new schema with request category, stated order ID, missing information, concise draft and escalation reason. Begin with a small explicit policy excerpt in context. Do not pretend the model has access to orders or a refund system.
 
-First ask the learner to sketch the schema and adapt known validation independently; provide hints only after the attempt or an explicit help request. Use cases where the request is ambiguous, mixes two intents or lacks an order ID. Add a small Arabic or English equivalent set after the initial mechanism works; keep Arabic, English and code-switch results separate rather than inferring language ability from translated UI labels.
+First ask the learner to sketch the schema and adapt known validation independently; provide hints only after the attempt or an explicit help request. Transfer must change a meaningful constraint—not just names or surface wording—such as ambiguity policy, missing-order behavior, language, or escalation rules. Use cases where the request is ambiguous, mixes two intents or lacks an order ID, and reserve one unfamiliar case before the implementation is tuned. Add a small Arabic or English equivalent set after the initial mechanism works; keep Arabic, English and code-switch results separate rather than inferring language ability from translated UI labels.
 
 **Evidence:** schema validity, category correctness on labeled examples, unsupported order/status claims, correct requests for missing information, and a brief explanation of which medical techniques transferred and which domain rules changed. A deliberate wrong classification should be investigated by layer, not fixed by adding a framework.
 
@@ -90,11 +90,11 @@ First ask the learner to sketch the schema and adapt known validation independen
 **Prerequisite:** J2 and enough Python to inspect lists, vectors and functions. Teach vector/cosine intuition through a few support questions; no linear-algebra course is a gate.
 
 1. Create a small versioned synthetic policy collection: returns, delivery, warranty and exceptions. Preserve document ID, section and effective date.
-2. Write a visible ingestion/chunking step. Use one embedding route and NumPy similarity. Inspect retrieved chunks before generation.
+2. Write a visible ingestion/chunking step. Start with a simple lexical or exact-term retrieval baseline, then use one embedding route and NumPy similarity. Inspect retrieved chunks before generation and compare both routes on the same labeled questions.
 3. Add cited answers and an explicit insufficient-evidence path. Unknown, conflicting and expired-policy questions belong in the evaluation set.
 4. Separate retrieval failure from generation failure: was the relevant passage retrieved, did the answer use it, and does each citation support the attached claim?
 5. Treat retrieved instructions as data. Include an instruction-like passage and verify it does not authorize tools or override application rules.
-6. Rebuild one small slice with LangChain using current docs; explain which responsibilities moved to the library. Keep the clearer implementation as the project baseline.
+6. Assess abstraction literacy only after the native path is traceable. If a demonstrated need exists, rebuild one small slice with LangChain using current docs and explain which responsibilities moved. Otherwise, a changed trace plus a justified no-adoption comparison—what the framework would own, costs it adds, and the trigger to reconsider—satisfies this comparison. Keep the clearer implementation as the project baseline.
 
 **Evidence:** labeled relevant document IDs for retrieval Recall@k, supported-answer/citation rubric, abstention outcomes, and one comparison changing only chunking or retrieval configuration. Small corpus limitations must be stated. Later Arabic questions should be evaluated against deliberately labeled evidence, including cross-language retrieval if used.
 
@@ -102,14 +102,14 @@ First ask the learner to sketch the schema and adapt known validation independen
 
 ### J4 — Retail order tools and state
 
-**Prerequisite:** J3 plus a short direct SQL lab. Write SELECT, WHERE, JOIN and aggregation by hand against synthetic customers/orders/items; validate expected results before model integration. Start SQLite locally or PostgreSQL if already available. Use parameterized queries.
+**Entry prerequisite:** J2 for a short direct SQL and scoped read-tool branch. Write SELECT, WHERE, JOIN and aggregation by hand against synthetic customers/orders/items; validate expected results before model integration. Start SQLite locally or PostgreSQL if already available. Use parameterized queries. **Completion prerequisite:** J3 retrieval readiness, because the finished response combines verified order facts with retrieved policy.
 
 1. Implement a typed read-only `get_order` tool whose trusted caller scope determines which synthetic customer's rows are accessible. A model-supplied customer ID is not authorization.
 2. Expose the provider-native tool schema. Inspect proposed arguments, execute validated code, and return the result with the matching tool-call identity using current provider docs.
 3. Build a bounded loop with explicit stop conditions, maximum steps and errors for missing orders, invalid arguments and tool failure. Do not disguise an error as a successful order result.
 4. Combine verified order facts with retrieved policy to draft a support response. Evaluate tool correctness separately from final response quality.
 5. Add a simulated return request: proposed -> awaiting approval -> approved or rejected -> simulated result. Bind approval to an immutable proposal identity/version or digest, trusted actor, target and exact parameters. The executable layer rechecks the binding immediately before the effect and consumes approval once. Test post-approval mutation, actor/target substitution, stale version, rejection and replay locally; all rejected paths produce zero effects. Text saying “approved” is insufficient.
-6. Reconstruct this small approval workflow in LangGraph when the state/checkpoint need is visible. Explain state transitions and retain whichever implementation the learner can justify.
+6. Compare the explicit state flow with LangGraph only when checkpointing, branching or recovery creates a demonstrated need. A justified no-adoption decision may qualify when the learner can trace a changed transition, identify what the framework would own, and state a concrete adoption trigger. If adopted, reconstruct only the useful slice and retain whichever implementation the learner can justify.
 
 **Evidence:** normal lookup, wrong-customer lookup, nonexistent order, injected tool argument, rejected action, changed approval binding, repeated request and tool exception. Write focused executable checks as each SQL/tool/state boundary arrives, before model integration. Record expected result, observed result, tool trace and source evidence. No live refund, outbound message or real customer data.
 
@@ -122,9 +122,10 @@ First ask the learner to sketch the schema and adapt known validation independen
 - Extract clear functions/modules; expose one small FastAPI endpoint and a simple usable interface. Validate request/response boundaries and show understandable errors. A local demo is sufficient for this curriculum checkpoint; a specific vacancy may warrant a hosted demo or Docker practice.
 - Handle provider timeouts and bounded retry only for suitable transient failures. Never blindly retry a consequential tool action. Explain HTTP request/response behavior; introduce async only when an actual concurrent I/O task needs it.
 - Consolidate the deterministic checks introduced with schema/source validation in J1 and query scope/approval transitions in J4; add API request/response cases now. Keep AI behavior evaluation separate. Full coverage targets, complex fixtures, CI/CD and infrastructure are later work.
-- Assemble held-out cases separated from development examples. A practical starting target is 20-30 cases per product with explicit failure categories, adjusted to cost and scope; this is a planning heuristic, not a statistical sufficiency claim. Freeze expected outcomes before running, record model/config/date and sample size, and disclose if a previously held-out case was used for tuning.
+- Assemble held-out cases separated from development examples, extending the small unseen probes introduced earlier. A practical starting target is 20-30 cases per product with explicit failure categories, adjusted to cost and scope; this is a planning heuristic, not a statistical sufficiency claim. Freeze expected outcomes before running, record model/config/date and sample size, and disclose if a previously held-out case was used for tuning.
 - Report observed quality, critical failures, latency and cost when available. Repeat a small subset to expose variability. Missing token/cost information is unknown, not zero. Do not invent improvements or business impact.
 - Have the learner make one unfamiliar change and diagnose one unfamiliar failure with normal docs allowed and support recorded. Require the learner's own architecture/dataflow explanation and one rejected alternative. J5 ownership gates (explanation, modification, debug and transfer) require `none`/`docs`; execution may be supported. J5 readiness requires E01–E22 at least practiced; full route completion also requires E22 independently applied or stronger, including delayed transfer. Supported final work is retained as practice and reassessed on a different task.
+- Observe one small usability task with a person other than the builder when practical: give only the normal README/interface, capture where they hesitate or fail, and make or defer one evidence-backed correction. This is lightweight interface evidence, not a usability study.
 - Prepare the two project READMEs, demo recording or reproducible demo commands, evaluation report, limitations, dependency lock and role-specific CV bullets using [portfolio evidence](PORTFOLIO.md).
 - Compare real vacancies against demonstrated skills and explicit eligibility. Start applying to suitable roles; record gaps as targeted short branches, not a reason to complete every later module first.
 
@@ -158,6 +159,3 @@ MCP, multi-agent systems, GraphRAG and fine-tuning are not automatic signs of a 
 | Q5-Q12 | Later selectable catalog above |
 
 The old Q1-Q4 milestone numbers are historical references, not extra parallel tasks. [Progress protocol](PROGRESS_PROTOCOL.md) defines evidence, [current state](../progress/current.json) tracks the active point, [engineering](ENGINEERING_GUIDE.md) supplies depth-specific standards, [portfolio](PORTFOLIO.md) owns portfolio proof, and [teaching](TEACHING_GUIDE.md) controls tutoring. Do not import maintainer reports as live lesson instructions.
-
-
-Readiness advancement requires an append-only maintainer readiness decision referencing the then-current passing non-transfer proof and its review time/task/trigger, as well as the grounded live queue required by the evidence protocol. Historical readiness uses that prior decision, never a retroactive queue; preserve valid history through later regression, reopen claims whose proof was corrected, and reassess with fresh prerequisite and downstream evidence. Final J5 completion requires every initial-route milestone complete, including earlier delayed transfer. The readiness decision is teaching administration, not learner competence.

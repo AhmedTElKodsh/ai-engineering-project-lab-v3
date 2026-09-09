@@ -19,6 +19,8 @@ Recommend two featured projects: the Medical Document Review Assistant and Retai
 
 Do not label a repository production ready because it has Docker, many tests or a polished UI. Do not wait for maturity C to apply to suitable junior positions.
 
+This route specializes in applied AI/LLM application engineering: provider boundaries, structured outputs, retrieval, scoped tools, evaluation and delivery. It does not by itself establish general data-science, ML-research, model-training, data-engineering, frontend-specialist, security-specialist or platform/SRE competence. Match each application to demonstrated evidence and add a targeted branch when a role depends on one of those areas.
+
 ## Evidence bundle for each featured project
 
 1. Problem, intended user, input/output example and concise scope.
@@ -29,6 +31,7 @@ Do not label a repository production ready because it has Docker, many tests or 
 6. Focused deterministic checks plus AI evaluation kept conceptually separate. Show at least one failed case and the change it motivated.
 7. Brief design decisions, one credible alternative rejected for a stated reason, known limitations and a realistic next step.
 8. Learner contribution and AI assistance disclosure, plus one independent change/debugging record. Preserve references to real commits/output where available.
+9. A small observed usability note when practical: one person other than the builder attempts a normal task from the README/interface; record the task, hesitation or failure, and one resulting correction or explicit deferral. Do not coach the participant to manufacture success or present this as a formal usability study.
 
 Useful demo: show one successful case, one missing/ambiguous case and one controlled failure with an honest explanation. A short recording or local reproduction is sufficient for this curriculum; a hosted app may be a useful vacancy-specific extension. Never require reviewers to supply patient/customer data or send their secrets to an unknown service.
 
@@ -47,7 +50,7 @@ Maintain a small list of current vacancies and revisit it as projects mature. Ca
 
 Use the route to prepare a strong applied core, then add short branches for repeated requirements in eligible roles. If target roles consistently require Docker/Azure or deeper ML, schedule a focused extension with actual practice; do not pretend this initial route covers it. Some junior titles still demand prior experience or a degree, and a portfolio does not erase those constraints.
 
-Application checkpoint: can the learner reproduce the demo, explain every major boundary, make an unfamiliar change, debug a controlled failure, discuss measured limitations and point to their own contribution? If yes and the vacancy's requirements fit, apply while continuing selected later study. Never claim employment readiness solely from document validation.
+Application checkpoint: can the learner reproduce the demo, explain every major boundary, make an unfamiliar change, debug a controlled failure, discuss measured limitations, show one small usability observation when available, and point to their own contribution? If yes and the vacancy's requirements fit the applied-LLM evidence actually demonstrated, apply while continuing selected later study. Never claim employment readiness solely from document validation.
 
 Curriculum completion is a separate claim: J5 ownership gates (explanation, modification, debug and transfer) require actual learner evidence with assistance `none` or `docs`; execution may be supported. J5 readiness requires E01–E22 at least practiced; completion also requires E22 independently applied or stronger. A `ready` milestone with delayed transfer queued permits useful progress but does not certify retention or full route completion. Disclose assistance and pending transfer honestly when showing work; supported artifacts remain usable learning evidence.
 

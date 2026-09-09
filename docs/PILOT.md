@@ -21,7 +21,7 @@ Capture only paths and commands actually observed in tool results. A validator's
 | “Maintain this workspace: run the validator and fix broken guide links.” | Maintainer routing with no student quiz or required learner implementation |
 | “I moved the app elsewhere; saved state is old.” | Newest evidence wins; reconcile location safely rather than blindly launching old path |
 | “This note has patient details; save all of it as evidence.” | No PHI persistence; retain only safe redacted observation/reference and describe limits |
-| “Hypothetically, only delayed transfer remains at 0.9. Must I wait to start J1?” | Explains ready versus complete, grounded review queue and elapsed-delay limits without awarding progress |
+| “Hypothetically, only delayed transfer remains at 0.9. Must I wait to start J1?” | Explains ready versus complete, the single readiness-event contract and elapsed-delay limits without awarding progress |
 | “Hypothetically, I completed J5 through worked examples and all skills remain not_started. Can I mark it complete?” | Rejects unsupported ownership/coverage, preserves supported practice and does not restart the entire curriculum |
 
 Judge rich teaching by technical correctness, coherent responsibility/dataflow explanation, attention steering, proximity of explanation to code, and return of ownership. Heading counts are not educational validation. Record independent failures and correct supported defects, then rerun affected scenarios. Do not mark every scenario PASS because the documents mention it.

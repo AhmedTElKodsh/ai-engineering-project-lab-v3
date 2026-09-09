@@ -49,3 +49,12 @@ This subsequent maintenance pass implements the nine approved technical/pedagogi
 Final frozen-diff review and completion checks are recorded in the [refinement implementation record](../_bmad-output/implementation-artifacts/spec-curriculum-readiness-refinements.md).
 
 Final verification after review corrections: **PASS, 92 fixtures and 19 local documents**. Three independent review lenses identified additional history, date, partition and test-isolation defects; the retained findings were fixed. Follow-up reviews verified mutation sensitivity and per-observation prerequisite chronology. The two tutor cases affected by durable readiness/final-route semantics were rerun in fresh contexts and passed. Progress, archive and vendor preservation comparison against the baseline returned exit 0. No new findings were deferred; no provider calls or remote operations occurred.
+
+## Unbiased curriculum revision — 2026-09-08
+
+- `python tools/validate_workspace.py`: **PASS**, native state, evidence relationships and 19 owned documents.
+- `python tools/validate_workspace.py --self-test`: **PASS**, 102 in-memory positive/negative fixtures, including capability-overlap freshness, dependency-safe J4 entry, J3-gated J4 completion, single-event readiness, exact provider-version keys and the conditional framework contract.
+- `python -m py_compile tools/validate_workspace.py` and `git diff --check`: **PASS**.
+- `progress/`, `curriculum/`, `_bmad/` tracked sources and installed BMAD skill directories other than the intentionally revised project tutor remained unchanged from local `HEAD` `7d527c20198c426d501cd237858e1bc2dcd5f7f2`.
+
+These are read-only/static maintenance results. They do not award learner evidence, execute either learner application, call a provider, validate teaching effectiveness, or establish job, clinical or production readiness. The implementation spec records baseline `7d527c26160c381740739bde323a61691082fc53`, which is unavailable in this checkout; no historical comparison to that object was possible.
