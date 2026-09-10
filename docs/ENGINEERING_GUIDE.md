@@ -20,6 +20,18 @@ Keep secret values out of source, logs, screenshots, traces and chat. A local `.
 
 Treat user, retrieved, model and tool content as data. Validate before use; permissions and action approval belong in deterministic code. Use synthetic medical notes and retail orders. Medical extraction preserves explicit facts, missingness, negation, chronology, uncertainty and source spans for human review; it never infers diagnosis/treatment/dose or claims clinical validation. Retail tools scope rows from trusted caller identity, not model arguments. Actions are simulated unless separately authorized.
 
+## Checks now, test engineering later
+
+These are two different things and the route treats them differently.
+
+A **boundary check** is a small piece of deterministic code that answers *how would I know this is wrong*: does this span resolve to the input, does this payload satisfy the schema, does this query cross a customer boundary, does this approval still bind to the parameters being executed. It is written beside the mechanism it guards, in the same session, because without it the mechanism has no defined correct behavior. An extractor with no span check is not an untested extractor — it is a text generator. These are part of the build and are never deferred.
+
+**Test engineering** is the surrounding apparatus: framework architecture, fixture libraries, parametrization, coverage targets, mocking strategy, CI pipelines and regression suites. It earns its cost when the checks outgrow a single readable file, when a regression escapes twice, or when more than one person touches the code. Those triggers are working heuristics, not measured thresholds; adjust them from what actually happens. Until then it is overhead that displaces building. It is deferred with a named trigger, as listed in [the route](CURRICULUM.md).
+
+Call the first thing checks, not tests. The naming matters: work filed under "testing" reads as deferrable, and these are not deferrable. They are also what makes the work presentable — what was measured, what failed, and how it was detected.
+
+The same split governs AI behavior: a frozen case set with expected outcomes is a check on the system, not a test suite, and it stays separate from deterministic checks throughout.
+
 ## Mechanism checks
 
 JSON syntax, schema validity, and source truth are distinct. Validate output and invariants; verify evidence spans against input. Null represents absent facts. Measure unsupported facts and missing/negated handling, with counts and denominator; empty predictions cannot win by precision alone.

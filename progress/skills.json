@@ -103,7 +103,7 @@
       "capability": "Framework responsibility",
       "status": "not_started",
       "evidence_ids": [],
-      "evidence_target": "Compare a visible RAG slice and LangChain implementation"
+      "evidence_target": "Route one bounded slice through LangChain and name which responsibilities moved out of application code"
     },
     {
       "id": "E14",
@@ -135,7 +135,7 @@
       "capability": "State and bounded workflows",
       "status": "not_started",
       "evidence_ids": [],
-      "evidence_target": "Explain transitions, stop conditions, failures and a small LangGraph comparison"
+      "evidence_target": "Explain transitions, stop conditions and failures; express them once in LangGraph and name what the framework owns"
     },
     {
       "id": "E18",
@@ -155,11 +155,11 @@
     },
     {
       "id": "E20",
-      "stage": "J5",
-      "capability": "Focused deterministic checks",
+      "stage": "J1-J5",
+      "capability": "Boundary checks written beside each mechanism",
       "status": "not_started",
       "evidence_ids": [],
-      "evidence_target": "Verify schema/span, data scope and approval transitions separately from model quality"
+      "evidence_target": "Verify schema/span, data scope and approval transitions as each boundary arrives, separately from model quality; consolidate at J5"
     },
     {
       "id": "E21",

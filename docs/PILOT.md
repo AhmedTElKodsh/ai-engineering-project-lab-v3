@@ -32,8 +32,16 @@ Capture only paths and commands actually observed in tool results. A validator's
 | *(three turns)* pose an assessment, reply with a partial and partly wrong answer, continue | Withholds the answer at turn one; at turn three responds to what was actually said, fades one step rather than supplying the solution, and records assistance at the level actually given |
 | *(first exposure, J1)* “Explain structured extraction; I have never used Pydantic” | Builds a mental model before syntax, decomposes before compacting, names the few mechanism-bearing lines, traces one input, ends with one learner action |
 | *(diagnosis, J3)* “The answer cites the wrong returns policy” | Separates retrieval from generation from source evidence before proposing a change; does not reach for the prompt first |
+| “Teach me embeddings” (first exposure to a new mechanism) | Follows the [lesson template](LESSON_TEMPLATE.md): napkin sketch before code, the learner's likely objection voiced and answered, any analogy bounded, at most two detail dives, rung named, predictions requested before the run command, one action, one closing question |
+| “I'm skipping the optional checks, what's next?” | Continues immediately without comment, penalty or re-offer; does not treat the skip as a gap, does not make the next step contingent on it, and does not reintroduce the check as homework |
+| “What is a tensor?” asked mid-lesson | Direct sufficient answer, no template scaffolding wrapped around a direct question, then returns to the pending action without restarting the lesson |
+| “I finished J1, what now?” | Prompts the stage-end capture while results are fresh and mentions the honest first CV bullet before advancing to J2; does not defer portfolio work to J5 |
+| “Should I add Docker / a vector DB / pytest now?” | Answers from the deferral table with the specific reopening trigger rather than a general yes or no, and does not convert a deferred item into an early gate |
+| A pasted traceback with no other context | Shape C: reads the actual evidence first, states expected versus observed, names the failing layer from the traceback rather than from likelihood, proposes one single-variable experiment, and returns the diagnosis to the learner instead of handing back repaired code |
+| “Just write the validation function for me” | Shape E: restates the supplied scope, marks the code assistant-authored, states that it cannot satisfy explanation/modification/debug/transfer, and returns ownership with a genuinely different task |
+| “Ok that ran, what's next?” on an already-run mechanism | Shape B: names the rung and its one new difficulty, shows the delta only, and does not replay the whole file or re-teach the rung below |
 
-Judge rich teaching by technical correctness, coherent responsibility/dataflow explanation, attention steering, proximity of explanation to code, and return of ownership. Heading counts are not educational validation. Record independent failures and correct supported defects, then rerun affected scenarios. Do not mark every scenario PASS because the documents mention it.
+Judge rich teaching by technical correctness, coherent responsibility/dataflow explanation, attention steering, proximity of explanation to code, and return of ownership. Judge the teaching moves by whether they carry substance, not by whether they appear: a sketch that hides the trust boundary, an analogy left unbounded, a ladder rung asserted without a named next difficulty, or the full template imposed on a direct question are all failures even though the section headings are present. Optional practice must read as genuinely declinable in the actual wording. Heading counts are not educational validation. Record independent failures and correct supported defects, then rerun affected scenarios. Do not mark every scenario PASS because the documents mention it.
 
 ## Actual learner pilot
 
@@ -46,3 +54,20 @@ Across J1–J5 collect independent schema/change/debug and delayed transfer evid
 Initial workspace creation adds no actual learner pilot result. Root-maintainer review should record its own dated static commands and independent simulation results, with any untested scenarios marked untested. Private publication verification should record visibility and matching reviewed/published commit separately. Nothing in this protocol itself asserts those checks happened.
 
 The [2026-09-08 refinement run](../_bmad-output/verification/2026-09-08-curriculum-refinements/README.md) records nine isolated scenarios, their actual responses, bounded judgments and the metadata failure/retest. It does not establish repeated-run reliability or actual learning effectiveness.
+
+**2026-09-09 teaching-shape run.** Six scenarios were executed in fresh independent read-only contexts, each given only the project path, the learner message and its situational context — never the criteria being applied, and never the name of the shape under test. Each returned the files it opened and its verbatim user-facing reply, judged afterwards against this guide.
+
+| Scenario | Shape | Outcome |
+|---|---|---|
+| First exposure to a later-stage mechanism | A | Shape followed in full; **finding raised**, see below |
+| Skipping the optional checks | B | Pass — continued with no comment, penalty or re-offer |
+| Direct question mid-lesson | direct answer | Pass — answered, no scaffolding, returned to the pending action |
+| Pasted traceback | C | Pass — configuration named as the failing layer, authentication explicitly excluded |
+| Request to have code written | E | Pass — scope stated, code marked, ownership returned on a different task |
+| Stage declared finished | capture | Pass — capture prompted; the stage was correctly judged not yet complete |
+
+All six routed themselves through `AGENTS.md` to the tutor skill without prompting, and each read between six and twelve files. None wrote a file, ran a provider call, or asserted learner evidence.
+
+**The finding:** the first-exposure scenario asked for a mechanism the route places at J3 while saved state sits at J0. The response delivered a complete, accurate lesson for it. It named the placement honestly and offered to switch back, but only after the lesson — spending a session that produced no evidence for the active increment. No shape covered a learner requesting later-stage material. The off-route rule in [lesson and interaction templates](LESSON_TEMPLATE.md) was added in response.
+
+**Also observed, and worth keeping:** the most effective moves in these transcripts appear in no document — withholding response field names so the learner discovers them in their own output, "nothing was sent, no tokens, no charge" to separate configuration from authentication, and "print the length, never the value" for a secret. The shapes supplied order without displacing judgment. Six single runs establish neither repeated-run reliability nor any learning outcome.
