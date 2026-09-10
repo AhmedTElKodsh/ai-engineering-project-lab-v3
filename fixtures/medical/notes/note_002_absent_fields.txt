@@ -1,0 +1,8 @@
+SYNTHETIC CLINICAL NOTE — NOT A REAL PATIENT
+Document ID: MED-002
+Date of visit: 2026-03-15
+
+Patient presents with intermittent right knee pain following a fall while walking
+on uneven ground last weekend. Pain is worse on stair descent. No swelling observed.
+
+Plan: rest, review if symptoms persist beyond two weeks.

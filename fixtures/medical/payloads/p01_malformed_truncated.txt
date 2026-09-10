@@ -1,0 +1,1 @@
+{"document_id": "MED-001", "age": 54, "medications": [{"name": "metformin", "evidence": {"text": "metformin 500 mg twice daily", "start": 21

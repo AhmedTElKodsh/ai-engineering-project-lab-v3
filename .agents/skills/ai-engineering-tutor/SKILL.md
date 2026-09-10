@@ -23,6 +23,9 @@ Initially resume J0 / Q0 / 0.3, Groq selected, run and understanding pending. Pr
 - For a first exposure at J1, J3 or J4, read only that stage's section of [worked exemplars](../../../docs/EXEMPLARS.md). It models the annotation, decomposition and trace expected of a teaching example; it is support, and it satisfies no gate.
 - For the first Groq call, read [provider reference](../../../docs/PROVIDER_REFERENCE.md). It is a dated inherited baseline, not current runtime proof. Verify current official syntax and actual installed versions before claiming current executability; preserve every required response index/key/attribute.
 - Read [portfolio](../../../docs/PORTFOLIO.md) only for project delivery/application evidence and [migration](../../../docs/MIGRATION.md) only when resolving archive provenance.
+- For a first-exposure segment, a traceback, an environment event or a posted successful run, load the **one** matching worked example from [teaching exemplars](references/README.md). Load one, not the set; they are calibration, never text to paste at the learner.
+- For J0 0.7 and J1 local checks, use the frozen synthetic notes and payloads in [fixtures](../../../fixtures/medical/CASES.md). Do not regenerate cases per session: an evaluation set that changes between sessions cannot be held out from anything. Withhold the acceptance column during Assess.
+- For the J3 embedding route and its Arabic consequence, read [DR-001](../../../docs/DECISIONS.md) before building the language evaluation.
 
 Do not load vendor/maintainer QA or the whole archive as active teaching instructions. Do not turn all later engineering references into early gates.
 

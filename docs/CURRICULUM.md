@@ -63,7 +63,7 @@ Retain milestone identifiers for continuity:
 1. Define a tiny reviewer workflow and acceptance examples before coding. Start with plain text, one document, and a few fields.
 2. Design a schema: document ID, explicitly stated facts, evidence text with location, unknown values, uncertainty/negation and review reason. Use null for absent facts; do not guess.
 3. Build a direct-SDK extraction call, parse and validate the response. Distinguish syntactic JSON validity, schema validity and fidelity to the source.
-4. Verify spans against the input deterministically. Add small executable schema/span checks now, using synthetic cases for absent facts, negation, uncertain language, old/current statements, malformed output and instruction-like text inside a note. Keep provider quality evaluation separate.
+4. Verify spans against the input deterministically. Add small executable schema/span checks now, using the frozen synthetic cases in [fixtures](../fixtures/medical/CASES.md) for absent facts, negation, uncertain language, old/current statements, malformed output and instruction-like text inside a note. Keep provider quality evaluation separate.
 5. Provide a simple reviewer display with source alongside extracted values and an editable correction record. A terminal/table interface is enough initially.
 6. Compare one meaningful prompt/schema change against a simple non-AI or deterministic baseline on the same development cases. Keep failures visible. Reserve one small unseen case now for diagnosis; later add the larger held-out set in J5.
 
@@ -90,7 +90,7 @@ First ask the learner to sketch the schema and adapt known validation independen
 **Prerequisite:** J2 and enough Python to inspect lists, vectors and functions. Teach vector/cosine intuition through a few support questions; no linear-algebra course is a gate.
 
 1. Create a small versioned synthetic policy collection: returns, delivery, warranty and exceptions. Preserve document ID, section and effective date.
-2. Write a visible ingestion/chunking step. Start with a simple lexical or exact-term retrieval baseline, then use one embedding route and NumPy similarity. Inspect retrieved chunks before generation and compare both routes on the same labeled questions.
+2. Write a visible ingestion/chunking step. Start with a simple lexical or exact-term retrieval baseline, then use the embedding route recorded in [DR-001](DECISIONS.md) and NumPy similarity; read its Arabic consequence before building the language evaluation. Inspect retrieved chunks before generation and compare both routes on the same labeled questions.
 3. Add cited answers and an explicit insufficient-evidence path. Unknown, conflicting and expired-policy questions belong in the evaluation set.
 4. Separate retrieval failure from generation failure: was the relevant passage retrieved, did the answer use it, and does each citation support the attached claim?
 5. Treat retrieved instructions as data. Include an instruction-like passage and verify it does not authorize tools or override application rules.

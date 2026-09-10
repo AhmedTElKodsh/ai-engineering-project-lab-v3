@@ -7,3 +7,6 @@
 *.yml text eol=lf
 *.toml text eol=lf
 *.zip binary
+
+# Fixture notes are span-addressed; line endings must not shift character offsets
+fixtures/** text eol=lf

@@ -1,0 +1,18 @@
+{
+  "document_id": "MED-006",
+  "age": 33,
+  "chief_complaint": "lower back pain after lifting at work",
+  "medications": [
+    {
+      "name": "ibuprofen",
+      "evidence": {
+        "text": "ibuprofen 400 mg as needed",
+        "start": 197,
+        "end": 223
+      }
+    }
+  ],
+  "smoking_status": "never",
+  "review_flags": [],
+  "verified": true
+}

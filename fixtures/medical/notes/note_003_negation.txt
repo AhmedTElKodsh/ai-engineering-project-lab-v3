@@ -1,0 +1,9 @@
+SYNTHETIC CLINICAL NOTE — NOT A REAL PATIENT
+Document ID: MED-003
+Date of visit: 2026-03-16
+
+Patient is a 41-year-old woman attending for a routine review. She denies any tobacco
+use, current or past. She is not currently taking metformin; this was discussed and
+declined at the last visit. She takes levothyroxine 75 mcg each morning.
+
+There is no history of asthma. No known drug allergies.

@@ -1,0 +1,11 @@
+SYNTHETIC CLINICAL NOTE — NOT A REAL PATIENT
+Document ID: MED-005
+Date of visit: 2026-03-18
+
+Patient is a 58-year-old woman attending for blood pressure review. She stopped
+smoking in 2019 after roughly fifteen years of about ten cigarettes per day.
+
+She was taking lisinopril 10 mg daily until March of this year, when it was stopped
+because of a persistent cough. She has been on amlodipine 5 mg daily since then.
+
+No known drug allergies.
