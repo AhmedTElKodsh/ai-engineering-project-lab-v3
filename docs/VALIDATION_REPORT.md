@@ -1,6 +1,6 @@
 # Native workspace validation report
 
-Date: 2026-09-08. Scope: Codex learner workspace configuration and its authored evidence validator. This report does not award learner progress.
+Date: 2026-09-08. Scope: Codex learner workspace configuration and its authored evidence validator. This report does not award learner progress. Each section's counts are the counts that build produced on that date; the current numbers are in the last section, never in an earlier one.
 
 ## Local verification
 
@@ -156,3 +156,57 @@ The verification gap recorded in the previous entry is now partially closed. Six
 - **Added a worked fragment** to the same document — a condensed real transcript annotated with the move each part performs — on the evidence that the shapes were followed accurately from prose alone, so a fragment supplements rather than replaces them. The proposal to replace the specifications with an exemplar outright is not supported by this run.
 - **Routing held.** All six reached the tutor skill through [AGENTS.md](../AGENTS.md) unprompted, read six to twelve files each, and none wrote a file, called a provider or asserted learner evidence.
 - **Limits.** Six single runs, one judge, scenarios authored by the same session that wrote the documents under test. This establishes neither repeated-run reliability nor any learning outcome, and five scenarios remain unrun. Teaching effectiveness, learner understanding, retention and job-market accuracy remain unestablished.
+
+## Branch reconciliation — 2026-09-10
+
+Three trees had diverged from `7d527c2`, each holding work the other two lacked, and the
+learner would have opened the one with no fixtures in it. Both siblings are merged here.
+
+- `python tools/validate_workspace.py`: **PASS**, native state, evidence relationships and
+  **22 owned documents**.
+- `python tools/validate_workspace.py --self-test`: **PASS**, **104 in-memory
+  positive/negative fixtures**.
+- `python -m py_compile tools/validate_workspace.py` and `git diff --check`: **PASS**.
+  Run on Python 3.13.9 with pydantic 2.12.4 and NumPy 2.3.5.
+- The three sections above this one report 19, 20 and 92/102 because that is what their
+  builds produced. [Pilot](PILOT.md) requires the build each figure was measured against;
+  the counts in this section supersede them as the current state and no earlier section was
+  edited to match.
+
+**Merged.** From `claude/curriculum-ai-skills-review-67b65f`: seven synthetic notes, eight
+hand-written payloads, [DR-001](DECISIONS.md) and five per-situation tutor references. From
+`claude/junior-ai-engineering-curriculum-382394`: [lesson and interaction
+templates](LESSON_TEMPLATE.md), the named teaching moves, stage-end capture, the deferral
+table and six executed pilot scenarios.
+
+**Conflict policy.** Where the two branches stated different rules, the newer routing on
+this tree won: framework adoption at J3 and J4 stays conditional rather than mandatory, and
+the branch's scoping advice was folded into it. `progress/skills.json` E13 and E17 carried
+mandatory-sounding evidence targets into that conditional policy and were reworded to match;
+all 22 skill IDs, statuses and evidence references are unchanged and every row remains
+`not_started`. No progress state, milestone, gate or capability ID was altered by this merge.
+
+**Executed, not merely linked.** All three [worked exemplars](EXEMPLARS.md) were run and
+each reproduced its documented output exactly, so the file's claim that the shown output is
+that run's actual output holds at this commit. In the fixtures, `metformin 500 mg twice
+daily` resolves at characters 217-245 of `note_001_baseline.txt` as
+[CASES.md](../fixtures/medical/CASES.md) states, amoxicillin is genuinely absent from that
+note so `p05` is a real unsupported claim, `p01` raises on `json.loads`, and the other seven
+payloads parse.
+
+**Two false statements removed.** `docs/ENGINEERING_GUIDE.md` and
+[worked exemplars](EXEMPLARS.md) both asserted in the present tense that
+`data/synthetic/medical/check_arabic_spans.py` exists and reports a two-character offset
+error. That file is in no commit on any branch. Both now point at
+`fixtures/medical/notes/note_007_arabic.txt`, which does exist, and the invented figure is
+gone: measured against the real note the drift is one character at the medication and four
+by the end of the file, and taking that measurement is the learner's work.
+
+**Known gap, not closed here.** The validator protects the *existence* of teaching material
+through link checks -- deleting `docs/EXEMPLARS.md` fails, verified -- but not its content.
+Stripping every code fence out of that file leaves the validator passing at 22 documents.
+That is the mechanism by which the exemplars were lost once already.
+
+Not established by this merge: any learner execution, understanding, teaching effectiveness,
+retention, provider behaviour, clinical validity, production or job readiness. Five of the
+eleven pilot scenarios remain unrun, and no scenario has been rerun against the merged tree.

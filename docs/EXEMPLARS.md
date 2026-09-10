@@ -160,15 +160,13 @@ deliberately only does one, so the gap is visible rather than described.
 Source spans are offsets into a specific byte sequence. Normalising Arabic — folding
 alef variants, dropping diacritics — produces a different byte sequence, so an offset
 found in the normalised copy does not address the same characters in the original.
-The corpus ships a note built to demonstrate exactly this, and a script that runs it:
-
-```powershell
-uv run python data/synthetic/medical/check_arabic_spans.py
-```
-
-It reports the true offset, the offset a normalised search returns, and the two-character
-error between them. Measure Arabic, English and code-switch results separately; never
-infer one language's behaviour from another's.
+[`fixtures/medical/notes/note_007_arabic.txt`](../fixtures/medical/CASES.md) is built to
+demonstrate exactly this, and it is the same clinical content as `note_001_baseline.txt`,
+so a failure is attributable to the language rather than to the case. Locate the medication
+in the original and in a normalised copy and compare the two offsets yourself; the size of
+the drift is the measurement, and it is not the same number in every note. Measure Arabic,
+English and code-switch results separately; never infer one language's behaviour from
+another's.
 
 ## J3 — retrieval that can be wrong while succeeding
 

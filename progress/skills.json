@@ -103,7 +103,7 @@
       "capability": "Framework responsibility",
       "status": "not_started",
       "evidence_ids": [],
-      "evidence_target": "Route one bounded slice through LangChain and name which responsibilities moved out of application code"
+      "evidence_target": "Route one bounded slice through LangChain, or justify no adoption, and either way name which responsibilities the framework would own"
     },
     {
       "id": "E14",
@@ -135,7 +135,7 @@
       "capability": "State and bounded workflows",
       "status": "not_started",
       "evidence_ids": [],
-      "evidence_target": "Explain transitions, stop conditions and failures; express them once in LangGraph and name what the framework owns"
+      "evidence_target": "Explain transitions, stop conditions and failures; express them in LangGraph where a checkpoint need is visible, or justify no adoption, and name what the framework would own"
     },
     {
       "id": "E18",
