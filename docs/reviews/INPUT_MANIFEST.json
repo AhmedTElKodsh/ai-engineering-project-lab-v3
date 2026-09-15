@@ -1,0 +1,15 @@
+{
+  "review_date": "2026-09-15",
+  "baseline_commit": "ce3d5b767280bb8a376753b04598f377202ecb06",
+  "planning_file_count": 33,
+  "tasks": 30,
+  "requirement_ids": 21,
+  "dependency_graph_acyclic": true,
+  "input_sha256": {
+    "project-planning.zip": "62066765a5f7cb923e8a31a4bd5fee714143bb251d7b56f139ae2d80f5f5431e",
+    "SKILL.md": "a46607f71f72abbfc45183e9b162c486036ced3498d47b29b5401bf9328d841b",
+    "DELIVERY_VALIDATION.md": "4800b92db05929617de04d9f194b45e49283204b4a8db1572e40daf0b7b1a10a"
+  },
+  "uploaded_helper_available": false,
+  "new_host_behavior_scenarios": "not_run"
+}

@@ -1,0 +1,21 @@
+name: Curriculum artifact checks
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - refine/supportops-workbench-20260915
+permissions:
+  contents: read
+jobs:
+  artifacts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Native workspace consistency
+        run: python3 tools/validate_workspace.py
+      - name: Native evidence self-tests
+        run: python3 tools/validate_workspace.py --self-test
+      - name: SupportOps fixture integrity
+        run: python3 tools/test_supportops.py
