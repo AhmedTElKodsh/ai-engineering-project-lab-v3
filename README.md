@@ -1,32 +1,48 @@
-# AI Engineering Project Lab V3
+# SupportOps AI - AI Engineering Project Lab V3
 
-A learner-owned Codex workspace for building a Medical Document Review Assistant and a Retail Support and Order Assistant. This repository currently contains the curriculum and learning state; neither learner application has been observed here.
+One learner-owned support application, built through small, runnable releases inside the existing **J0-J5** curriculum. This is a focused adaptation, not a new course or progress reset.
 
-Open this folder as the project and ask **“Resume my lesson”** or **“Use $ai-engineering-tutor to resume.”** The initial saved position is **J0 / Q0 / 0.3 — first Groq SDK call**, with execution and understanding pending. The tutor first reconciles your latest output and the application location. It should not repeat onboarding or install the full tool stack.
+This repository contains reviewed planning, tutor instructions, synthetic fixtures and existing learning records. A learner application has not been implemented by this refinement. Passing a fixture check is not a completed lesson or working support product.
 
-A fresh lesson thread may be needed for the skill picker to refresh after installation. [AGENTS.md](AGENTS.md) also points directly to the project skill file, which the agent can read even before picker discovery refreshes.
+## Start or resume
 
-Useful requests:
+Open the workspace and ask:
 
-- “Learn: explain this response object and help me continue.”
-- “Assess: test my understanding of the current mechanism.”
-- “Build together: help me write this specific function.”
-- “Save a checkpoint from today's actual evidence.”
-- “Maintain this workspace: validate the guides and state.”
+> Use ai-engineering-tutor. Resume from my latest actual evidence. Explain the mechanism and guide one small runnable SupportOps step. Do not reset onboarding or build the whole application.
 
-Learner questions are answered directly. Assessment answers are withheld until you attempt them or request help. Explicit maintainer work runs normally and does not become a student exercise.
+The saved starting position is J0/Q0/0.3 with Groq selected and execution/understanding pending. Newer actual work takes precedence. [Current state](progress/current.json) is not proof of the current environment or absence of prior work elsewhere. [projects/supportops](projects/supportops/README.md) reserves an application container; inspect and preserve an already verified app elsewhere.
 
-J1–J5 use compact [assessment cards](docs/ASSESSMENT_CARDS.md), loaded only for the active increment. J0–J5 remains the recommended narrative, with one documented dependency-safe option after J2: direct SQL/scoped read-tool work may begin before J3, while combined J4 completion still requires retrieval. Advancement readiness uses one append-only event carrying its delayed-transfer contract; retained independence and full completion require their own evidence. Final ownership is assessed with normal docs allowed, alongside coverage of all core capabilities.
+## What you will finish
 
-The route ships something showable at every stage rather than saving the portfolio for the end, and it defers test frameworks, deployment and LLMOps with an explicit trigger for reopening each. Start with [the route](docs/CURRICULUM.md), [teaching guide](docs/TEACHING_GUIDE.md), and [current state](progress/current.json). [Progress protocol](docs/PROGRESS_PROTOCOL.md) explains evidence and resumption. [Provider reference](docs/PROVIDER_REFERENCE.md) retains a dated baseline, not a current runtime claim. [Portfolio](docs/PORTFOLIO.md) distinguishes planned work from demonstrated results. [Migration](docs/MIGRATION.md) maps all seven frozen sources to native authorities.
+| Stage | Runnable result |
+|---|---|
+| J0 | First provider call and tiny draft using supplied policy |
+| J1 | Structured intake with source evidence and review |
+| J2 | Meaningful transfer to a different support constraint |
+| J3 | Policy finder first, then cited assistant |
+| J4 | Scoped lookup first, then bounded tools and approved simulation |
+| J5 | One reproducible evaluated release and independent handoff |
 
-From this repository's root, with Python installed:
+These are closed increments, not separate microservices. No full-stack installation, large evaluation corpus, second progress system or deployment is required to begin. Advanced work retains explicit reopening triggers.
 
-```powershell
+## Read only the active depth
+
+[Project requirements](docs/project/PRD.md), [contracts](docs/project/CONTRACTS.md) and [release cards](docs/project/RELEASES.md) define what to build. [Curriculum](docs/CURRICULUM.md) owns sequence; [teaching](docs/TEACHING_GUIDE.md) and [lesson shapes](docs/LESSON_TEMPLATE.md) own delivery. [Progress protocol](docs/PROGRESS_PROTOCOL.md) remains the sole state authority. [Engineering](docs/ENGINEERING_GUIDE.md), [assessment](docs/ASSESSMENT_CARDS.md) and [portfolio](docs/PORTFOLIO.md) are consulted when relevant.
+
+[Input and external-skill review](docs/reviews/2026-09-15-refinement.md) records adoption decisions and missing helper files. The uploaded M0-M7/T001-T030 design is not installed as a competing course. The canonical [ai-engineering-tutor](.agents/skills/ai-engineering-tutor/SKILL.md) has an identical existing Claude mirror and Copilot routing, not multiple different coaches.
+
+## Maintainer checks
+
+```bash
 python tools/validate_workspace.py
 python tools/validate_workspace.py --self-test
+python tools/test_supportops.py
 ```
 
-These commands use only the standard library, need no secrets/network/provider, and never launch the learner's app. The [pilot](docs/PILOT.md) distinguishes static checks, tutor simulations, and real learner outcomes. Maintainers can request BMAD explicitly; [the planning contract](_bmad-output/specs/spec-codex-learning-workspace/SPEC.md) and its companions describe this setup. Do not treat generated planning artifacts as completed student projects.
+These check documents, state and fixtures; they never launch a learner app or call a model. [Validation](docs/reviews/VALIDATION.md) distinguishes observed checks from unexecuted behavioral/learner tests. The existing [pilot](docs/PILOT.md) contains historical runs; new coach scenarios remain explicitly unexecuted until tested in the selected host.
 
-The V3.2 source pack and prior QA remain under [curriculum](curriculum/V3.2_Medical_and_Retail_Junior_Path/README_FIRST.md) as a frozen archive. Native guides own current teaching. Keep publication private unless the user later explicitly changes that scope; GitHub publication does not activate providers or establish learning progress.
+## Privacy and preserved history
+
+Repository visibility was observed public and is unchanged. Never commit secrets, raw customer data or private learner transcripts; publish only deliberately approved sanitized evidence. No paid models, external traces, deployment, real commerce actions or outbound messages are authorized by these documents.
+
+Existing J/E/Q identifiers, progress files, schema, native validator, frozen curriculum, medical historical fixtures and vendor skills are preserved. Medical work is no longer a required second product. Maintainer work does not award learner achievements.

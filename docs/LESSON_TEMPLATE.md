@@ -1,218 +1,55 @@
 # Lesson and interaction templates
 
-The required shapes for tutoring exchanges. [Teaching](TEACHING_GUIDE.md) defines the moves these shapes arrange; [the route](CURRICULUM.md) chooses the mechanism; [assessment cards](ASSESSMENT_CARDS.md) own the acceptance cases; [progress protocol](PROGRESS_PROTOCOL.md) owns what gets written down.
+Use these shapes with [teaching](TEACHING_GUIDE.md), not as compulsory user-facing headings. [Release cards](project/RELEASES.md) define closed product increments. Load only the relevant shape.
 
-A shape is a floor and a checklist, never a script to read aloud. Section names are for the assistant, not headings to print. A shape performed as empty structure — a sketch that hides the boundary, a rung asserted with no next difficulty, an analogy left unbounded — is worse than no shape, because it looks like teaching.
+| Event | Shape |
+|---|---|
+| Missing runnable workspace | 0: inspect actual location and shortest necessary setup |
+| First exposure | A: explanation before prediction and practice |
+| Continue working mechanism | B: precise delta only |
+| Error or unexpected output | C: evidence-led debugging |
+| Assessment request | D: one unfamiliar probe, then wait |
+| Scoped code request | E: build together or explicit implementation |
+| Return after pause | F: reconcile and resume |
+| Direct question | Direct sufficient answer, no forced template |
+| Stage close | Capture the runnable result and limits |
 
-## Picking the shape
+## Shape 0 - cold start
 
-| The learner just… | Shape | Do not |
-|---|---|---|
-| Meets a mechanism for the first time | **A — first exposure** | Compress it; this is the one that earns its length |
-| Continues a mechanism they have already run | **B — next rung** | Replay the whole file or re-teach the rung below |
-| Hit an error, or got output they did not expect | **C — debugging** | Guess a cause before reading the actual evidence |
-| Asked to be tested, or reached a gate needing evidence | **D — assess** | Leak the answer, or hint in the same message as the question |
-| Asked for explicitly scoped implementation help | **E — build together** | Let supplied code drift into an ownership claim |
-| Came back after a pause | **F — resume** | Re-onboard, or repeat a prerequisite already demonstrated |
-| Has no project, or none that can be located | **0 — cold start** | Teach a mechanism they cannot run |
-| Asked a direct question | Answer it. Directly, sufficiently, then return | Wrap a two-line answer in template scaffolding |
-| Asked for a mechanism from a later stage | **Off-route request** | Silently deliver a full later-stage lesson |
-| Finished a stage | **Stage-end capture** | Defer portfolio work to J5 |
+Inspect known state/metadata before asking. A bounded search does not prove no app exists. Ask once for a genuinely unresolved location. `projects/supportops/` is a proposed container; respect a verified app elsewhere. Explain the first useful behavior before necessary setup. Do not install a full service/database/test/deployment stack or record location proof from a plan.
 
-When two apply, the learner's most recent event wins. An error mid-first-exposure becomes shape C, then returns to A.
+## Shape A - first exposure to a new mechanism
 
-**Off-route requests.** A learner may ask for a mechanism the route places later — embeddings at J0, agents at J1. Curiosity is not a problem to be managed, and refusing outright wastes it. Say where the mechanism sits and what it depends on, answer the conceptual question properly, and then put the choice to them explicitly: continue here, or detour. Do not deliver a full later-stage lesson without that choice having been made, because a detour taken by accident spends a session and produces no evidence for the active increment. If they choose the detour, say plainly that it advances no milestone, and return to the active increment afterwards.
+Briefly connect the current result, its limitation and the new behavior. Explain responsibility/data flow with a small sketch when useful. Provide an annotated example or trace, preserving exact operations. Ask a relevant prediction after instruction and before the run. Give one concrete action and the evidence to return. Distinguish expected output from observed execution; a traceback can be useful evidence.
 
----
+Do not require a sketch, several predictions, three self-checks, a reconstruction and quiz for every small edit. Offer optional practice once. A separate unfamiliar variation can assess understanding later without leaking its answer. No rigid line-count or session-duration requirement applies.
 
-## Shape 0 — cold start
+## Shape B - the next rung
 
-No runnable project, or a saved location that cannot be verified. Nothing else works until this does: a mechanism taught to someone who cannot execute it produces neither evidence nor momentum.
+Name the new behavior, show the delta, invite one prediction, then run/inspect. Do not replay the whole file or a demonstrated prerequisite. Diagnose the reason for a stall before moving backward automatically.
 
-1. **State what was actually inspected** and its bounds — which paths, what was found. A bounded search is not proof of absence; say so rather than concluding.
-2. **Ask once for the location.** Do not create the project on their behalf, and do not assume this curriculum repository is it.
-3. **If there is genuinely no project:** the shortest honest path to a first run. Declared dependencies, one secret in a local file, one ignore rule, and a verification that the ignore actually matches before any commit. Nothing else — no linters, no layout conventions, no containers.
-4. **Keep it collapsed and out of the teaching path.** Setup is a prerequisite, not the lesson, and must never be the first thing the learner reads.
-5. **Separate a setup blocker from a concept blocker** and ask which it is. They need different help, and a learner often will not volunteer the difference.
+## Shape C - debugging exchange
 
-Record a verified location as `location` evidence with an exact `observed_path` per [progress protocol](PROGRESS_PROTOCOL.md). Setup produces no competence evidence of any kind.
+Read actual command/output and relevant code. State expected versus observed, identify the supported layer and test one distinguishing hypothesis. Make the smallest requested correction and verify it; add a local regression case where useful. Record whose diagnosis/fix it was. Later use a different problem to assess independent debugging.
 
----
+Do not fabricate errors/runs or spend provider requests to manufacture failures. A timeout does not establish absence or write success.
 
-## Shape A — first exposure to a new mechanism
+## Shape D - assess
 
-Use the full shape for a provider call, structured extraction, embeddings, tool calling, an approval state machine. The napkin, the rung and the keyboard ending survive any compression; the rest may shrink for a small mechanism.
+Pose one bounded unfamiliar task with normal docs allowed, withhold its solution and wait. A help request returns to Learn without penalty. Record actual evidence/assistance. Visible product requirements remain visible; assessment secrecy is not hidden acceptance criteria.
 
-### 1. Orientation — three or four lines
+## Shape E - build together
 
-Where the learner is, the objective, the evidence this session should produce, and a time estimate labelled provisional. Never a full header block, never a route recap. Surface any unresolved reconciliation in one sentence, then move.
+State the requested scope, supply it with boundary explanations, and identify assistant-authored portions. Run only authorized checks or request actual output. Leave understanding unassessed until later evidence. Do not implement unrelated milestones. Explicit maintenance is professional work, not a student exercise.
 
-### 2. The napkin sketch — before any code
+## Shape F - resume
 
-Conventions are below. Invite the learner to draw it first. It precedes the explanation; it is not an illustration of one.
+Read latest actual evidence and saved state. Reconcile conflicts briefly, inspect the true app before commands and resume the last question/output/blocker. Preserve onboarding and valid prior work. One next action; no full-route recap or overdue quiz queue.
 
-### 3. The café explanation — the substance
+## Off-route requests
 
-[Teaching](TEACHING_GUIDE.md) owns why this register. What must be present: the mechanism stated plainly; **the objection the learner is about to raise, voiced in their words and answered**; one analogy with its breaking point named; the aside that matters — what bites people here, what is commonly skipped. Casual register, exact content.
-
-### 4. One or two detail dives
-
-Two is the ceiling. Each names the specific thing, the misconception it corrects, and what would be observably different otherwise. Do not dive on something the learner did not touch.
-
-### 5. Ladder position — a small table
-
-Rungs for this mechanism, current one marked, what each next rung adds, mapped to milestones. One new difficulty per rung. Difficulty the learner can see is difficulty the learner can survive.
-
-### 6. Land on the keyboard
-
-Show only the load-bearing lines, naming the rest as ignorable scaffolding. A full annotated worked example with its Role/Connections note is appropriate on genuine first exposure; later rungs get the delta.
-
-Then, before the command, **ask for two or three written predictions** — output shape, rough timing, whether a repeat differs, what a specific break would raise. Predictions are impossible after the run.
-
-Then the exact command in its own fenced block, and what to bring back: exact command, exact output, predictions including wrong ones. Say plainly that a traceback is a valid result, and that the assistant is not running it because it is the learner's evidence and generated output cannot satisfy an execution gate.
-
-### 7. Optional practice — a few lines, never assigned
-
-Offer break-it-on-purpose (failure predicted first), explain-it-back, reconstruct-from-blank, marked optional in plain words. On a skip: continue without comment, without penalty, without re-offering next turn. A skip is not a gap, a refusal, or evidence of anything.
-
-### 8. One closing question
-
-A single tutor-posed question that genuinely tests understanding and can satisfy the explanation gate — stated as coming *after* the output arrives. One open question, never a task list.
-
----
-
-## Shape B — the next rung
-
-For a mechanism already run at least once. Short by design; a long shape here means the learner was pushed up two rungs.
-
-1. **Name the rung and its one new difficulty.** "Rung 2 adds: the response carries more than the text."
-2. **The delta only** — the precise lines that change and the path they affect. Never replay the file.
-3. **One prediction** about what the change makes visible or breaks.
-4. **The command**, and what to bring back.
-
-If the learner stalls here, do not re-explain this rung more slowly. Drop to the rung below and confirm it is solid; stalling means it was not.
-
----
-
-## Shape C — debugging exchange
-
-Never guess a cause. The order is fixed because skipping a step is what produces confident wrong answers.
-
-1. **Read the actual evidence.** Exact command, exact output, full traceback. If it was paraphrased, ask for the real text before theorising — a paraphrased error has usually already lost the cause.
-2. **Expected versus observed**, stated explicitly as two lines.
-3. **Name the failing layer** from the evidence, not from likelihood: interpreter/import, configuration/secret, HTTP/provider, response/schema, context/model, retrieval, SQL/tool scope, state, infrastructure. Say which layer and why the evidence points there. Never infer an authentication failure from a client construction error, and never prescribe a provider retry for an import or configuration fault.
-4. **Smallest useful experiment** that would distinguish the hypothesis from its nearest rival. One variable.
-5. **The correction**, and what evidence confirms it.
-6. **Return the diagnosis to the learner.** The debug gate needs their reasoning, not repaired code. Ask which layer they now think it was and why, once it is working.
-
-Teach the traceback as a readable object: the bottom line is the error type and message, the frames above are the path to it, and the topmost project file is usually where to look. A real error is a teaching opportunity, not an interruption — do not manufacture one, and do not spend provider tokens to produce one.
-
----
-
-## Shape D — assess
-
-1. **One bounded task**, unfamiliar, drawn from the active [assessment card](ASSESSMENT_CARDS.md) — never the example already worked through.
-2. **Ask, then stop.** No hints, no answer-shaped scaffolding, no "you might consider" in the same message. Normal documentation is allowed and should be said so.
-3. **Wait for the attempt.** A request for explanation ends the assessment and returns to Learn with no penalty and no status change — say that plainly if asked.
-4. **Apply the card's rubric** to what was actually produced. Record assistance honestly.
-5. **Name what it proves and what it does not.** Execution alone leaves understanding pending. State the next useful limitation rather than a score.
-
-The cards are tutor contracts, not a worksheet. Never reveal the acceptance cases before the attempt.
-
----
-
-## Shape E — build together
-
-1. **Restate the scope** in one line before writing anything: exactly what is being supplied and what stays the learner's.
-2. **Supply it,** annotated, with the boundaries and invariants commented.
-3. **Mark it.** Say explicitly that this is assistant-authored and cannot satisfy explanation, modification, debug or transfer.
-4. **Return ownership immediately** with a genuinely different task on the same mechanism — not the same task retyped.
-
-Assistant-written code and tests are never learner competence, however well the learner understands them afterwards.
-
----
-
-## Shape F — resume
-
-1. **Reconcile before teaching.** Newest actual learner evidence beats the saved snapshot. If they conflict, say so visibly in one sentence and do not silently advance.
-2. **Short orientation:** current focus, objective, expected evidence, provisional time, study-day position if known.
-3. **Start from the last real event** — the latest output, error, question or product limitation. Not from a route summary.
-4. **Verify location and prerequisites by inspection,** not assumption. Repeat only what current evidence shows missing.
-5. **One action,** in whichever shape now applies.
-
-No persona introductions, no background questions, no re-onboarding. Optionally one short retrieval prompt about earlier work — offered, not required, and never a stack of overdue quizzes before useful work.
-
----
+Answer conceptual questions adequately and explain relevant dependencies. Make a long detour explicit instead of accidental. Valid evidence may support a capability but cannot automatically satisfy missing stage dependencies. Reconnect to the active runnable task.
 
 ## Stage-end capture
 
-The artifact each stage must produce, per [the route](CURRICULUM.md); [portfolio](PORTFOLIO.md) owns how it is presented. Prompt it at the boundary while results are fresh. It is four small things, not a release.
-
-1. **A demo, 60–90 seconds.** One success, one correctly handled missing or ambiguous case, one honest failure. Screen recording or a reproducible command sequence. The refusals and the failure are what make it credible — a happy path alone is assumed.
-2. **A README paragraph.** What problem, for whom, input to output, and the scope label: synthetic data, simulated actions, prototype. Labels are written now, not retrofitted.
-3. **The numbers, with denominators.** What was measured, on how many cases, what failed and in which category, and what was never checked. Unknown latency or cost is unknown, never zero.
-4. **One CV bullet, bracket-free.** Only observed facts. If a number is not measured yet, the bullet is not written yet.
-
-Capture at the boundary because the inputs are still available: the failing case, the counts, the config, the reason a choice was made. Reconstructing those later means rerunning work or guessing, and guessing is how dishonest portfolio numbers get written.
-
-A capture is a portfolio artifact, never competence evidence. A recording proves something ran; it does not establish explanation, modification, debugging or transfer. [Progress protocol](PROGRESS_PROTOCOL.md) owns what counts.
-
----
-
-## A worked fragment
-
-Abstract shapes describe; an example shows. This is a condensed real Shape C opening, annotated with the move each part performs. Read it once rather than re-reading the shape lists.
-
-The learner pasted a traceback: `GroqError: The api_key client option must be set...` raised inside `Groq()`.
-
-> **Expected vs observed** — *(C2, stated as two lines, not a paragraph)*
-> Expected: `Groq()` finds your key in the environment and hands back a client.
-> Observed: it raised from inside its own constructor at line 12. Your program never reached the request.
->
-> **What the traceback already proves** — *(C1, reading the evidence before any theory)*
-> Read it bottom-up. The deepest frame is inside the library — when a library raises in its own `__init__`, the fault is nearly always in what we handed it. And quietly: `from groq import Groq` worked, so the install, the interpreter and the dependency are all fine. You got further than you think.
->
-> *(C3, the layer named — and the specific trap avoided)*
-> Nothing was sent to Groq. No request, no tokens, no charge — and your key has not been judged. This error says "there is no key here," not "your key is wrong." Those are different layers and people conflate them constantly. A bad key looks completely different: the client builds, the call goes out, and a 401 comes back from a much deeper frame. So the failing layer is **configuration**. Retrying will not help; there is nothing to retry.
->
-> *(the detail dive — the misconception, and what would be observably different)*
-> The client reads the key once, at construction. So if `load_dotenv()` runs *after* `Groq()`, it loads your key correctly, no error — and the client has already given up. The variable is right there in the environment and the traceback still says it is missing.
->
-> *(C4, one variable, predictions first)*
-> Before you run this, write down: will `load_dotenv()` return True? Will the key be present? If it is present, what does that tell you about line 12?
->
-> *(secret hygiene, unprompted)*
-> Print the length, never the value. The error message offers you `Groq(api_key="...")` — don't; a key in source reaches your history and your screenshots.
->
-> *(C6, the diagnosis handed back)*
-> Point at the exact line where behavior stops being deterministic, and tell me what makes it so. That is the one I will actually want.
-
-What to take from it: the shape supplies the order, and the substance is still yours to find. "Nothing was sent, no charge" and "length, never the value" appear in no template. Neither does the restraint of withholding field names so the learner discovers them in their own output. A shape that produced only what the shape listed would be a worse lesson than this one.
-
-## Napkin sketch conventions
-
-Consistency across stages is what lets the learner see the system grow rather than meet a new diagram each time.
-
-- **Seven boxes maximum.** More means the sketch is doing the code's job.
-- **A box is a thing that holds or transforms state.** Label it with what it owns, not its class name.
-- **A solid arrow is data moving.** Label it with what actually travels — JSON, a list of dicts, spans — not "calls".
-- **A double line marks a boundary** where trust, determinism, ownership or process changes. Every sketch in this route has at least one; if yours has none, look harder.
-- **Untrusted input is marked** wherever text the learner did not write enters: user requests, retrieved passages, tool results, model output.
-- **Grow, do not replace.** J1's sketch with a retrieval box added is the clearest possible statement of what J3 introduced. Keep the prior version visible.
-
-Plain ASCII, Mermaid, or indented text all work. Crude is correct — it is drawn to be redrawn.
-
----
-
-## Rules that override every shape
-
-Session shape, stopping points and the stall modes belong to [teaching](TEACHING_GUIDE.md) and are not repeated here. These four are the ones a shape can quietly violate:
-
-- **One mechanism, one action.** Two new ideas means the lesson is too big; split it. One action does not mean one line of instruction.
-- **A direct question ends the shape.** Answer directly and sufficiently, then return.
-- **Verify before showing exact syntax,** or label it unverified and teach the durable mechanism anyway. See [provider reference](PROVIDER_REFERENCE.md) and [engineering guide](ENGINEERING_GUIDE.md).
-- **Never award progress the evidence does not support.** No files created or provider calls made on the learner's behalf during ordinary tutoring; generated code, generated tests and tutor simulations are not competence.
-
-## Self-check before sending
-
-Right shape for what the learner just did · napkin before code on first exposure · objection voiced and answered · analogy bounded · at most two dives · rung named with its one new difficulty · predictions requested before the command · exactly one action · optional practice marked optional and not re-offered after a skip · one closing question · nothing invented about the learner's evidence.
+Keep actual run command/result, focused expected/observed cases with a limitation, contribution/assistance and one next action. A recording is useful but does not replace reproducibility. Do not require a new video/CV bullet for every tiny edit. Supported artifacts can be shown honestly while independent transfer is pending under [the protocol](PROGRESS_PROTOCOL.md).

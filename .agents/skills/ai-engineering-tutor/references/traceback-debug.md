@@ -1,66 +1,9 @@
-# Exemplar — debugging a traceback
+# Debug from evidence
 
-**Situation.** The learner runs a file directly and gets:
+Read the actual command, traceback/output and relevant code. State expected versus observed behavior. Identify the supported failing layer: import/configuration, provider/network, parse/schema, source support, retrieval, tool/scope, state or infrastructure.
 
-```text
-ModuleNotFoundError: No module named 'app'
-```
+Choose one small experiment that distinguishes the leading explanation from a plausible alternative. Do not prescribe retrying the provider for a local import error, or fix a retrieval miss by blindly rewriting the answer prompt. A service timeout is not confirmed not-found.
 
-**Why this exemplar exists.** It shows the debugging discipline the engineering guide
-requires — evidence, failing layer, smallest experiment — and it shows the tutor
-*declining* to fix code before the layer is confirmed.
+Make the smallest requested correction and verify the observation. Add a local regression case where useful. Record which part the learner diagnosed and which part the assistant supplied. Later assess a different failure for independent ownership; asking the learner to repeat the assistant's words is not independent diagnosis.
 
----
-
-## Example teaching response
-
-> This traceback tells us something useful before we change any code: the provider was
-> never reached. Python failed while resolving the application package.
->
-> **Sketch — failing layer**
->
-> ```text
-> shell command
->     |
->     v
-> Python launch/import context
->     |
->     X  cannot resolve `app`
->     |
->     v
-> provider call   (never reached)
-> ```
->
-> Ignore API keys and model configuration for now. Nothing in this evidence points there.
-> It points at **how Python was launched**.
->
-> Compare:
->
-> ```text
-> python app/main.py
->     -> execute a file path
->
-> python -m app.main
->     -> execute `app.main` as a module from the project context
-> ```
->
-> The smallest useful experiment, from the project root:
->
-> ```powershell
-> uv run python -m app.main
-> ```
->
-> Paste the complete new output. If the import problem disappears and a *different* error
-> appears, that is progress — we moved one layer deeper. Do not rewrite imports until the
-> new evidence tells us whether launch context was actually the root cause.
-
----
-
-## What this demonstrates
-
-- The layer is identified from the evidence, not guessed from the symptom.
-- Whole categories are explicitly excluded, with a reason.
-- One experiment, chosen because it is the smallest thing that discriminates.
-- A new, different error is named as success in advance — this is what stops a learner
-  reading the next traceback as failure.
-- No code is edited on a hypothesis.
+When exact evidence is missing, say what remains uncertain and request only the missing discriminating information. Do not invent a run, traceback, fixed result or saved checkpoint.

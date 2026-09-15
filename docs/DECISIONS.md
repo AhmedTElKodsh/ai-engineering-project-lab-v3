@@ -1,81 +1,21 @@
 # Decision records
 
-Costly or cross-component choices get a short record in the format [ENGINEERING_GUIDE.md](ENGINEERING_GUIDE.md)
-already specifies: context, decision, alternatives, evidence, consequences, review trigger.
-A record states what was decided and on what evidence; it is not a claim that the decision
-was executed or measured.
+A decision records context, alternatives, evidence, consequences and reopening trigger. It is not implementation or learner evidence.
 
-## DR-001 — J3 embedding route
+## DR-001 - J3 embeddings: unverified, not an executable default
 
-**Status:** provisional default, decided 2026-09-09. Reopen at J3 entry.
+The 2026-09-09 baseline selected a purported Groq endpoint serving nomic-embed-text-v1_5, partly from an aggregator, and recorded no provider call. The 2026-09-15 review could not substantiate it in the [official API reference](https://console.groq.com/docs/api-reference) or [model catalog](https://console.groq.com/docs/models). This is insufficient support, not proof an account-specific service cannot exist. The earlier record remains in Git history.
 
-### Context
+Remove the unsupported runnable default. Do not claim availability, zero cost or measured Arabic quality. Keep generation separate. At J3 choose a documented route based on the actual environment, authorization and language scope; record model/revision, dimensions, preprocessing, index identity and a small labeled comparison. No replacement setup blocks J0.
 
-[CURRICULUM.md](CURRICULUM.md) J3 says *"Use one embedding route and NumPy similarity"*
-and never names it. [PROVIDER_REFERENCE.md](PROVIDER_REFERENCE.md) covers chat completions
-and JSON Object Mode only. Meanwhile E09 in [skills.json](../progress/skills.json) requires
-Arabic and English results reported separately, and J3 asks for cross-language retrieval
-evaluation if used.
+## DR-002 - One product and existing identifiers
 
-So the first genuinely cross-component choice on the route had no owner: which embedding
-model, from which provider, at what setup cost, with what Arabic behavior.
+Use SupportOps as the product story, retarget extraction/transfer and one final release, preserving J0-J5, E01-E22, native schema and evidence. Closed mini-projects are descriptive stopping points, not new progress IDs. The uploaded M0-M7/T001-T030 route is reviewed design input, not an installed tracker.
 
-### Decision
+Keep required meaningful transfer within SupportOps. Preserve deferrals; introduce small deterministic tests and development execution visibility with the relevant mechanism. The upload's full database/queue/deployment scope does not become an initial gate.
 
-Default to **Groq's embeddings endpoint** for the first working J3 slice, English only.
-Treat Arabic retrieval as an explicitly open risk to be decided with evidence, not now.
+## DR-003 - One canonical learner coach
 
-### Alternatives considered
+Update ai-engineering-tutor and its existing identical Claude mirror. Adopt reviewed ideas with locally authored wording, not whole external frameworks or mandatory HTML lessons. Do not install the upload's incomplete entrypoint or nonexistent helper. Its reported helper tests are not reproduced without those files.
 
-| Option | Cost | Arabic | Why not the default |
-|---|---|---|---|
-| Groq embeddings endpoint | No new key, no new SDK, no download | Weak — see below | **Chosen** for the first slice |
-| Local sentence-transformer (multilingual) | New dependency, model download, no API cost | Strong | Real setup cost before the mechanism is understood; violates one-new-thing-at-a-time |
-| Second hosted provider for embeddings | New key, new billing, new SDK | Varies | Two provider boundaries while learning the first one |
-
-### Evidence
-
-Checked 2026-09-09, no provider call made:
-
-- Groq publishes an embeddings endpoint serving `nomic-embed-text-v1_5`, float or base64
-  output, on the same client as the chat endpoints.
-- `nomic-embed-text-v1.5` is not the multilingual member of that family. The multilingual
-  model is `nomic-embed-text-v2-moe` (~100 languages, MoE), and it is **not** what the
-  Groq endpoint serves. Published Arabic–English cross-lingual retrieval comparisons place
-  v1.5 below purpose-built multilingual alternatives.
-
-Sources: [Groq supported models](https://console.groq.com/docs/models),
-[Groq embeddings API](https://apis.io/apis/groq/groq-embeddings-api/),
-[nomic-embed-text-v2-moe](https://simonwillison.net/2025/Feb/12/nomic-embed-text-v2/),
-[Arabic–English RAG embedding comparison](https://hosn.om/blog/bilingual-rag-embeddings-arabic-english.html).
-
-Availability, account access and actual retrieval quality on this corpus are unverified.
-This is a documentation check, exactly as scoped in [PROVIDER_REFERENCE.md](PROVIDER_REFERENCE.md).
-
-### Consequences
-
-The English J3 slice costs nothing new: no key, no SDK, no download, one endpoint on a
-client the learner already built. That preserves the route's own rule about introducing
-one mechanism at a time.
-
-**Arabic retrieval on this route is expected to underperform, and that is a tooling
-property, not a learner failure.** This is the consequence that matters. Without this
-record, a learner whose Arabic Recall@k comes back poor has no way to tell a bad chunking
-decision from a bad embedding model, and the available conclusion — *"I don't understand
-embeddings"* — is both wrong and the likeliest to end the project.
-
-State this before the Arabic evaluation runs, not after it disappoints.
-
-### Review trigger
-
-Reopen when **either** condition holds:
-
-1. Labeled Arabic questions exist and measured Arabic Recall@k is materially below the
-   English figure on the same content. `note_001` / `note_007` in
-   [fixtures](../fixtures/medical/CASES.md) are the same pattern for extraction and show
-   how the comparison is built: same facts, two languages, scored separately.
-2. A target vacancy requires demonstrated Arabic retrieval quality.
-
-On either trigger, evaluate a multilingual model against this baseline on the same labeled
-set and keep whichever is justified. Do not switch models on intuition; the point of the
-baseline is to make the switch measurable.
+Static packaging, host activation, conversational behavior and learner retention require different evidence. Twelve host scenarios are specifications until executed. See [review](reviews/2026-09-15-refinement.md).

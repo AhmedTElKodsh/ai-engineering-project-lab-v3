@@ -1,107 +1,44 @@
 # Portfolio and Junior Application Evidence
 
-**Native adaptation:** 2026-09-08, from frozen V3.2 source 05. Status claims must follow [current evidence](../progress/evidence.jsonl) and [the progress protocol](PROGRESS_PROTOCOL.md).
-
-## Initial package
-
-Recommend two featured projects: the Medical Document Review Assistant and Retail Support and Order Assistant. They demonstrate different applied work and share transferable AI mechanisms. These are planned artifacts, not finished projects; neither is currently marked complete. Two is a curriculum recommendation, not a universal minimum demanded by employers.
-
-| Project | Status | What the initial showcase should prove | Honest scope label |
-|---|---|---|---|
-| Medical Document Review Assistant | Planned; learner implementation not observed | Typed source-grounded extraction, missingness/negation, review workflow, measured field errors | Synthetic document-processing prototype; not clinically validated |
-| Retail Support and Order Assistant | Planned; learner implementation not observed | Cited policy RAG, scoped order lookup, bounded tool/state flow and simulated approval | Synthetic support workflow; actions simulated |
+One featured SupportOps application with progressively completed mini-tools. This replaces the two-required-product presentation, not the evidence standard. [Current evidence](../progress/evidence.jsonl) and [protocol](PROGRESS_PROTOCOL.md) control achievement claims.
 
 ## Capture as you go, not at the end
 
-The portfolio is a byproduct of the route, not its final phase. Each stage in [the route](CURRICULUM.md) ends with a capture step; this file is where those captures accumulate. Assembling a portfolio from memory after J5 is the slowest path to an application, and the numbers it needs are gone by then.
+At meaningful stage closes preserve actual command/demo, input/output, normal and failure/limitation cases, counts with denominators and actual assistance/contribution. A short recording is useful but does not replace reproducibility. Do not require a new presentation after every tiny edit.
 
-| After | Capture, while it is fresh | Why this one is persuasive |
-|---|---|---|
-| J1 | Recording of a successful extraction, a correctly flagged missing fact and one honest failure; the field counts and denominator; the first measured CV bullet | Source-grounded extraction with visible provenance is a specific, uncommon thing to be able to show |
-| J2 | The retail schema beside the medical one, and a short note on what transferred and what the domain changed | Demonstrates generalization rather than one memorized pipeline |
-| J3 | A cited answer, an abstention on an unsupported question, and one retrieval miss traced to its layer | A system that refuses to answer reads as engineering judgment; one that always answers reads as a demo |
-| J4 | Normal lookup, blocked wrong-customer lookup, rejected approval producing zero effects | The refusals are the demo. Happy paths are assumed |
-| J5 | Reproducible run commands, README, evaluation report with limits, contribution disclosure | This is assembly if the earlier captures exist, authorship if they do not |
-
-Keep captures honest as they are made: label synthetic data, simulated actions, mocked outputs and prerecorded runs at capture time, not retroactively. A recording made during the stage is also the most reliable record of what the learner actually built themselves.
-
-## When to start applying
-
-Applications are not gated on route completion, and waiting for the whole route is a common, costly mistake.
-
-- **After J1:** the CV, profile and repository carry one honest measured bullet. This is enough to start conversations and to find out what local and eligible-remote listings actually ask for.
-- **From J3 onward:** apply to roles whose must-have list is already covered by demonstrated work. Which requirements those are is an open question this curriculum does not answer — collect the must-have lists from actual eligible listings and compare them against the route yourself. Do not take a coverage claim from any secondary source, including this document.
-- **Throughout:** record uncovered requirements as `role_gaps` entries and convert repeated ones into short targeted branches. A requirement appearing in one listing is noise; the same requirement in five is a branch worth taking.
-
-None of this changes eligibility. Degree, experience minimums, language requirements, location and work authorization are separate constraints that portfolio evidence does not remove, and "remote" alone does not mean applicants in Egypt are eligible. Verify before applying, and do not describe planned work as completed.
+| Stage | Showable evidence |
+|---|---|
+| J0 | Authorized first-call output and boundary explanation, or clearly labeled fake practice |
+| J1 | Stated/missing/negated facts and source-support failure in a reviewable intake view |
+| J2 | Two support scenarios with a meaningful changed constraint and transfer evidence |
+| J3 | Finder, cited answer, abstention and diagnosed retrieval miss |
+| J4 | Allowed/denied lookup and approved/rejected/mutated/replayed simulation |
+| J5 | One reproducible release, held-out results/limits and independent change/debug/transfer |
 
 ## Artifact maturity is separate from visibility
 
-- **A — Learning build:** small runnable slice, a few expected-vs-observed cases, explanation and a known failure. It can already be shown as learning work.
-- **B — Demonstrable engineered project:** reproducible interface, focused boundary checks, honest held-out evaluation, independent modification/debugging and a readable README. This is the target for the initial featured portfolio.
-- **C — Operational system:** deployment, access controls, monitoring, load/recovery, cost and rollback evidence for the actual environment. This is later work. Portfolio visibility does not imply C.
+Learning slice, engineered local release and operational deployment are different. No Dockerfile, static PASS or elapsed time proves production readiness or employability. Apply to suitable roles as evidence develops; verify requirements and eligibility separately rather than waiting for every Q module. No employment or business benefit is guaranteed.
 
-Do not label a repository production ready because it has Docker, many tests or a polished UI. Do not wait for maturity C to apply to suitable junior positions.
+## Technical interview practice
 
-This route specializes in applied AI/LLM application engineering: provider boundaries, structured outputs, retrieval, scoped tools, evaluation and delivery. It does not by itself establish general data-science, ML-research, model-training, data-engineering, frontend-specialist, security-specialist or platform/SRE competence. Match each application to demonstrated evidence and add a targeted branch when a role depends on one of those areas.
+Attach one short exercise to a meaningful stage close. J1: explain schema versus truth and change a validator. J3: diagnose a wrong answer from retrieved evidence and defend an alternative. J4: write/repair a scoped SQL query, distinguish failure outcomes, and explain approval/idempotency. J5: trace a request end to end, implement a small unfamiliar change and defend an architecture tradeoff.
 
-## Evidence bundle for each featured project
+Normal docs are allowed for independent engineering evidence. A separate explicit mock interview may add agreed time/tool constraints; do not retroactively treat ordinary assisted learning as a failed interview. Expand targeted Python, SQL, ML fundamentals or system-design practice from observed gaps and actual role requirements, not a new blocking course.
 
-1. Problem, intended user, input/output example and concise scope.
-2. Data origin, synthetic-generation method or license, and what was manually reviewed.
-3. Small architecture/dataflow diagram: deterministic code, model call, retrieval/data boundary and human decision point.
-4. Reproducible setup with dependency lock, example environment variable names only, exact local run/demo commands, and a fake-data or fixture mode when provider access is unavailable. Clearly label prerecorded or mocked outputs.
-5. Evaluation report: development/held-out split, expected-outcome rubric, sample size, model/config/date, counts and denominators, critical failures, language breakdown and limits. Include actual latency/cost only if measured.
-6. Focused deterministic checks plus AI evaluation kept conceptually separate. Show at least one failed case and the change it motivated.
-7. Brief design decisions, one credible alternative rejected for a stated reason, known limitations and a realistic next step.
-8. Learner contribution and AI assistance disclosure, plus one independent change/debugging record. Preserve references to real commits/output where available.
-9. A small observed usability note when practical: one person other than the builder attempts a normal task from the README/interface; record the task, hesitation or failure, and one resulting correction or explicit deferral. Do not coach the participant to manufacture success or present this as a formal usability study.
+## Evidence bundle for the release
 
-**A recorded demo is a required artifact, not an alternative to one.** Deployment is deferred to later work for good reasons, but the consequence has to be handled rather than inherited: a reviewer spending four minutes on a candidate does not clone a repository, install a package manager, supply their own provider key and run anything. Record two to three minutes showing one successful case, one missing or ambiguous case, and one controlled failure with an honest explanation. Label prerecorded or mocked output plainly. A hosted app remains an optional vacancy-specific extension; the recording is what actually gets watched. Never require reviewers to supply patient/customer data or send their secrets to an unknown service.
+State user/problem, scope and data origin. Include actual setup/run commands, dependency lock, small data/trust diagram, synthetic-data description, baseline comparison and evaluation report: counts/sample size, per-language scope, model/config/date, contamination, failures and measured latency/cost. Label mocks and prerecorded runs and unknown values.
 
-## Suggested measurements, never fabricated results
+Retain a meaningful failure investigation/fix/regression case, assistance disclosure and independent change/debug record. Do not impose an arbitrary ten-story quota. Observe another person using the tool when practical. Solo code does not prove collaboration; a real issue/review exchange is separate evidence when relevant.
 
-| Product | Core measurements | Failure evidence that matters |
-|---|---|---|
-| Medical | Field precision/recall or defined exact-match rubric; unsupported-fact count; source-span validity; review flag behavior | Missing vs negated facts, chronology, uncertain source text and valid-schema hallucinations |
-| Retail | Classification correctness; retrieval Recall@k; citation/answer support; abstention; tool/workflow success | Wrong-customer lookup, missing order, wrong policy version, rejected action, repeated request and tool error |
+Do not present generated plans as applications, or multiple release tags as independent production systems. Measure business savings before claiming them.
 
-Record the evaluation dataset size and ambiguity handling. Small synthetic evaluations show bounded engineering behavior, not clinical efficacy or proven commercial savings. If claiming a reduction in review time, measure it with an explicit baseline and comparable tasks; otherwise describe it as an intended benefit.
+## Publication and privacy
 
-## Publication: which repositories go public
+The repository was observed public; this refinement does not change visibility. Access does not authorize publishing private learner transcripts or real tickets. Keep raw material private and publish only explicitly approved sanitized evidence and synthetic fixtures. Do not automatically push progress. Check current files/history for secrets and rotate exposed credentials rather than only deleting current files.
 
-The curriculum workspace stays private. It holds learning state and evidence about a person, and nothing about it is portfolio material. The two product repositories have to be public, or the portfolio does not exist — a reviewer cannot evaluate what they cannot open.
+A public repository is not the only possible portfolio: authorized private review, sanitized showcase or local demo can supply evidence. Application runtime customer data and learning records are separate systems.
 
-Before making a product repository public, in this order:
+## Completion
 
-1. Confirm no secret was ever committed, not merely that one is ignored now. `git check-ignore   .env` proves the current rule matches; it says nothing about history. Search the history   explicitly, and if a key was ever committed, rotate it — removing the file does not unpublish it.
-2. Confirm every document, note, policy and order in the repository is synthetic, and that the   README says so in its first paragraph.
-3. Keep the evaluation report in. Its limitations section is evidence of judgement, and removing   it to look stronger makes the portfolio weaker to exactly the readers worth impressing.
-4. Keep the assistance disclosure in. Supported work honestly labelled reads as professional;   discovering it was undisclosed does not.
-
-## Vacancy matching for Egypt and remote roles
-
-This section owns how a vacancy is recorded and matched; the timing of a first application is above. Maintain a small list of current vacancies and revisit it as projects mature. Capture: employer/title/link/date, Egypt/on-site/hybrid/remote eligibility, experience/degree, English/Arabic requirements, must-have skills, preferred tools, evidence links and unresolved gaps. “Remote” alone does not mean applicants in Egypt are eligible. Listings may expire; verify before applying.
-
-Use the route to prepare a strong applied core, then add short branches for repeated requirements in eligible roles. If target roles consistently require Docker/Azure or deeper ML, schedule a focused extension with actual practice; do not pretend this initial route covers it. Some junior titles still demand prior experience or a degree, and a portfolio does not erase those constraints.
-
-Application checkpoint: can the learner reproduce the demo, explain every major boundary, make an unfamiliar change, debug a controlled failure, discuss measured limitations, show one small usability observation when available, and point to their own contribution? If yes and the vacancy's requirements fit the applied-LLM evidence actually demonstrated, apply while continuing selected later study. Never claim employment readiness solely from document validation.
-
-Curriculum completion is a separate claim: J5 ownership gates (explanation, modification, debug and transfer) require actual learner evidence with assistance `none` or `docs`; execution may be supported. J5 readiness requires E01–E22 at least practiced; completion also requires E22 independently applied or stronger. A `ready` milestone with delayed transfer queued permits useful progress but does not certify retention or full route completion. Disclose assistance and pending transfer honestly when showing work; supported artifacts remain usable learning evidence.
-
-## Resume bullets — fill only after measurement
-
-- Built a synthetic medical document review prototype using [actual stack] to extract [defined fields] with source evidence; evaluated on [N] held-out cases and reported [measured results and important limitations].
-- Developed a retail support assistant combining cited policy retrieval with scoped SQL order tools and human-approved simulated returns; demonstrated [actual workflow cases] and measured [actual quality/latency results].
-
-Replace brackets with observed facts before use. State prototype/synthetic scope when relevant. Do not claim clinical validation, live refunds, real revenue gains, production scale or business adoption without evidence.
-
-## What this package does not evidence
-
-This route is solo by construction. Two synthetic-data prototypes, one author, no review history, no issue thread, no collaboration artifact. "Can this person work with other people" is a real screen and nothing here answers it — which is worth stating plainly, in the same spirit as every other limit named in this document, rather than letting the package look complete along an axis it never measured.
-
-The cheapest honest evidence, if a target role weights it: one real issue thread, or one accepted contribution to something you did not write. Neither belongs on the critical path to a first application, and neither should delay one.
-
-## Later portfolio expansion
-
-Expand an existing product when a measured limitation or target role calls for it. An optional third independent project can demonstrate a missing capability such as SQL analytics or open-model adaptation. Do not require four to six repositories or every Q5-Q12 framework before the first application. Prefer a small number of explainable, evaluated projects over copied demos.
+Follow unchanged J5 none/docs ownership gates, E01-E22 practiced coverage, E22 independence and required delayed transfer. Preserve supported artifacts without promoting them to mastery. No second medical release, new progress schema or mandatory hosted deployment is required.
