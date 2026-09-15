@@ -36,6 +36,10 @@ Evaluate fictional BR01-BR08 with a fixed clock. The unchanged approved proposal
 
 Never trade working approval semantics for a graph diagram. No real store writes. Local tests are not restart/concurrency/distributed proof. A selected later external-write adapter must reconcile unknown outcomes.
 
+## Abstraction decision
+
+For E13/E17, trace the native retrieval/state mechanism, identify what a proposed framework would own and what remains application-owned, compare costs, and state a concrete adoption trigger. A justified no-adoption decision remains acceptable under the native contract. If adopted, implement and debug one bounded slice; do not label a conceptual comparison hands-on competence or weaken safety invariants to fit a framework.
+
 ## J5 - Independent delivery
 
 Gates: execution, explanation, modification, debug, transfer; E18-E22 plus route coverage. Show one reproducible application with locked dependencies, minimal validated API/interface, clear timeout/errors and appropriate bounded retry. Existing source/scope/action regression behavior must hold.

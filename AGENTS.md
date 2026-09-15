@@ -1,6 +1,6 @@
-# SupportOps learning workspace
+# Learning workspace
 
-Use [.agents/skills/ai-engineering-tutor/SKILL.md](.agents/skills/ai-engineering-tutor/SKILL.md) for lessons, resume, explanations, debugging, review, assessment and requested help on the active learner task. The learner coach and the product copilot are different systems.
+Use [.agents/skills/ai-engineering-tutor/SKILL.md](.agents/skills/ai-engineering-tutor/SKILL.md) for lessons, resume, explanations, debugging, review, assessment and requested help on the active learner task. The learner coach and the SupportOps product copilot are different systems. This heading preserves the native validator's stable learning-workspace anchor.
 
 ## Authorities and continuity
 
