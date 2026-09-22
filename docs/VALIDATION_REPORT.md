@@ -40,6 +40,8 @@ The workspace was published to the authenticated user's `ai-engineering-project-
 
 This subsequent maintenance pass implements the nine approved technical/pedagogical review refinements. It is local work; the earlier publication statement above does not mean these changes were uploaded.
 
+*Update 2026-09-22:* this pass (`7d527c2`) is now published. It is an ancestor of `origin/main` at `ce3d5b7`, verified against a fresh clone.
+
 - Native validator and self-test: PASS, 19 local documents and 66 in-memory fixtures at the implementation checkpoint. The local count includes an existing ignored spec memlog; it is not a portable inventory guarantee.
 - New fixtures cover readiness queues, midnight versus elapsed delay, invalidated prerequisite history, cross-stage reassessment/reconciliation, independent J5 ownership, capability coverage and supported execution.
 - [Nine isolated tutor scenarios](../_bmad-output/verification/2026-09-08-curriculum-refinements/README.md) exercised original routing cases plus retention-readiness and unsupported final completion. All user-facing behaviors passed. One metadata-inventory failure was retained, the capture rule corrected, and a fresh maintenance retest passed.
